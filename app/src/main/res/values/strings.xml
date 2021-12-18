@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">Pendudukku</string>
+    <string-array name="list_agama">
+        <item>Pilih Agama</item>
+        <item>Hindu</item>
+        <item>Islam</item>
+        <item>Kristen Katolik</item>
+        <item>Kristen Protestan</item>
+        <item>Budha</item>
+        <item>Kong Hu Chu</item>
+    </string-array>
+    <string-array name="list_status_perkawinan">
+        <item>Pilih Status Perkawinan</item>
+        <item>Kawin</item>
+        <item>Belum Kawin</item>
+        <item>Cerai Mati</item>
+        <item>Cerai Hidup</item>
+    </string-array>
 </resources>

@@ -28,7 +28,7 @@
             android:layout_weight="1">
         </LinearLayout>
         <ImageButton
-            android:id="@+id/imb_show_hide_password"
+            android:id="@+id/img_pengaturan_profil"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:src="@drawable/ic_pengaturan_profil"

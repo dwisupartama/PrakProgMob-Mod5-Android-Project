@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Pendudukku">
         <activity
+            android:name=".ModulAuth.UbahPasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ModulAuth.PengaturanProfilActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainPegawaiActivity"
             android:exported="false" />
         <activity
