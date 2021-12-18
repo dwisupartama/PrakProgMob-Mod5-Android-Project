@@ -7,17 +7,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import id.ppmkelompok10.pendudukku.GetStartedActivity;
+import id.ppmkelompok10.pendudukku.MainPegawaiActivity;
 import id.ppmkelompok10.pendudukku.R;
 
 public class LoginPegawaiActivity extends AppCompatActivity {
     private EditText etNIK, etPassword;
     private ImageButton imbShowHidePassword, btnBack;
     private TextView tvMasukPenduduk;
+    private Button btnMasuk;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,9 @@ public class LoginPegawaiActivity extends AppCompatActivity {
 
         //Deklarasi Tombol Masuk Sebagai Penduduk
         tvMasukPenduduk = findViewById(R.id.tv_masuk_penduduk);
+
+        //Deklarasi Tombol Masuk
+        btnMasuk = findViewById(R.id.btn_masuk);
 
         //Auto Focus ke Input NIK
         etNIK.requestFocus();
@@ -73,6 +79,17 @@ public class LoginPegawaiActivity extends AppCompatActivity {
                 Intent loginPendudukActivity = new Intent(LoginPegawaiActivity.this, LoginPendudukActivity.class);
                 startActivity(loginPendudukActivity);
                 finish();
+            }
+        });
+
+        //Tombol Masuk / Login Pegawai
+        btnMasuk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent mainPegawaiActivity = new Intent(LoginPegawaiActivity.this, MainPegawaiActivity.class);
+                startActivity(mainPegawaiActivity);
+
+                //Script Login Pegawai
             }
         });
     }
