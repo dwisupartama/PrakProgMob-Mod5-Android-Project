@@ -10,7 +10,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Pendudukku">
         <activity
+            android:name=".ModulAuth.LoginPegawaiActivity"
+            android:exported="false" />
+         <activity
+         android:name=".ModulAuth.LoginPendudukActivity"
+         android:exported="false" />
+        <activity
+            android:name=".GetStartedActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

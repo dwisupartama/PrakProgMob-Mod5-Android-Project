@@ -3,7 +3,23 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Pendudukku-MOD5/app/src/main/res/drawable/bg_img_btn_ripple.xml" value="0.21614583333333334" />
+        <entry key="..\:/Pendudukku-MOD5/app/src/main/res/drawable/bg_primary_input.xml" value="0.21614583333333334" />
+        <entry key="..\:/Pendudukku-MOD5/app/src/main/res/drawable/button_primary.xml" value="0.21614583333333334" />
+        <entry key="..\:/Pendudukku-MOD5/app/src/main/res/drawable/ic_eye_close.xml" value="0.21614583333333334" />
+        <entry key="..\:/Pendudukku-MOD5/app/src/main/res/drawable/ic_splash_logo.xml" value="0.21614583333333334" />
+        <entry key="..\:/Pendudukku-MOD5/app/src/main/res/drawable/img_get_started_ilustration.xml" value="0.21614583333333334" />
+        <entry key="..\:/Pendudukku-MOD5/app/src/main/res/drawable/ripple_img_button_ripple.xml" value="0.21614583333333334" />
+        <entry key="..\:/Pendudukku-MOD5/app/src/main/res/drawable/style_primary_input.xml" value="0.21614583333333334" />
+        <entry key="..\:/Pendudukku-MOD5/app/src/main/res/drawable/substyle_primary_input_default.xml" value="0.21614583333333334" />
+        <entry key="..\:/Pendudukku-MOD5/app/src/main/res/drawable/substyle_primary_input_focus.xml" value="0.21614583333333334" />
+        <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/activity_get_started.xml" value="0.25" />
+        <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/activity_login.xml" value="0.2" />
+        <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/activity_login_pegawai.xml" value="0.33" />
+        <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/activity_login_penduduk.xml" value="0.25" />
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/activity_main2.xml" value="0.2" />
+        <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/activity_splash.xml" value="0.22" />
       </map>
     </option>
   </component>

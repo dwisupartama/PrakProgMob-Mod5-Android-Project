@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".GetStartedActivity"
+    android:clipToPadding="false"
+    android:paddingLeft="30dp"
+    android:paddingRight="30dp"
+    android:paddingTop="30dp"
+    android:paddingBottom="30dp"
+    android:background="@color/white">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Pendudukku"
+        android:fontFamily="@font/poppins_semibold"
+        android:textSize="20dp"
+        android:textColor="@color/PrimaryTextColorBlack"
+        android:gravity="center"
+        android:layout_alignParentTop="true"
+        />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="150dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/img_get_started_ilustration" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="220dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:gravity="center"
+        android:text="Pelayanan Cepat dan Ramah"
+        android:textColor="@color/PrimaryTextColorBlack"
+        android:textSize="24dp"
+        android:background="@android:color/transparent"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="340dp"
+        android:alpha="0.5"
+        android:fontFamily="@font/poppins_regular"
+        android:gravity="center"
+        android:text="Pelayanan kami sudah dilatih agar dapat
+memuaskan pengguna"
+        android:textColor="@color/PrimaryTextColorBlack"
+        android:textSize="14dp"
+        android:background="@android:color/transparent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:gravity="center">
+        <Button
+            android:id="@+id/btn_ayo_mulai"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/buttonPrimary"
+            android:text="Ayo Mulai"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"/>
+        <TextView
+            android:id="@+id/tv_masuk_pegawai"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Masuk sebagai Pegawai"
+            android:textSize="14dp"
+            android:textColor="@color/PrimaryTextColorBlack"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/poppins_medium"
+            android:alpha="0.5"/>
+    </LinearLayout>
+
+</RelativeLayout>
