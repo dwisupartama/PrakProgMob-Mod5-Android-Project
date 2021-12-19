@@ -21,4 +21,7 @@
     <color name="BlueColorPrimary">#0D6EFD</color>
 
     <color name="transparent50PrimaryText">#9A9BA3</color>
+
+    <color name="transparent10Black">#F5F5F6</color>
+    <color name="transparent10Red">#FCEBED</color>
 </resources>

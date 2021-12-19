@@ -3,9 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Pendudukku-MOD5/app/src/main/res/drawable/bg_button_utama_daftar.xml" value="0.21614583333333334" />
+        <entry key="..\:/Pendudukku-MOD5/app/src/main/res/drawable/bg_checkbox_primary.xml" value="0.21614583333333334" />
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/drawable/bg_group_radio_button.xml" value="0.21614583333333334" />
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/drawable/bg_icon_circle_primary.xml" value="0.21614583333333334" />
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/drawable/bg_img_btn_ripple.xml" value="0.21614583333333334" />
+        <entry key="..\:/Pendudukku-MOD5/app/src/main/res/drawable/bg_input_search.xml" value="0.21614583333333334" />
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/drawable/bg_layout_input_readonly.xml" value="0.21614583333333334" />
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/drawable/bg_primary_input.xml" value="0.21614583333333334" />
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/drawable/bg_spinner_primary.xml" value="0.21614583333333334" />
@@ -14,6 +17,7 @@
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/drawable/group_radio_selected.xml" value="0.21614583333333334" />
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/drawable/ic_eye_close.xml" value="0.21614583333333334" />
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/drawable/ic_ktpku.xml" value="0.21614583333333334" />
+        <entry key="..\:/Pendudukku-MOD5/app/src/main/res/drawable/ic_search.xml" value="0.21614583333333334" />
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/drawable/ic_splash_logo.xml" value="0.21614583333333334" />
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/drawable/ic_suratku.xml" value="0.21614583333333334" />
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/drawable/ic_ubah_password.xml" value="0.21614583333333334" />
@@ -33,11 +37,16 @@
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/activity_main2.xml" value="0.2" />
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/activity_main_pegawai.xml" value="0.33" />
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/activity_main_penduduk.xml" value="0.2" />
+        <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/activity_pegawai_daftar_penduduk.xml" value="0.33" />
+        <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/activity_pegawai_edit_penduduk.xml" value="0.2653766413268832" />
+        <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/activity_pegawai_tambah_penduduk.xml" value="0.27176220806794055" />
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/activity_pengaturan_profil.xml" value="0.29046898638426627" />
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/activity_splash.xml" value="0.22" />
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/activity_ubah_password.xml" value="0.26834381551362685" />
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/custom_spinner.xml" value="0.2" />
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/custom_spinner_dropdown.xml" value="0.2" />
+        <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/dialog_confirm_danger.xml" value="0.25" />
+        <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/view_pegawai_daftar_wtdelete.xml" value="0.33" />
       </map>
     </option>
   </component>

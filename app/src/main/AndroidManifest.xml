@@ -10,6 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Pendudukku">
         <activity
+            android:name=".ModulPenduduk.PegawaiEditPendudukActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ModulPenduduk.PegawaiTambahPendudukActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ModulPenduduk.PegawaiDaftarPendudukActivity"
+            android:exported="false" />
+        <activity
             android:name=".ModulAuth.UbahPasswordActivity"
             android:exported="false" />
         <activity

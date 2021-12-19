@@ -16,4 +16,10 @@
         <item>Cerai Mati</item>
         <item>Cerai Hidup</item>
     </string-array>
+    <string-array name="list_status_akses">
+        <item>Pilih Status Akses</item>
+        <item>Penduduk</item>
+        <item>Pegawai</item>
+        <item>Admin</item>
+    </string-array>
 </resources>

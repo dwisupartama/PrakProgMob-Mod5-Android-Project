@@ -16,6 +16,15 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="buttonSuccess" parent="Theme.AppCompat.Light">
+        <item name="android:backgroundTint">@color/GreenColorPrimary</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">@font/poppins_medium</item>
+        <item name="android:textSize">15dp</item>
+        <item name="cornerRadius">50dp</item>
+        <item name="android:stateListAnimator">@null</item>
+    </style>
+
     <style name="buttonPrimary" parent="Theme.AppCompat.Light">
         <item name="android:backgroundTint">@color/PrimaryColorVariant</item>
         <item name="android:textColor">@color/white</item>
@@ -25,11 +34,34 @@
         <item name="android:stateListAnimator">@null</item>
     </style>
 
+    <style name="buttonOutlineSecondary" parent="Theme.AppCompat.Light">
+        <item name="android:backgroundTint">@color/transparent10Black</item>
+        <item name="android:textColor">@color/PrimaryTextColorBlack</item>
+        <item name="android:fontFamily">@font/poppins_medium</item>
+        <item name="android:textSize">13dp</item>
+        <item name="cornerRadius">7dp</item>
+        <item name="android:stateListAnimator">@null</item>
+    </style>
+
+    <style name="buttonOutlineDanger" parent="Theme.AppCompat.Light">
+        <item name="android:backgroundTint">@color/transparent10Red</item>
+        <item name="android:textColor">@color/RedColorPrimary</item>
+        <item name="android:fontFamily">@font/poppins_medium</item>
+        <item name="android:textSize">13dp</item>
+        <item name="cornerRadius">7dp</item>
+        <item name="android:stateListAnimator">@null</item>
+    </style>
+
     <style name="datePickerDialogPrimary" parent="ThemeOverlay.AppCompat.Dialog">
         <item name="colorAccent">@color/white</item>
         <item name="android:windowBackground">@color/white</item>
         <item name="android:colorControlActivated">@color/PrimaryColorVariant</item>
         <item name="android:textColorPrimary">@color/PrimaryTextColorBlack</item>
         <item name="android:textColorSecondary">@color/transparent50PrimaryText</item>
+    </style>
+
+    <style name="DialogAnimationZoom">
+        <item name="android:windowEnterAnimation">@anim/zoom_in</item>
+        <item name="android:windowExitAnimation">@anim/zoom_out</item>
     </style>
 </resources>
