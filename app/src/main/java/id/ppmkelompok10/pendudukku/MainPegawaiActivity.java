@@ -8,15 +8,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
-import id.ppmkelompok10.pendudukku.ModulAuth.LoginPendudukActivity;
 import id.ppmkelompok10.pendudukku.ModulAuth.PengaturanProfilActivity;
 import id.ppmkelompok10.pendudukku.ModulKTP.PegawaiDaftarKTPActivity;
 import id.ppmkelompok10.pendudukku.ModulPenduduk.PegawaiDaftarPendudukActivity;
+import id.ppmkelompok10.pendudukku.ModulSurat.PegawaiDaftarSuratActivity;
+import id.ppmkelompok10.pendudukku.ModulSurat.PendudukDaftarSuratActivity;
 import id.ppmkelompok10.pendudukku.ModulVaksin.PegawaiDaftarVaksinActivity;
 
 public class MainPegawaiActivity extends AppCompatActivity {
     private ImageButton imbPengaturanProfil;
-    private CardView cvMenuPendudukku, cvMenuKTPku, cvMenuVaksinku;
+    private CardView cvMenuPendudukku, cvMenuKTPku, cvMenuVaksinku, cvMenuSuratku;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +31,7 @@ public class MainPegawaiActivity extends AppCompatActivity {
         cvMenuPendudukku = findViewById(R.id.cv_menu_pendudukku);
         cvMenuKTPku = findViewById(R.id.cv_menu_ktpku);
         cvMenuVaksinku = findViewById(R.id.cv_menu_vaksinku);
+        cvMenuSuratku = findViewById(R.id.cv_menu_suratku);
 
         //Button Pengaturan Profil
         imbPengaturanProfil = findViewById(R.id.img_pengaturan_profil);
@@ -62,6 +64,14 @@ public class MainPegawaiActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent pegawaiDaftarVaksinActivity = new Intent(MainPegawaiActivity.this, PegawaiDaftarVaksinActivity.class);
                 startActivity(pegawaiDaftarVaksinActivity);
+            }
+        });
+
+        cvMenuSuratku.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent pegawaiDaftarSuratActivity = new Intent(MainPegawaiActivity.this, PegawaiDaftarSuratActivity.class);
+                startActivity(pegawaiDaftarSuratActivity);
             }
         });
     }

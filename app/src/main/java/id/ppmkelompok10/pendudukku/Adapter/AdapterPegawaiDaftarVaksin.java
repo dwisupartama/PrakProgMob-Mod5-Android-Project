@@ -36,7 +36,7 @@ public class AdapterPegawaiDaftarVaksin extends RecyclerView.Adapter<AdapterPega
 
     @Override
     public void onBindViewHolder(@NonNull AdapterPegawaiDaftarVaksin.Holder holder, int position) {
-        String jenisPengajuan = "Pembuatan KTP";
+        String jenisPengajuan = "Vaksin Pertama";
         String namaLengkap = "I Kadek Dwi Supartama";
         String nik = "5103061410010003";
         String status = "Menunggu Konfirmasi";

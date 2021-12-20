@@ -16,27 +16,26 @@ import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import id.ppmkelompok10.pendudukku.ModulKTP.DetailKTPActivity;
-import id.ppmkelompok10.pendudukku.ModulVaksin.DetailVaksinActivity;
+import id.ppmkelompok10.pendudukku.ModulSurat.DetailSuratActivity;
 import id.ppmkelompok10.pendudukku.R;
 
-public class AdapterPendudukDaftarVaksin extends RecyclerView.Adapter<AdapterPendudukDaftarVaksin.Holder> {
+public class AdapterPendudukDaftarSurat extends RecyclerView.Adapter<AdapterPendudukDaftarSurat.Holder> {
     private Context context;
 
-    public AdapterPendudukDaftarVaksin(Context context) {
+    public AdapterPendudukDaftarSurat(Context context) {
         this.context = context;
     }
 
     @NonNull
     @Override
-    public AdapterPendudukDaftarVaksin.Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AdapterPendudukDaftarSurat.Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.view_penduduk_daftar, parent, false);
-        return new AdapterPendudukDaftarVaksin.Holder(view);
+        return new AdapterPendudukDaftarSurat.Holder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterPendudukDaftarVaksin.Holder holder, int position) {
-        String jenisPengajuan = "Vaksin Pertama";
+    public void onBindViewHolder(@NonNull AdapterPendudukDaftarSurat.Holder holder, int position) {
+        String jenisPengajuan = "Surat Tidak Mampu";
         String tanggalPengajuan = "12 Desember 2021";
 //        String status = "Menunggu Konfirmasi";
 //        String status = "Sedang di Proses";
@@ -70,8 +69,8 @@ public class AdapterPendudukDaftarVaksin extends RecyclerView.Adapter<AdapterPen
         holder.imbDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent detailVaksinActivity = new Intent(v.getContext(), DetailVaksinActivity.class);
-                context.startActivity(detailVaksinActivity);
+                Intent detailSuratActivity = new Intent(v.getContext(), DetailSuratActivity.class);
+                context.startActivity(detailSuratActivity);
             }
         });
 

@@ -10,6 +10,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Pendudukku">
         <activity
+            android:name=".ModulSurat.PegawaiEditSuratActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ModulSurat.PendudukTambahSuratActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ModulSurat.PegawaiDaftarSuratActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ModulSurat.DetailSuratActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ModulSurat.PendudukDaftarSuratActivity"
+            android:exported="false" />
+        <activity
             android:name=".ModulVaksin.PendudukTambahVaksinActivity"
             android:exported="false" />
         <activity

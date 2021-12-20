@@ -35,6 +35,7 @@
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/drawable/substyle_primary_input_default.xml" value="0.21614583333333334" />
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/drawable/substyle_primary_input_focus.xml" value="0.21614583333333334" />
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/activity_detail_ktp_activity.xml" value="0.25" />
+        <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/activity_detail_surat.xml" value="0.25" />
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/activity_detail_vaksin.xml" value="0.22" />
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/activity_get_started.xml" value="0.25" />
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/activity_login.xml" value="0.2" />
@@ -46,14 +47,18 @@
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/activity_main_penduduk.xml" value="0.2" />
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/activity_pegawai_daftar_ktp_activity.xml" value="0.33" />
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/activity_pegawai_daftar_penduduk.xml" value="0.33" />
+        <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/activity_pegawai_daftar_surat.xml" value="0.25" />
+        <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/activity_pegawai_daftar_surat2.xml" value="0.13333333333333333" />
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/activity_pegawai_daftar_vaksin.xml" value="0.2" />
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/activity_pegawai_edit_ktp_activity.xml" value="0.25" />
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/activity_pegawai_edit_penduduk.xml" value="0.25396825396825395" />
+        <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/activity_pegawai_edit_surat.xml" value="0.13333333333333333" />
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/activity_pegawai_edit_vaksin.xml" value="0.33" />
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/activity_pegawai_tambah_penduduk.xml" value="0.24319189360354654" />
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/activity_penduduk_daftar_ktp_activity.xml" value="0.22" />
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/activity_penduduk_daftar_vaksin.xml" value="0.22" />
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/activity_penduduk_tambah_ktp_activity.xml" value="0.25" />
+        <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/activity_penduduk_tambah_surat.xml" value="0.25" />
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/activity_penduduk_tambah_vaksin.xml" value="0.18" />
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/activity_pengaturan_profil.xml" value="0.2302158273381295" />
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/activity_splash.xml" value="0.22" />
