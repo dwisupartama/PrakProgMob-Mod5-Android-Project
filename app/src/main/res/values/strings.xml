@@ -40,4 +40,23 @@
         <item>KTP Rusak/Hilang</item>
         <item>KTP Perbaikan</item>
     </string-array>
+
+    <string-array name="list_tahap_vaksin">
+        <item>Pilih Tahap Vaksin</item>
+        <item>Vaksin Pertama</item>
+        <item>Vaksin Kedua</item>
+    </string-array>
+
+    <string-array name="list_daerah_vaksin">
+        <item>Pilih Lokasi Daerah Vaksin</item>
+        <item>Denpasar</item>
+        <item>Badung</item>
+        <item>Bangli</item>
+        <item>Buleleng</item>
+        <item>Gianyar</item>
+        <item>Jembrana</item>
+        <item>Karangasem</item>
+        <item>Klungkung</item>
+        <item>Tabanan</item>
+    </string-array>
 </resources>
