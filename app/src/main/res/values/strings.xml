@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Pendudukku</string>
+
     <string-array name="list_agama">
         <item>Pilih Agama</item>
         <item>Hindu</item>
@@ -9,6 +10,7 @@
         <item>Budha</item>
         <item>Kong Hu Chu</item>
     </string-array>
+
     <string-array name="list_status_perkawinan">
         <item>Pilih Status Perkawinan</item>
         <item>Kawin</item>
@@ -16,10 +18,26 @@
         <item>Cerai Mati</item>
         <item>Cerai Hidup</item>
     </string-array>
+
     <string-array name="list_status_akses">
         <item>Pilih Status Akses</item>
         <item>Penduduk</item>
         <item>Pegawai</item>
         <item>Admin</item>
+    </string-array>
+
+    <string-array name="list_status_pengajuan">
+        <item>Pilih Status Pengajuan</item>
+        <item>Menunggu Konfirmasi</item>
+        <item>Sedang di Proses</item>
+        <item>Selesai di Proses</item>
+        <item>Pengajuan Gagal</item>
+    </string-array>
+
+    <string-array name="list_jenis_pengajuan_ktp">
+        <item>Pilih Jenis Pengajuan KTP</item>
+        <item>Pembuatan KTP</item>
+        <item>KTP Rusak/Hilang</item>
+        <item>KTP Perbaikan</item>
     </string-array>
 </resources>

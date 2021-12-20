@@ -10,6 +10,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Pendudukku">
         <activity
+            android:name=".ModulKTP.PendudukTambahKTPActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ModulKTP.PendudukDaftarKTPActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ModulKTP.PegawaiEditKTPActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ModulKTP.DetailKTPActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ModulKTP.PegawaiDaftarKTPActivity"
+            android:exported="false" />
+        <activity
             android:name=".ModulPenduduk.PegawaiEditPendudukActivity"
             android:exported="false" />
         <activity

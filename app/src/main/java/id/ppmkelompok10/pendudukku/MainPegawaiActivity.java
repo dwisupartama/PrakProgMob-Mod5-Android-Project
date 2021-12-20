@@ -10,11 +10,12 @@ import android.widget.ImageButton;
 
 import id.ppmkelompok10.pendudukku.ModulAuth.LoginPendudukActivity;
 import id.ppmkelompok10.pendudukku.ModulAuth.PengaturanProfilActivity;
+import id.ppmkelompok10.pendudukku.ModulKTP.PegawaiDaftarKTPActivity;
 import id.ppmkelompok10.pendudukku.ModulPenduduk.PegawaiDaftarPendudukActivity;
 
 public class MainPegawaiActivity extends AppCompatActivity {
     private ImageButton imbPengaturanProfil;
-    private CardView cvMenuPendudukku;
+    private CardView cvMenuPendudukku, cvMenuKTPku;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +27,7 @@ public class MainPegawaiActivity extends AppCompatActivity {
 
         //Deklarasi Tombol menu
         cvMenuPendudukku = findViewById(R.id.cv_menu_pendudukku);
+        cvMenuKTPku = findViewById(R.id.cv_menu_ktpku);
 
         //Button Pengaturan Profil
         imbPengaturanProfil = findViewById(R.id.img_pengaturan_profil);
@@ -42,6 +44,14 @@ public class MainPegawaiActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent pegawaiDaftarPendudukActivity = new Intent(MainPegawaiActivity.this, PegawaiDaftarPendudukActivity.class);
                 startActivity(pegawaiDaftarPendudukActivity);
+            }
+        });
+
+        cvMenuKTPku.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent pegawaiDaftarKTPActivity = new Intent(MainPegawaiActivity.this, PegawaiDaftarKTPActivity.class);
+                startActivity(pegawaiDaftarKTPActivity);
             }
         });
     }

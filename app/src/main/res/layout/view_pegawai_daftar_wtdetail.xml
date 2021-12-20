@@ -21,47 +21,61 @@
         android:paddingTop="15dp"
         android:paddingBottom="15dp"
         android:orientation="horizontal">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tv_jenis_pengajuan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Jenis Pengajuan"
+                android:textColor="@color/PrimaryColorVariant"
+                android:textSize="12dp" />
+
+            <TextView
+                android:id="@+id/tv_nama_lengkap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-4dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Nama Lengkap..."
+                android:textColor="@color/PrimaryTextColorBlack"
+                android:textSize="16dp" />
+
             <TextView
                 android:id="@+id/tv_nik"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="0000000000000000"
-                android:fontFamily="@font/poppins_medium"
-                android:textSize="12dp"
-                android:textColor="@color/PrimaryColorVariant"/>
-            <TextView
-                android:id="@+id/tv_nama_lengkap"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Nama Lengkap..."
-                android:fontFamily="@font/poppins_semibold"
-                android:textSize="16dp"
-                android:textColor="@color/PrimaryTextColorBlack"
-                android:layout_marginTop="-4dp"/>
+                android:fontFamily="@font/poppins_regular"
+                android:text="NIK"
+                android:textColor="@color/transparent50PrimaryText"
+                android:textSize="12dp" />
+
             <LinearLayout
-                android:layout_width="match_parent"
+                android:id="@+id/ln_bg_status"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center"
-                >
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_kartu_keluarga"/>
+                android:layout_marginTop="3dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="5dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="5dp">
+
                 <TextView
-                    android:id="@+id/tv_no_kk"
+                    android:id="@+id/tv_status"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="KK. 0000000000"
-                    android:fontFamily="@font/poppins_regular"
-                    android:textSize="12dp"
-                    android:textColor="@color/transparent50PrimaryText"
-                    android:layout_marginLeft="5dp"/>
+                    android:layout_marginBottom="-2dp"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="Menunggu Konfirmasi"
+                    android:textColor="@color/PrimaryTextColorBlack"
+                    android:textSize="9dp" />
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
@@ -69,6 +83,15 @@
             android:layout_height="match_parent"
             android:orientation="horizontal"
             android:gravity="end|center">
+            <ImageButton
+                android:id="@+id/imb_detail"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/bg_img_btn_ripple"
+                android:foreground="@drawable/ripple_img_button_ripple"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:src="@drawable/ic_detail_color"/>
             <ImageButton
                 android:id="@+id/imb_edit"
                 android:layout_width="40dp"
@@ -78,15 +101,6 @@
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp"
                 android:src="@drawable/ic_edit_color"/>
-            <ImageButton
-                android:id="@+id/imb_delete"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="@drawable/bg_img_btn_ripple"
-                android:foreground="@drawable/ripple_img_button_ripple"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                android:src="@drawable/ic_delete_color"/>
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>
