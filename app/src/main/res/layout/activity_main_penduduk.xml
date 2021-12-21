@@ -16,7 +16,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingLeft="10dp"
-        android:paddingRight="10dp"
         android:gravity="center">
         <ImageView
             android:layout_width="30dp"
@@ -33,6 +32,14 @@
             android:layout_height="50dp"
             android:src="@drawable/ic_pengaturan_profil"
             android:background="@drawable/bg_img_btn_ripple"
+            android:foreground="@drawable/ripple_img_button_ripple"
+            android:layout_marginRight="5dp"/>
+        <ImageButton
+            android:id="@+id/img_logout"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_logout"
+            android:background="@drawable/bg_img_btn_ripple"
             android:foreground="@drawable/ripple_img_button_ripple"/>
     </LinearLayout>
     <TextView
@@ -46,9 +53,10 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"/>
     <TextView
+        android:id="@+id/tv_nama_pengguna"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Dek Dwik"
+        android:text="Nama Pengguna"
         android:fontFamily="@font/poppins_semibold"
         android:textColor="@color/PrimaryColorVariant"
         android:textSize="28dp"

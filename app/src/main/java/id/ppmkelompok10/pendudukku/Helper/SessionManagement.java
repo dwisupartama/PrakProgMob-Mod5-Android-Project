@@ -14,9 +14,11 @@ public class SessionManagement {
         sharedEditor.apply();
     }
 
-    public void saveSession(String nik, String namaLengkap){
+    public void saveSession(String nik, String namaLengkap, String statusAkses, String logedinTo){
         sharedEditor.putString("nik", nik);
         sharedEditor.putString("nama_lengkap", namaLengkap);
+        sharedEditor.putString("status_akses", statusAkses);
+        sharedEditor.putString("loggedin_to", logedinTo);
         sharedEditor.putBoolean("login", true);
         sharedEditor.apply();
     }
@@ -32,6 +34,14 @@ public class SessionManagement {
 
     public String getNamaLengkap(){
         return sharedPreferences.getString("nama_lengkap", "");
+    }
+
+    public String getStatusAkses(){
+        return sharedPreferences.getString("status_akses", "");
+    }
+
+    public String getLoggedInTo(){
+        return sharedPreferences.getString("loggedin_to", "");
     }
 
     public Boolean getStatusLogin(){

@@ -1,4 +1,4 @@
-package id.ppmkelompok10.pendudukku;
+package id.ppmkelompok10.pendudukku.Helper;
 
 import android.app.Activity;
 import android.graphics.Rect;

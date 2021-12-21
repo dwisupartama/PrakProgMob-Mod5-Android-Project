@@ -7,12 +7,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.TextView;
 
 import id.ppmkelompok10.pendudukku.Adapter.AdapterPendudukDaftarSurat;
-import id.ppmkelompok10.pendudukku.KeyboardUtils;
 import id.ppmkelompok10.pendudukku.R;
 
 public class PendudukDaftarSuratActivity extends AppCompatActivity {

@@ -66,9 +66,12 @@
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/custom_spinner.xml" value="0.2" />
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/custom_spinner_dropdown.xml" value="0.2" />
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/dialog_confirm_danger.xml" value="0.25" />
+        <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/dialog_danger.xml" value="0.13333333333333333" />
+        <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/dialog_success.xml" value="0.13333333333333333" />
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/view_pegawai_daftar_wtdelete.xml" value="0.33" />
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/view_pegawai_daftar_wtdetail.xml" value="0.5" />
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/view_penduduk_daftar.xml" value="0.25" />
+        <entry key="..\:/Pendudukku-MOD5/app/src/main/res/xml/network_security_config.xml" value="0.13333333333333333" />
       </map>
     </option>
   </component>

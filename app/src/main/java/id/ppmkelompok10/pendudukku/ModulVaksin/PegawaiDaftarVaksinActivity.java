@@ -9,10 +9,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import id.ppmkelompok10.pendudukku.Adapter.AdapterPegawaiDaftarKTP;
 import id.ppmkelompok10.pendudukku.Adapter.AdapterPegawaiDaftarVaksin;
-import id.ppmkelompok10.pendudukku.KeyboardUtils;
-import id.ppmkelompok10.pendudukku.ModulKTP.PegawaiDaftarKTPActivity;
+import id.ppmkelompok10.pendudukku.Helper.KeyboardUtils;
 import id.ppmkelompok10.pendudukku.R;
 
 public class PegawaiDaftarVaksinActivity extends AppCompatActivity {

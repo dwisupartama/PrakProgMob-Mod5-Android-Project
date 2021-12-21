@@ -6,14 +6,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import id.ppmkelompok10.pendudukku.Adapter.AdapterPegawaiDaftarPenduduk;
-import id.ppmkelompok10.pendudukku.KeyboardUtils;
+import id.ppmkelompok10.pendudukku.Helper.KeyboardUtils;
 import id.ppmkelompok10.pendudukku.R;
 
 public class PegawaiDaftarPendudukActivity extends AppCompatActivity{
