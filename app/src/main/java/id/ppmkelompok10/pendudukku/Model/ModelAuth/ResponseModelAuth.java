@@ -3,7 +3,7 @@ package id.ppmkelompok10.pendudukku.Model.ModelAuth;
 public class ResponseModelAuth {
     private int code;
     private String message;
-    private DataModelLoginAuth data;
+    private AccountModelAuth data;
 
     public int getCode() {
         return code;
@@ -21,11 +21,11 @@ public class ResponseModelAuth {
         this.message = message;
     }
 
-    public DataModelLoginAuth getData() {
+    public AccountModelAuth getData() {
         return data;
     }
 
-    public void setData(DataModelLoginAuth data) {
+    public void setData(AccountModelAuth data) {
         this.data = data;
     }
 }

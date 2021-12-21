@@ -1,8 +1,8 @@
 package id.ppmkelompok10.pendudukku.Model.ModelAuth;
 
-public class DataModelLoginAuth {
+public class AccountModelAuth {
     private int nik;
-    private String password, status_akses, nama_lengkap, tempat_lahir, tanggal_lahir, jenis_kelamin, golongan_darah, alamat, agama, statusPerkawinan, pekerjaan, created_at, updated_at;
+    private String password, status_akses, nama_lengkap, tempat_lahir, tanggal_lahir, jenis_kelamin, golongan_darah, alamat, agama, status_perkawinan, pekerjaan, created_at, updated_at;
 
     public int getNik() {
         return nik;
@@ -84,12 +84,12 @@ public class DataModelLoginAuth {
         this.agama = agama;
     }
 
-    public String getStatusPerkawinan() {
-        return statusPerkawinan;
+    public String getStatus_perkawinan() {
+        return status_perkawinan;
     }
 
-    public void setStatusPerkawinan(String statusPerkawinan) {
-        this.statusPerkawinan = statusPerkawinan;
+    public void setStatus_perkawinan(String status_perkawinan) {
+        this.status_perkawinan = status_perkawinan;
     }
 
     public String getPekerjaan() {

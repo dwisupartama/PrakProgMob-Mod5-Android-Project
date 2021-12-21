@@ -4,7 +4,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,20 +16,12 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.util.Arrays;
-import java.util.List;
-
 import id.ppmkelompok10.pendudukku.API.APIAuth.APILogin;
 import id.ppmkelompok10.pendudukku.API.RetroServer;
 import id.ppmkelompok10.pendudukku.GetStartedActivity;
 import id.ppmkelompok10.pendudukku.Helper.SessionManagement;
 import id.ppmkelompok10.pendudukku.MainPendudukActivity;
-import id.ppmkelompok10.pendudukku.Model.ModelAuth.DataModelLoginAuth;
+import id.ppmkelompok10.pendudukku.Model.ModelAuth.AccountModelAuth;
 import id.ppmkelompok10.pendudukku.Model.ModelAuth.ResponseModelAuth;
 import id.ppmkelompok10.pendudukku.R;
 import retrofit2.Call;
@@ -142,7 +133,7 @@ public class LoginPendudukActivity extends AppCompatActivity {
                 if(code == 0){
                     alertDialogDanger(LoginPendudukActivity.this, "Gagal Masuk", message);
                 }else{
-                    DataModelLoginAuth dataLogin = response.body().getData();
+                    AccountModelAuth dataLogin = response.body().getData();
                     session.saveSession(String.valueOf(dataLogin.getNik()), dataLogin.getNama_lengkap(), dataLogin.getStatus_akses(), "Penduduk");
                     alertDialogSuccess(LoginPendudukActivity.this, "Berhasil Masuk", message);
                 }

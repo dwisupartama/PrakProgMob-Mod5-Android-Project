@@ -21,8 +21,7 @@ import id.ppmkelompok10.pendudukku.API.RetroServer;
 import id.ppmkelompok10.pendudukku.GetStartedActivity;
 import id.ppmkelompok10.pendudukku.Helper.SessionManagement;
 import id.ppmkelompok10.pendudukku.MainPegawaiActivity;
-import id.ppmkelompok10.pendudukku.MainPendudukActivity;
-import id.ppmkelompok10.pendudukku.Model.ModelAuth.DataModelLoginAuth;
+import id.ppmkelompok10.pendudukku.Model.ModelAuth.AccountModelAuth;
 import id.ppmkelompok10.pendudukku.Model.ModelAuth.ResponseModelAuth;
 import id.ppmkelompok10.pendudukku.R;
 import retrofit2.Call;
@@ -134,7 +133,7 @@ public class LoginPegawaiActivity extends AppCompatActivity {
                 if(code == 0){
                     alertDialogDanger(LoginPegawaiActivity.this, "Gagal Masuk", message);
                 }else{
-                    DataModelLoginAuth dataLogin = response.body().getData();
+                    AccountModelAuth dataLogin = response.body().getData();
                     session.saveSession(String.valueOf(dataLogin.getNik()), dataLogin.getNama_lengkap(), dataLogin.getStatus_akses(), "Pegawai");
                     alertDialogSuccess(LoginPegawaiActivity.this, "Berhasil Masuk", message);
                 }
