@@ -28,6 +28,7 @@ import id.ppmkelompok10.pendudukku.API.APIAuth.APILogin;
 import id.ppmkelompok10.pendudukku.API.APIAuth.APIPengaturanProfil;
 import id.ppmkelompok10.pendudukku.API.RetroServer;
 import id.ppmkelompok10.pendudukku.GetStartedActivity;
+import id.ppmkelompok10.pendudukku.Helper.LoadingDialog;
 import id.ppmkelompok10.pendudukku.Helper.SessionManagement;
 import id.ppmkelompok10.pendudukku.MainPendudukActivity;
 import id.ppmkelompok10.pendudukku.Model.ModelAuth.AccountModelAuth;
@@ -230,7 +231,6 @@ public class PengaturanProfilActivity extends AppCompatActivity {
             public void onResponse(Call<ResponseModelAuth> call, Response<ResponseModelAuth> response) {
                 int code = response.body().getCode();
                 String message = response.body().getMessage();
-
                 if(code == 0){
                     alertDialogDanger(PengaturanProfilActivity.this, "Gagal", message);
                 }else{
@@ -252,6 +252,8 @@ public class PengaturanProfilActivity extends AppCompatActivity {
     }
 
     public void ambilDataAPI(){
+        LoadingDialog loading2 = new LoadingDialog(this);
+        loading2.startLoadingDialog();
         //Ambil API
         String nik = session.getNIK();
         APIPengaturanProfil apiPengaturanProfil = RetroServer.konekRetrofit().create(APIPengaturanProfil.class);
@@ -318,11 +320,13 @@ public class PengaturanProfilActivity extends AppCompatActivity {
                 }
 
                 etPekerjaan.setText(dataAkun.getPekerjaan());
+                loading2.dismissLoading();
             }
 
             @Override
             public void onFailure(Call<ResponseModelAuth> call, Throwable t) {
                 Toast.makeText(PengaturanProfilActivity.this, "Error Server : "+t.getMessage(), Toast.LENGTH_SHORT).show();
+                loading2.dismissLoading();
             }
         });
     }

@@ -19,6 +19,7 @@ import android.widget.Toast;
 import id.ppmkelompok10.pendudukku.API.APIAuth.APILogin;
 import id.ppmkelompok10.pendudukku.API.RetroServer;
 import id.ppmkelompok10.pendudukku.GetStartedActivity;
+import id.ppmkelompok10.pendudukku.Helper.LoadingDialog;
 import id.ppmkelompok10.pendudukku.Helper.SessionManagement;
 import id.ppmkelompok10.pendudukku.MainPegawaiActivity;
 import id.ppmkelompok10.pendudukku.Model.ModelAuth.AccountModelAuth;
@@ -113,16 +114,17 @@ public class LoginPegawaiActivity extends AppCompatActivity {
                     etPassword.setError("Password harus diisi !");
                     etPassword.requestFocus();
                 }else{
-                    loginPenduduk(nik, password);
+                    loginPegawai(nik, password);
                 }
             }
         });
     }
 
-    public void loginPenduduk(String nik, String password){
+    public void loginPegawai(String nik, String password){
+        LoadingDialog loading = new LoadingDialog(this);
+        loading.startLoadingDialog();
         APILogin apiLogin = RetroServer.konekRetrofit().create(APILogin.class);
         Call<ResponseModelAuth> loginPenduduk = apiLogin.apiLoginPegawai(nik, password);
-
 
         loginPenduduk.enqueue(new Callback<ResponseModelAuth>() {
             @Override
@@ -131,10 +133,12 @@ public class LoginPegawaiActivity extends AppCompatActivity {
                 String message = response.body().getMessage();
 
                 if(code == 0){
+                    loading.dismissLoading();
                     alertDialogDanger(LoginPegawaiActivity.this, "Gagal Masuk", message);
                 }else{
+                    loading.dismissLoading();
                     AccountModelAuth dataLogin = response.body().getData();
-                    session.saveSession(String.valueOf(dataLogin.getNik()), dataLogin.getNama_lengkap(), dataLogin.getStatus_akses(), "Pegawai");
+                    session.saveSession(String.valueOf(dataLogin.getNik()), dataLogin.getStatus_akses(), "Pegawai");
                     alertDialogSuccess(LoginPegawaiActivity.this, "Berhasil Masuk", message);
                 }
             }

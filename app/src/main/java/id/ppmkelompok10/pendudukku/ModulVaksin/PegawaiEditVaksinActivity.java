@@ -112,6 +112,9 @@ public class PegawaiEditVaksinActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(position == 2){
                     lnTanggalPerkiraanSelesai.setVisibility(View.VISIBLE);
+                    lnTanggalVaksin.setVisibility(View.GONE);
+                    lnWaktuVaksin.setVisibility(View.GONE);
+                    lnTempatVaksin.setVisibility(View.GONE);
                 }else if(position == 3) {
                     lnTanggalPerkiraanSelesai.setVisibility(View.GONE);
                     lnTanggalVaksin.setVisibility(View.VISIBLE);

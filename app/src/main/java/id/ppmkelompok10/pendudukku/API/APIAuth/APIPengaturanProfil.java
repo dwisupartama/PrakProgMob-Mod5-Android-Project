@@ -1,6 +1,5 @@
 package id.ppmkelompok10.pendudukku.API.APIAuth;
 
-import id.ppmkelompok10.pendudukku.Model.ModelAuth.AccountModelAuth;
 import id.ppmkelompok10.pendudukku.Model.ModelAuth.ResponseModelAuth;
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -28,5 +27,13 @@ public interface APIPengaturanProfil {
             @Field("agama") String agama,
             @Field("status_perkawinan") String status_perkawinan,
             @Field("pekerjaan") String pekerjaan
+    );
+
+    @FormUrlEncoded
+    @POST("ubahPassword")
+    Call<ResponseModelAuth> apiUbahPassword(
+            @Field("nik") String nik,
+            @Field("password_lama") String password_lama,
+            @Field("password_baru") String password_baru
     );
 }

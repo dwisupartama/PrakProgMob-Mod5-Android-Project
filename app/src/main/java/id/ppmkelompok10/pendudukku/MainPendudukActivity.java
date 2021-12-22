@@ -12,14 +12,23 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import id.ppmkelompok10.pendudukku.API.APIAuth.APIPengaturanProfil;
+import id.ppmkelompok10.pendudukku.API.RetroServer;
+import id.ppmkelompok10.pendudukku.Helper.LoadingDialog;
 import id.ppmkelompok10.pendudukku.Helper.SessionManagement;
+import id.ppmkelompok10.pendudukku.Model.ModelAuth.AccountModelAuth;
+import id.ppmkelompok10.pendudukku.Model.ModelAuth.ResponseModelAuth;
 import id.ppmkelompok10.pendudukku.ModulAuth.LoginPendudukActivity;
 import id.ppmkelompok10.pendudukku.ModulAuth.PengaturanProfilActivity;
 import id.ppmkelompok10.pendudukku.ModulKTP.PegawaiDaftarKTPActivity;
 import id.ppmkelompok10.pendudukku.ModulKTP.PendudukDaftarKTPActivity;
 import id.ppmkelompok10.pendudukku.ModulSurat.PendudukDaftarSuratActivity;
 import id.ppmkelompok10.pendudukku.ModulVaksin.PendudukDaftarVaksinActivity;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainPendudukActivity extends AppCompatActivity {
     private ImageButton imbPengaturanProfil, imbLogout;
@@ -43,7 +52,8 @@ public class MainPendudukActivity extends AppCompatActivity {
 
         //Deklarasi TextView
         tvNamaPengguna = findViewById(R.id.tv_nama_pengguna);
-        tvNamaPengguna.setText(session.getNamaLengkap());
+
+        showDataAkun(MainPendudukActivity.this);
 
         //Button Pengaturan Profil
         imbPengaturanProfil = findViewById(R.id.img_pengaturan_profil);
@@ -88,6 +98,12 @@ public class MainPendudukActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        showDataAkun(MainPendudukActivity.this);
+    }
+
     public void alertDialogConfirm(Context context){
         AlertDialog.Builder builderDialog;
         AlertDialog alertDialog;
@@ -126,6 +142,33 @@ public class MainPendudukActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 alertDialog.dismiss();
+            }
+        });
+    }
+
+    public void showDataAkun(Context context){
+        LoadingDialog loading = new LoadingDialog(this);
+        loading.startLoadingDialog();
+        //Ambil API
+        String nik = session.getNIK();
+        APIPengaturanProfil apiPengaturanProfil = RetroServer.konekRetrofit().create(APIPengaturanProfil.class);
+        Call<ResponseModelAuth> apiAmbilDataProfil = apiPengaturanProfil.apiAmbilDataProfil(nik);
+
+        apiAmbilDataProfil.enqueue(new Callback<ResponseModelAuth>() {
+            @Override
+            public void onResponse(Call<ResponseModelAuth> call, Response<ResponseModelAuth> response) {
+                int code = response.body().getCode();
+                String message = response.body().getMessage();
+                AccountModelAuth dataAkun = response.body().getData();
+
+                tvNamaPengguna.setText(dataAkun.getNama_lengkap());
+                loading.dismissLoading();
+            }
+
+            @Override
+            public void onFailure(Call<ResponseModelAuth> call, Throwable t) {
+                Toast.makeText(context, "Error Server : "+t.getMessage(), Toast.LENGTH_SHORT).show();
+                loading.dismissLoading();
             }
         });
     }

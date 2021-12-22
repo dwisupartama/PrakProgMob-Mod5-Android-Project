@@ -14,9 +14,8 @@ public class SessionManagement {
         sharedEditor.apply();
     }
 
-    public void saveSession(String nik, String namaLengkap, String statusAkses, String logedinTo){
+    public void saveSession(String nik, String statusAkses, String logedinTo){
         sharedEditor.putString("nik", nik);
-        sharedEditor.putString("nama_lengkap", namaLengkap);
         sharedEditor.putString("status_akses", statusAkses);
         sharedEditor.putString("loggedin_to", logedinTo);
         sharedEditor.putBoolean("login", true);
@@ -30,10 +29,6 @@ public class SessionManagement {
 
     public String getNIK(){
         return sharedPreferences.getString("nik", "");
-    }
-
-    public String getNamaLengkap(){
-        return sharedPreferences.getString("nama_lengkap", "");
     }
 
     public String getStatusAkses(){

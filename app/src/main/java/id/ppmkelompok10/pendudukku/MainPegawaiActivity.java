@@ -12,8 +12,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import id.ppmkelompok10.pendudukku.API.APIAuth.APIPengaturanProfil;
+import id.ppmkelompok10.pendudukku.API.RetroServer;
+import id.ppmkelompok10.pendudukku.Helper.LoadingDialog;
 import id.ppmkelompok10.pendudukku.Helper.SessionManagement;
+import id.ppmkelompok10.pendudukku.Model.ModelAuth.AccountModelAuth;
+import id.ppmkelompok10.pendudukku.Model.ModelAuth.ResponseModelAuth;
 import id.ppmkelompok10.pendudukku.ModulAuth.LoginPegawaiActivity;
 import id.ppmkelompok10.pendudukku.ModulAuth.LoginPendudukActivity;
 import id.ppmkelompok10.pendudukku.ModulAuth.PengaturanProfilActivity;
@@ -22,12 +28,24 @@ import id.ppmkelompok10.pendudukku.ModulPenduduk.PegawaiDaftarPendudukActivity;
 import id.ppmkelompok10.pendudukku.ModulSurat.PegawaiDaftarSuratActivity;
 import id.ppmkelompok10.pendudukku.ModulSurat.PendudukDaftarSuratActivity;
 import id.ppmkelompok10.pendudukku.ModulVaksin.PegawaiDaftarVaksinActivity;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainPegawaiActivity extends AppCompatActivity {
     private ImageButton imbPengaturanProfil, imbLogout;
     private TextView tvNamaPengguna;
     private CardView cvMenuPendudukku, cvMenuKTPku, cvMenuVaksinku, cvMenuSuratku;
     SessionManagement session;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if(session.getStatusAkses().equals("Pegawai")){
+            cvMenuPendudukku.setVisibility(View.GONE);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +65,8 @@ public class MainPegawaiActivity extends AppCompatActivity {
 
         //Deklarasi TextView
         tvNamaPengguna = findViewById(R.id.tv_nama_pengguna);
-        tvNamaPengguna.setText(session.getNamaLengkap());
+
+        showDataAkun(MainPegawaiActivity.this);
 
         //Button Pengaturan Profil
         imbPengaturanProfil = findViewById(R.id.img_pengaturan_profil);
@@ -138,6 +157,40 @@ public class MainPegawaiActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 alertDialog.dismiss();
+            }
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        showDataAkun(MainPegawaiActivity.this);
+    }
+
+    public void showDataAkun(Context context){
+        LoadingDialog loading = new LoadingDialog(this);
+        loading.startLoadingDialog();
+        //Ambil API
+        String nik = session.getNIK();
+        APIPengaturanProfil apiPengaturanProfil = RetroServer.konekRetrofit().create(APIPengaturanProfil.class);
+        Call<ResponseModelAuth> apiAmbilDataProfil = apiPengaturanProfil.apiAmbilDataProfil(nik);
+
+        apiAmbilDataProfil.enqueue(new Callback<ResponseModelAuth>() {
+            @Override
+            public void onResponse(Call<ResponseModelAuth> call, Response<ResponseModelAuth> response) {
+                int code = response.body().getCode();
+                String message = response.body().getMessage();
+                AccountModelAuth dataAkun = response.body().getData();
+
+                loading.dismissLoading();
+
+                tvNamaPengguna.setText(dataAkun.getNama_lengkap());
+            }
+
+            @Override
+            public void onFailure(Call<ResponseModelAuth> call, Throwable t) {
+                loading.dismissLoading();
+                Toast.makeText(context, "Error Server : "+t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
