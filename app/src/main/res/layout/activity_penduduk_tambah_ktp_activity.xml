@@ -151,6 +151,7 @@
                     android:background="@drawable/bg_layout_input_readonly"
                     android:gravity="center">
                     <TextView
+                        android:id="@+id/tv_nik"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@android:color/transparent"
@@ -186,6 +187,7 @@
                     android:background="@drawable/bg_layout_input_readonly"
                     android:gravity="center">
                     <TextView
+                        android:id="@+id/tv_nama"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@android:color/transparent"
@@ -221,6 +223,7 @@
                     android:background="@drawable/bg_layout_input_readonly"
                     android:gravity="center">
                     <TextView
+                        android:id="@+id/tv_tempat_lahir"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@android:color/transparent"
@@ -256,6 +259,7 @@
                     android:background="@drawable/bg_layout_input_readonly"
                     android:gravity="center">
                     <TextView
+                        android:id="@+id/tv_tgl_lahir"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@android:color/transparent"
@@ -291,6 +295,7 @@
                     android:background="@drawable/bg_layout_input_readonly"
                     android:gravity="center">
                     <TextView
+                        android:id="@+id/tv_jenis_kelamin"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@android:color/transparent"
@@ -326,6 +331,7 @@
                     android:background="@drawable/bg_layout_input_readonly"
                     android:gravity="center">
                     <TextView
+                        android:id="@+id/tv_golongan_darah"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@android:color/transparent"
@@ -363,6 +369,7 @@
                     android:paddingTop="15dp"
                     android:paddingBottom="15dp">
                     <TextView
+                        android:id="@+id/tv_alamat"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@android:color/transparent"
@@ -400,6 +407,7 @@
                     android:paddingTop="15dp"
                     android:paddingBottom="15dp">
                     <TextView
+                        android:id="@+id/tv_agama"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@android:color/transparent"
@@ -437,6 +445,7 @@
                     android:paddingTop="15dp"
                     android:paddingBottom="15dp">
                     <TextView
+                        android:id="@+id/tv_perkawinan"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@android:color/transparent"
@@ -474,6 +483,7 @@
                     android:paddingTop="15dp"
                     android:paddingBottom="15dp">
                     <TextView
+                        android:id="@+id/tv_pekerjaan"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@android:color/transparent"
@@ -520,7 +530,7 @@
                 android:gravity="center">
 
                 <Button
-                    android:id="@+id/btn_masuk"
+                    android:id="@+id/btn_ajukan"
                     style="@style/buttonPrimary"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

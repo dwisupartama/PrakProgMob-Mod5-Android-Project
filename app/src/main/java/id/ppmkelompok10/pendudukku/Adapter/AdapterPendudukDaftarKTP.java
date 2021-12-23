@@ -16,15 +16,20 @@ import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
+import id.ppmkelompok10.pendudukku.Model.ModelKTP.PengajuanKTP;
 import id.ppmkelompok10.pendudukku.ModulKTP.DetailKTPActivity;
 import id.ppmkelompok10.pendudukku.ModulKTP.PegawaiEditKTPActivity;
 import id.ppmkelompok10.pendudukku.R;
 
 public class AdapterPendudukDaftarKTP extends RecyclerView.Adapter<AdapterPendudukDaftarKTP.Holder> {
     private Context context;
+    private ArrayList<PengajuanKTP> pengajuanAll;
 
-    public AdapterPendudukDaftarKTP(Context context) {
+    public AdapterPendudukDaftarKTP(Context context,ArrayList<PengajuanKTP> pengajuanAll) {
         this.context = context;
+        this.pengajuanAll = pengajuanAll;
     }
 
     @NonNull
@@ -36,12 +41,9 @@ public class AdapterPendudukDaftarKTP extends RecyclerView.Adapter<AdapterPendud
 
     @Override
     public void onBindViewHolder(@NonNull AdapterPendudukDaftarKTP.Holder holder, int position) {
-        String jenisPengajuan = "KTP Rusak / Hilang";
-        String tanggalPengajuan = "12 Desember 2021";
-//        String status = "Menunggu Konfirmasi";
-        String status = "Sedang di Proses";
-//        String status = "Selesai di Proses";
-//        String status = "Pengajuan Gagal";
+        String jenisPengajuan = pengajuanAll.get(position).getJenis_pengajuan();
+        String tanggalPengajuan = pengajuanAll.get(position).getTanggal_pengajuan().toString();
+        String status = pengajuanAll.get(position).getStatus_pengajuan();
 
         holder.tvJenisPengajuan.setText(jenisPengajuan);
         holder.tvTanggal.setText(tanggalPengajuan);
@@ -121,8 +123,7 @@ public class AdapterPendudukDaftarKTP extends RecyclerView.Adapter<AdapterPendud
 
     @Override
     public int getItemCount() {
-        return 6;
-        //return arrayList.size();
+        return pengajuanAll.size();
     }
 
     public class Holder extends RecyclerView.ViewHolder {

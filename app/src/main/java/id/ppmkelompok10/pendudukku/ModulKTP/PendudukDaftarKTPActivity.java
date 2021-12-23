@@ -5,20 +5,33 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.TextView;
+import android.widget.Toast;
 
-import id.ppmkelompok10.pendudukku.Adapter.AdapterPegawaiDaftarKTP;
+import java.util.ArrayList;
+
+import id.ppmkelompok10.pendudukku.API.APIKTP.APIGetAllPengajuan;
+import id.ppmkelompok10.pendudukku.API.RetroServer;
 import id.ppmkelompok10.pendudukku.Adapter.AdapterPendudukDaftarKTP;
+import id.ppmkelompok10.pendudukku.Helper.LoadingDialog;
+import id.ppmkelompok10.pendudukku.Helper.SessionManagement;
+import id.ppmkelompok10.pendudukku.Model.ModelKTP.PengajuanKTP;
+import id.ppmkelompok10.pendudukku.Model.ModelKTP.PengajuanKTP_Data;
+import id.ppmkelompok10.pendudukku.Model.ModelKTP.ResponseModelKTP;
 import id.ppmkelompok10.pendudukku.R;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class PendudukDaftarKTPActivity extends AppCompatActivity {
     private ImageButton btnBack;
     private RecyclerView rvDaftarKTP;
     private Button btnTambah;
+    public ArrayList<PengajuanKTP> pengajuanlist;
+    SessionManagement session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +51,11 @@ public class PendudukDaftarKTPActivity extends AppCompatActivity {
         rvDaftarKTP = findViewById(R.id.rv_daftar_ktp);
 
         //Pemanggilan Data Daftar
-        tampilDaftar();
+        pengajuanlist = PengajuanKTP_Data.getInstance().getdata();
+        if(pengajuanlist != null && pengajuanlist.size() !=0){
+            Toast.makeText(PendudukDaftarKTPActivity.this, "len : "+pengajuanlist.get(0).getNik(), Toast.LENGTH_SHORT).show();
+            tampilDaftar();
+        }
 
         //Tombol Kembali
         btnBack.setOnClickListener(new View.OnClickListener() {
@@ -59,13 +76,12 @@ public class PendudukDaftarKTPActivity extends AppCompatActivity {
     }
 
     public void tampilDaftar(){
-        AdapterPendudukDaftarKTP adapterPendudukDaftarKTP = new AdapterPendudukDaftarKTP(PendudukDaftarKTPActivity.this);
+        AdapterPendudukDaftarKTP adapterPendudukDaftarKTP = new AdapterPendudukDaftarKTP(PendudukDaftarKTPActivity.this,pengajuanlist);
         rvDaftarKTP.setAdapter(adapterPendudukDaftarKTP);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        tampilDaftar();
     }
 }

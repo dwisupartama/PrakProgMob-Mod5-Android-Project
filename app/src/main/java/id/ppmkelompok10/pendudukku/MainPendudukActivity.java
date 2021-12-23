@@ -14,12 +14,18 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 import id.ppmkelompok10.pendudukku.API.APIAuth.APIPengaturanProfil;
+import id.ppmkelompok10.pendudukku.API.APIKTP.APIGetAllPengajuan;
 import id.ppmkelompok10.pendudukku.API.RetroServer;
 import id.ppmkelompok10.pendudukku.Helper.LoadingDialog;
 import id.ppmkelompok10.pendudukku.Helper.SessionManagement;
 import id.ppmkelompok10.pendudukku.Model.ModelAuth.AccountModelAuth;
 import id.ppmkelompok10.pendudukku.Model.ModelAuth.ResponseModelAuth;
+import id.ppmkelompok10.pendudukku.Model.ModelKTP.PengajuanKTP;
+import id.ppmkelompok10.pendudukku.Model.ModelKTP.PengajuanKTP_Data;
+import id.ppmkelompok10.pendudukku.Model.ModelKTP.ResponseModelKTP;
 import id.ppmkelompok10.pendudukku.ModulAuth.LoginPendudukActivity;
 import id.ppmkelompok10.pendudukku.ModulAuth.PengaturanProfilActivity;
 import id.ppmkelompok10.pendudukku.ModulKTP.PegawaiDaftarKTPActivity;
@@ -54,7 +60,8 @@ public class MainPendudukActivity extends AppCompatActivity {
         tvNamaPengguna = findViewById(R.id.tv_nama_pengguna);
 
         showDataAkun(MainPendudukActivity.this);
-
+        //ambil data api
+        ambilDataAPI();
         //Button Pengaturan Profil
         imbPengaturanProfil = findViewById(R.id.img_pengaturan_profil);
         imbPengaturanProfil.setOnClickListener(new View.OnClickListener() {
@@ -172,4 +179,40 @@ public class MainPendudukActivity extends AppCompatActivity {
             }
         });
     }
+
+    protected void ambilDataAPI(){
+        LoadingDialog loading2 = new LoadingDialog(this);
+        loading2.startLoadingDialog();
+        //Ambil API
+        ArrayList<PengajuanKTP> pengajuanKTPS = new ArrayList<>();
+        session = new SessionManagement(this);
+        String nik = session.getNIK();
+        APIGetAllPengajuan apiGetAllPengajuan = RetroServer.konekRetrofit().create(APIGetAllPengajuan.class);
+        Call<ResponseModelKTP> getpengajuan = apiGetAllPengajuan.apiAmbilPengajuan(nik);
+
+        getpengajuan.enqueue(new Callback<ResponseModelKTP>() {
+            @Override
+            public void onResponse(Call<ResponseModelKTP> call, Response<ResponseModelKTP> response) {
+                int code = response.body().getCode();
+                String message = response.body().getMessage();
+                ArrayList<PengajuanKTP> dataPengajuan = response.body().getData();
+                for (PengajuanKTP item:dataPengajuan) {
+                    pengajuanKTPS.add(item);
+                }
+                MainPendudukActivity.this.setPengajuanView(pengajuanKTPS);
+                loading2.dismissLoading();
+            }
+
+            @Override
+            public void onFailure(Call<ResponseModelKTP> call, Throwable t) {
+                Toast.makeText(MainPendudukActivity.this, "Error Server : "+t.getMessage(), Toast.LENGTH_SHORT).show();
+                loading2.dismissLoading();
+            }
+        });
+    }
+
+    private void setPengajuanView(ArrayList<PengajuanKTP> pengajuanKTPS) {
+        PengajuanKTP_Data.getInstance().setPengajuanData(pengajuanKTPS);
+    }
+
 }
