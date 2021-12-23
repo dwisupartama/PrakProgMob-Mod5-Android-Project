@@ -14,6 +14,9 @@ import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
+import id.ppmkelompok10.pendudukku.Model.ModelVaksin.ModelVaksin;
 import id.ppmkelompok10.pendudukku.ModulKTP.DetailKTPActivity;
 import id.ppmkelompok10.pendudukku.ModulKTP.PegawaiEditKTPActivity;
 import id.ppmkelompok10.pendudukku.ModulVaksin.DetailVaksinActivity;
@@ -23,8 +26,11 @@ import id.ppmkelompok10.pendudukku.R;
 public class AdapterPegawaiDaftarVaksin extends RecyclerView.Adapter<AdapterPegawaiDaftarVaksin.Holder> {
     private Context context;
 
-    public AdapterPegawaiDaftarVaksin(Context context) {
+    private ArrayList<ModelVaksin> data;
+
+    public AdapterPegawaiDaftarVaksin(Context context, ArrayList<ModelVaksin> data) {
         this.context = context;
+        this.data = data;
     }
 
     @NonNull
@@ -36,17 +42,17 @@ public class AdapterPegawaiDaftarVaksin extends RecyclerView.Adapter<AdapterPega
 
     @Override
     public void onBindViewHolder(@NonNull AdapterPegawaiDaftarVaksin.Holder holder, int position) {
-        String jenisPengajuan = "Vaksin Pertama";
-        String namaLengkap = "I Kadek Dwi Supartama";
-        String nik = "5103061410010003";
-        String status = "Menunggu Konfirmasi";
+        String jenisPengajuan = data.get(position).getTahap_vaksin();
+        String namaLengkap = data.get(position).getKeterangan();
+        String nik = ""+data.get(position).getNik();
+        String status = data.get(position).getStatus_pengajuan();
 //        String status = "Sedang di Proses";
 //        String status = "Selesai di Proses";
 //        String status = "Pengajuan Gagal";
 
-        if(namaLengkap.length() > 18){
-            namaLengkap = namaLengkap.substring(0,18)+"...";
-        }
+//        if(namaLengkap.length() > 18){
+//            namaLengkap = namaLengkap.substring(0,18)+"...";
+//        }
 
         holder.tvJenisPengajuan.setText(jenisPengajuan);
         holder.tvNamaLengkap.setText(namaLengkap);
@@ -93,8 +99,8 @@ public class AdapterPegawaiDaftarVaksin extends RecyclerView.Adapter<AdapterPega
 
     @Override
     public int getItemCount() {
-        return 6;
-        //return arrayList.size();
+//        return 6;
+        return data.size();
     }
 
     public class Holder extends RecyclerView.ViewHolder {

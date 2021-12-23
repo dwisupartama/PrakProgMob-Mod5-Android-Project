@@ -9,20 +9,33 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
+import id.ppmkelompok10.pendudukku.API.APIVaksin.APIVaksin;
+import id.ppmkelompok10.pendudukku.API.RetroServer;
 import id.ppmkelompok10.pendudukku.Adapter.AdapterPegawaiDaftarVaksin;
 import id.ppmkelompok10.pendudukku.Helper.KeyboardUtils;
+import id.ppmkelompok10.pendudukku.Helper.SessionManagement;
+import id.ppmkelompok10.pendudukku.Model.ModelVaksin.ModelVaksin;
+import id.ppmkelompok10.pendudukku.Model.ModelVaksin.ResponseModelVaksin;
 import id.ppmkelompok10.pendudukku.R;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class PegawaiDaftarVaksinActivity extends AppCompatActivity {
     private ImageButton btnBack;
     private RecyclerView rvDaftarVaksin;
     private EditText etSearch;
     private TextView tvTitle, tvSubtitle;
+    private SessionManagement session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pegawai_daftar_vaksin);
+
+        session = new SessionManagement(this);
 
         //Merubah Status Bar Menjadi Putih / Mode Light
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
@@ -66,8 +79,29 @@ public class PegawaiDaftarVaksinActivity extends AppCompatActivity {
     }
 
     public void tampilDaftar(){
-        AdapterPegawaiDaftarVaksin adapterPegawaiDaftarVaksin = new AdapterPegawaiDaftarVaksin(PegawaiDaftarVaksinActivity.this);
-        rvDaftarVaksin.setAdapter(adapterPegawaiDaftarVaksin);
+        APIVaksin daftarVaksinPegawai = RetroServer.konekRetrofit().create(APIVaksin.class);
+        Call<ResponseModelVaksin> apiDaftarVaksinPegawai = daftarVaksinPegawai.apiDaftarVaksinPegawai();
+
+        apiDaftarVaksinPegawai.enqueue(new Callback<ResponseModelVaksin>() {
+            @Override
+            public void onResponse(Call<ResponseModelVaksin> call, Response<ResponseModelVaksin> response) {
+                int code = response.body().getCode();
+                String message = response.body().getMessage();
+                ArrayList<ModelVaksin> data = response.body().getData();
+
+                if (code == 1){
+                    AdapterPegawaiDaftarVaksin adapterPegawaiDaftarVaksin = new AdapterPegawaiDaftarVaksin(PegawaiDaftarVaksinActivity.this,data);
+                    rvDaftarVaksin.setAdapter(adapterPegawaiDaftarVaksin);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseModelVaksin> call, Throwable t) {
+
+            }
+        });
+
+
     }
 
     @Override

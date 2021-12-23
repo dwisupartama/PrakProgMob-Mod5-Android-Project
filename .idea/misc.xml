@@ -59,10 +59,9 @@
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/activity_pegawai_edit_ktp_activity.xml" value="0.25" />
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/activity_pegawai_edit_penduduk.xml" value="0.25396825396825395" />
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/activity_pegawai_edit_surat.xml" value="0.13333333333333333" />
-        <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/activity_pegawai_edit_vaksin.xml" value="0.22" />
+        <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/activity_pegawai_edit_vaksin.xml" value="0.33" />
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/activity_pegawai_tambah_penduduk.xml" value="0.24319189360354654" />
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/activity_penduduk_daftar_ktp_activity.xml" value="0.22" />
-        <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/activity_penduduk_daftar_surat.xml" value="0.13333333333333333" />
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/activity_penduduk_daftar_vaksin.xml" value="0.22" />
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/activity_penduduk_tambah_ktp_activity.xml" value="0.25" />
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/activity_penduduk_tambah_surat.xml" value="0.25" />
@@ -74,16 +73,19 @@
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/custom_spinner_dropdown.xml" value="0.2" />
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/dialog_confirm_danger.xml" value="0.25" />
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/dialog_danger.xml" value="0.13333333333333333" />
-        <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/dialog_loading.xml" value="0.33" />
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/dialog_success.xml" value="0.13333333333333333" />
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/view_pegawai_daftar_wtdelete.xml" value="0.33" />
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/view_pegawai_daftar_wtdetail.xml" value="0.5" />
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/layout/view_penduduk_daftar.xml" value="0.25" />
         <entry key="..\:/Pendudukku-MOD5/app/src/main/res/xml/network_security_config.xml" value="0.13333333333333333" />
+        <entry key="..\:/mdl_vaksin/PrakProgMob-Mod5-Android-Project/app/src/main/res/layout/activity_detail_vaksin.xml" value="0.3333333333333333" />
+        <entry key="..\:/mdl_vaksin/PrakProgMob-Mod5-Android-Project/app/src/main/res/layout/activity_pegawai_daftar_vaksin.xml" value="0.3333333333333333" />
+        <entry key="..\:/mdl_vaksin/PrakProgMob-Mod5-Android-Project/app/src/main/res/layout/activity_penduduk_daftar_vaksin.xml" value="0.4466666666666667" />
+        <entry key="..\:/mdl_vaksin/PrakProgMob-Mod5-Android-Project/app/src/main/res/layout/activity_penduduk_tambah_vaksin.xml" value="0.3333333333333333" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

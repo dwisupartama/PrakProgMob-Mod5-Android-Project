@@ -86,6 +86,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"/>
                 <TextView
+                    android:id="@+id/tv_tahap_vaksin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Vaksin Pertama"
@@ -112,6 +113,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"/>
                 <TextView
+                    android:id="@+id/tv_tanggal_pengajuan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Tanggal Pengajuan"
@@ -129,6 +131,7 @@
                 android:clipToPadding="false"
                 android:layout_marginTop="15dp">
                 <TextView
+                    android:id="@+id/tv_tgl_selesai"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Perkiraan Selesai"
@@ -138,6 +141,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"/>
                 <TextView
+                    android:id="@+id/tv_tanggal_perkiraan_selesai"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Tanggal Perkiraan Selesai"
@@ -155,6 +159,7 @@
                 android:clipToPadding="false"
                 android:layout_marginTop="15dp">
                 <TextView
+                    android:id="@+id/tv_status_pengajuan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Status Pengajuan"
@@ -204,6 +209,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"/>
                 <TextView
+                    android:id="@+id/tv_keterangan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Keterangan"
@@ -230,6 +236,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"/>
                 <TextView
+                    android:id="@+id/tv_tanggal_waktu_vaksin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Tanggal dan Waktu Vaksin"
@@ -256,6 +263,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"/>
                 <TextView
+                    android:id="@+id/tv_tempat_vaksin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Tempat Vaksin"
@@ -282,6 +290,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"/>
                 <TextView
+                    android:id="@+id/tv_jenis_vaksin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Jenis Vaksin"
@@ -308,6 +317,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"/>
                 <TextView
+                    android:id="@+id/tv_lokasi_diajukan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Lokasi yang Diajukan"
@@ -334,6 +344,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"/>
                 <TextView
+                    android:id="@+id/tv_riwayat_penyakit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Riwayat Penyakit"

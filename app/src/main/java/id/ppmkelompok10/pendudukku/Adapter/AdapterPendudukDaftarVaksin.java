@@ -16,6 +16,10 @@ import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import id.ppmkelompok10.pendudukku.Model.ModelVaksin.ModelVaksin;
 import id.ppmkelompok10.pendudukku.ModulKTP.DetailKTPActivity;
 import id.ppmkelompok10.pendudukku.ModulVaksin.DetailVaksinActivity;
 import id.ppmkelompok10.pendudukku.R;
@@ -23,8 +27,11 @@ import id.ppmkelompok10.pendudukku.R;
 public class AdapterPendudukDaftarVaksin extends RecyclerView.Adapter<AdapterPendudukDaftarVaksin.Holder> {
     private Context context;
 
-    public AdapterPendudukDaftarVaksin(Context context) {
+    private ArrayList<ModelVaksin> data;
+
+    public AdapterPendudukDaftarVaksin(Context context, ArrayList<ModelVaksin> data) {
         this.context = context;
+        this.data = data;
     }
 
     @NonNull
@@ -36,12 +43,12 @@ public class AdapterPendudukDaftarVaksin extends RecyclerView.Adapter<AdapterPen
 
     @Override
     public void onBindViewHolder(@NonNull AdapterPendudukDaftarVaksin.Holder holder, int position) {
-        String jenisPengajuan = "Vaksin Pertama";
-        String tanggalPengajuan = "12 Desember 2021";
+        String jenisPengajuan = data.get(position).getTahap_vaksin();
+        String tanggalPengajuan = data.get(position).getTanggal_pengajuan();
 //        String status = "Menunggu Konfirmasi";
 //        String status = "Sedang di Proses";
 //        String status = "Selesai di Proses";
-        String status = "Pengajuan Gagal";
+        String status = data.get(position).getStatus_pengajuan();
 
         holder.tvJenisPengajuan.setText(jenisPengajuan);
         holder.tvTanggal.setText(tanggalPengajuan);
@@ -71,6 +78,7 @@ public class AdapterPendudukDaftarVaksin extends RecyclerView.Adapter<AdapterPen
             @Override
             public void onClick(View v) {
                 Intent detailVaksinActivity = new Intent(v.getContext(), DetailVaksinActivity.class);
+                detailVaksinActivity.putExtra("id_vaksin",data.get(position).getId());
                 context.startActivity(detailVaksinActivity);
             }
         });
@@ -121,8 +129,8 @@ public class AdapterPendudukDaftarVaksin extends RecyclerView.Adapter<AdapterPen
 
     @Override
     public int getItemCount() {
-        return 6;
-        //return arrayList.size();
+        //return 6;
+        return data.size();
     }
 
     public class Holder extends RecyclerView.ViewHolder {
