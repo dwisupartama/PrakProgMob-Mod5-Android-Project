@@ -17,15 +17,24 @@ import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
+import id.ppmkelompok10.pendudukku.Model.ModelKTP.PengajuanKTP;
 import id.ppmkelompok10.pendudukku.ModulKTP.DetailKTPActivity;
 import id.ppmkelompok10.pendudukku.ModulKTP.PegawaiEditKTPActivity;
 import id.ppmkelompok10.pendudukku.R;
 
 public class AdapterPegawaiDaftarKTP extends RecyclerView.Adapter<AdapterPegawaiDaftarKTP.Holder> {
     private Context context;
+    private ArrayList<PengajuanKTP> pengajuanAll;
+    private AdapterPendudukDaftarKTP.lihatDataPengajuan lihatDataPengajuan;
+    private EditPengajuan editPengajuan;
 
-    public AdapterPegawaiDaftarKTP(Context context) {
+    public AdapterPegawaiDaftarKTP(Context context,ArrayList<PengajuanKTP> pengajuanAll, AdapterPendudukDaftarKTP.lihatDataPengajuan lihatDataPengajuan, EditPengajuan editPengajuan) {
         this.context = context;
+        this.pengajuanAll = pengajuanAll;
+        this.lihatDataPengajuan = lihatDataPengajuan;
+        this.editPengajuan = editPengajuan;
     }
 
     @NonNull
@@ -38,13 +47,10 @@ public class AdapterPegawaiDaftarKTP extends RecyclerView.Adapter<AdapterPegawai
     @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(@NonNull AdapterPegawaiDaftarKTP.Holder holder, int position) {
-        String jenisPengajuan = "Pembuatan KTP";
-        String namaLengkap = "I Kadek Dwi Supartama";
-        String nik = "5103061410010003";
-//        String status = "Menunggu Konfirmasi";
-//        String status = "Sedang di Proses";
-        String status = "Selesai di Proses";
-//        String status = "Pengajuan Gagal";
+        String jenisPengajuan = pengajuanAll.get(position).getJenis_pengajuan();
+        String namaLengkap = pengajuanAll.get(position).getNama_lengkap();
+        String nik = String.valueOf(pengajuanAll.get(position).getNik());
+        String status = pengajuanAll.get(position).getStatus_pengajuan();
 
         if(namaLengkap.length() > 18){
             namaLengkap = namaLengkap.substring(0,18)+"...";
@@ -74,28 +80,11 @@ public class AdapterPegawaiDaftarKTP extends RecyclerView.Adapter<AdapterPegawai
             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) holder.cvList.getLayoutParams();
             params.bottomMargin = 60;
         }
-
-        holder.imbDetail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent detailKTPActivity = new Intent(v.getContext(), DetailKTPActivity.class);
-                context.startActivity(detailKTPActivity);
-            }
-        });
-
-        holder.imbEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent pegawaiEditKTPActivity = new Intent(v.getContext(), PegawaiEditKTPActivity.class);
-                context.startActivity(pegawaiEditKTPActivity);
-            }
-        });
     }
 
     @Override
     public int getItemCount() {
-        return 6;
-        //return arrayList.size();
+        return pengajuanAll.size();
     }
 
     public class Holder extends RecyclerView.ViewHolder {
@@ -117,7 +106,25 @@ public class AdapterPegawaiDaftarKTP extends RecyclerView.Adapter<AdapterPegawai
             imbDetail = itemView.findViewById(R.id.imb_detail);
             imbEdit = itemView.findViewById(R.id.imb_edit);
 
+            imbDetail.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    lihatDataPengajuan.lihat(getAbsoluteAdapterPosition());
+                }
+            });
+
+            imbEdit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    editPengajuan.edit(getAbsoluteAdapterPosition());
+                }
+            });
+
             cvList = itemView.findViewById(R.id.cv_list);
         }
+    }
+
+    public interface EditPengajuan{
+        void edit(int position);
     }
 }

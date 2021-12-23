@@ -3,9 +3,7 @@ package id.ppmkelompok10.pendudukku.ModulKTP;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,18 +16,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import id.ppmkelompok10.pendudukku.API.APIAuth.APILogin;
 import id.ppmkelompok10.pendudukku.API.APIAuth.APIPengaturanProfil;
-import id.ppmkelompok10.pendudukku.API.APIKTP.APIPengajuan;
+import id.ppmkelompok10.pendudukku.API.APIKTP.APIPengajuanKTP;
 import id.ppmkelompok10.pendudukku.API.RetroServer;
-import id.ppmkelompok10.pendudukku.GetStartedActivity;
 import id.ppmkelompok10.pendudukku.Helper.LoadingDialog;
 import id.ppmkelompok10.pendudukku.Helper.SessionManagement;
-import id.ppmkelompok10.pendudukku.MainPendudukActivity;
 import id.ppmkelompok10.pendudukku.Model.ModelAuth.AccountModelAuth;
 import id.ppmkelompok10.pendudukku.Model.ModelAuth.ResponseModelAuth;
-import id.ppmkelompok10.pendudukku.ModulAuth.LoginPendudukActivity;
-import id.ppmkelompok10.pendudukku.ModulAuth.PengaturanProfilActivity;
 import id.ppmkelompok10.pendudukku.R;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -121,8 +114,8 @@ public class PendudukTambahKTPActivity extends AppCompatActivity {
         String __perkawinan = tv_perkawinan.getText().toString();
         String __pekerjaan = tv_pekerjaan.getText().toString();
 
-        APIPengajuan apiPengajuan = RetroServer.konekRetrofit().create(APIPengajuan.class);
-        Call<ResponseModelAuth> ajukan = apiPengajuan.AjukanKTP(__jenis_Pengajuan, __nik,__nama,__tmptLahir,__tglLahir,__jK,__golDar,__alamat,__agama,__perkawinan,__pekerjaan);
+        APIPengajuanKTP apiPengajuanKTP = RetroServer.konekRetrofit().create(APIPengajuanKTP.class);
+        Call<ResponseModelAuth> ajukan = apiPengajuanKTP.AjukanKTP(__jenis_Pengajuan, __nik,__nama,__tmptLahir,__tglLahir,__jK,__golDar,__alamat,__agama,__perkawinan,__pekerjaan);
         ajukan.enqueue(new Callback<ResponseModelAuth>() {
             @Override
             public void onResponse(Call<ResponseModelAuth> call, Response<ResponseModelAuth> response) {

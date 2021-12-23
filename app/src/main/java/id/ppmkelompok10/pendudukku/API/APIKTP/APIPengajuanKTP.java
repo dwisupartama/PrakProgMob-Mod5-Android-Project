@@ -1,12 +1,15 @@
 package id.ppmkelompok10.pendudukku.API.APIKTP;
 
 import id.ppmkelompok10.pendudukku.Model.ModelAuth.ResponseModelAuth;
+import id.ppmkelompok10.pendudukku.Model.ModelKTP.ResponseModelKTP;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
-public interface APIPengajuan {
+public interface APIPengajuanKTP {
     @FormUrlEncoded
     @POST("pengajuanKTP")
     Call<ResponseModelAuth> AjukanKTP(
@@ -21,5 +24,15 @@ public interface APIPengajuan {
             @Field("agama") String agama,
             @Field("status_perkawinan") String status_perkawinan,
             @Field("pekerjaan") String pekerjaan
+    );
+
+    @GET("/api/deletePengajuan/{id}")
+    Call<ResponseModelKTP> apiDelete(
+            @Path(value = "id", encoded = true) Long id
+    );
+
+    @GET("/api/getPengajuanFor/{nik}")
+    Call<ResponseModelKTP> apiAmbilPengajuan(
+            @Path(value = "nik", encoded = true) String nik
     );
 }

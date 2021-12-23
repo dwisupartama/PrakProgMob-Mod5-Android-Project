@@ -18,8 +18,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import id.ppmkelompok10.pendudukku.API.APIKTP.APIDeletePengajuan;
-import id.ppmkelompok10.pendudukku.API.APIKTP.APIGetAllPengajuan;
+import id.ppmkelompok10.pendudukku.API.APIKTP.APIPengajuanKTP;
 import id.ppmkelompok10.pendudukku.API.RetroServer;
 import id.ppmkelompok10.pendudukku.Adapter.AdapterPendudukDaftarKTP;
 import id.ppmkelompok10.pendudukku.Helper.LoadingDialog;
@@ -101,44 +100,6 @@ public class PendudukDaftarKTPActivity extends AppCompatActivity implements Adap
         startActivity(detailKTPActivity);
     }
 
-    ActivityResultLauncher<Intent> tambahPengajuan = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            result -> {
-                if (result.getResultCode() == Activity.RESULT_OK) {
-                    ambilDataAPI();
-                }
-            });
-
-    public void ambilDataAPI(){
-        LoadingDialog loading2 = new LoadingDialog(this);
-        loading2.startLoadingDialog();
-        //Ambil API
-        ArrayList<PengajuanKTP> pengajuanKTPS = new ArrayList<>();
-        session = new SessionManagement(this);
-        String nik = session.getNIK();
-        APIGetAllPengajuan apiGetAllPengajuan = RetroServer.konekRetrofit().create(APIGetAllPengajuan.class);
-        Call<ResponseModelKTP> getpengajuan = apiGetAllPengajuan.apiAmbilPengajuan(nik);
-
-        getpengajuan.enqueue(new Callback<ResponseModelKTP>() {
-            @Override
-            public void onResponse(Call<ResponseModelKTP> call, Response<ResponseModelKTP> response) {
-                ArrayList<PengajuanKTP> dataPengajuan = response.body().getData();
-                for (PengajuanKTP item:dataPengajuan) {
-                    pengajuanKTPS.add(item);
-                }
-                PengajuanKTP_Data.getInstance().setPengajuanData(pengajuanKTPS);
-                tampilDaftar(pengajuanKTPS);
-                loading2.dismissLoading();
-            }
-
-            @Override
-            public void onFailure(Call<ResponseModelKTP> call, Throwable t) {
-                Toast.makeText(PendudukDaftarKTPActivity.this, "Error Server : "+t.getMessage(), Toast.LENGTH_SHORT).show();
-                loading2.dismissLoading();
-            }
-        });
-    }
-
     @Override
     public void hapus(int position) {
         AlertDialog.Builder builderDialog;
@@ -180,10 +141,48 @@ public class PendudukDaftarKTPActivity extends AppCompatActivity implements Adap
         });
     }
 
+    ActivityResultLauncher<Intent> tambahPengajuan = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == Activity.RESULT_OK) {
+                    ambilDataAPI();
+                }
+            });
+
+    public void ambilDataAPI(){
+        LoadingDialog loading2 = new LoadingDialog(this);
+        loading2.startLoadingDialog();
+        //Ambil API
+        ArrayList<PengajuanKTP> pengajuanKTPS = new ArrayList<>();
+        session = new SessionManagement(this);
+        String nik = session.getNIK();
+        APIPengajuanKTP apiGetAllPengajuan = RetroServer.konekRetrofit().create(APIPengajuanKTP.class);
+        Call<ResponseModelKTP> getpengajuan = apiGetAllPengajuan.apiAmbilPengajuan(nik);
+
+        getpengajuan.enqueue(new Callback<ResponseModelKTP>() {
+            @Override
+            public void onResponse(Call<ResponseModelKTP> call, Response<ResponseModelKTP> response) {
+                ArrayList<PengajuanKTP> dataPengajuan = response.body().getData();
+                for (PengajuanKTP item:dataPengajuan) {
+                    pengajuanKTPS.add(item);
+                }
+                PengajuanKTP_Data.getInstance().setPengajuanData(pengajuanKTPS);
+                tampilDaftar(pengajuanKTPS);
+                loading2.dismissLoading();
+            }
+
+            @Override
+            public void onFailure(Call<ResponseModelKTP> call, Throwable t) {
+                Toast.makeText(PendudukDaftarKTPActivity.this, "Error Server : "+t.getMessage(), Toast.LENGTH_SHORT).show();
+                loading2.dismissLoading();
+            }
+        });
+    }
+
     protected void CallHapusAPI(Long id){
         LoadingDialog loading2 = new LoadingDialog(this);
         loading2.startLoadingDialog();
-        APIDeletePengajuan apiDeletePengajuan = RetroServer.konekRetrofit().create(APIDeletePengajuan.class);
+        APIPengajuanKTP apiDeletePengajuan = RetroServer.konekRetrofit().create(APIPengajuanKTP.class);
         Call<ResponseModelKTP> getpengajuan = apiDeletePengajuan.apiDelete(id);
 
         getpengajuan.enqueue(new Callback<ResponseModelKTP>() {

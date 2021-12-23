@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,19 +18,18 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
-import id.ppmkelompok10.pendudukku.API.APIKTP.APIDeletePengajuan;
-import id.ppmkelompok10.pendudukku.API.APIKTP.APIUpdatePengajuan;
+import id.ppmkelompok10.pendudukku.API.APIKTP.APIPegawaiKTP;
+import id.ppmkelompok10.pendudukku.API.APIKTP.APIPengajuanKTP;
 import id.ppmkelompok10.pendudukku.API.RetroServer;
-import id.ppmkelompok10.pendudukku.GetStartedActivity;
+import id.ppmkelompok10.pendudukku.Adapter.AdapterPendudukDaftarKTP;
 import id.ppmkelompok10.pendudukku.Helper.LoadingDialog;
-import id.ppmkelompok10.pendudukku.MainPendudukActivity;
-import id.ppmkelompok10.pendudukku.Model.ModelAuth.AccountModelAuth;
+import id.ppmkelompok10.pendudukku.Helper.SessionManagement;
 import id.ppmkelompok10.pendudukku.Model.ModelKTP.PengajuanKTP;
+import id.ppmkelompok10.pendudukku.Model.ModelKTP.PengajuanKTP_Data;
 import id.ppmkelompok10.pendudukku.Model.ModelKTP.ResponseModelKTP;
-import id.ppmkelompok10.pendudukku.ModulAuth.LoginPendudukActivity;
-import id.ppmkelompok10.pendudukku.ModulPenduduk.PegawaiEditPendudukActivity;
 import id.ppmkelompok10.pendudukku.R;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -42,6 +40,7 @@ public class PegawaiEditKTPActivity extends AppCompatActivity {
     private TextView tvTanggal;
     private Spinner spStatusPengajuan;
     private LinearLayout lnTanggalPerkiraanSelesai;
+    SessionManagement session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,8 +122,8 @@ public class PegawaiEditKTPActivity extends AppCompatActivity {
     protected void CallUpdateAPI(PengajuanKTP pengajuanKTP){
         LoadingDialog loading2 = new LoadingDialog(this);
         loading2.startLoadingDialog();
-        APIUpdatePengajuan apiUpdatePengajuan = RetroServer.konekRetrofit().create(APIUpdatePengajuan.class);
-        Call<ResponseModelKTP> getpengajuan = apiUpdatePengajuan.apiUpdate(pengajuanKTP.getId(),pengajuanKTP.getStatus_pengajuan(),pengajuanKTP.getKeterangan(),pengajuanKTP.getPerkiraan_selesai(),pengajuanKTP.getTanggal_selesai());
+        APIPegawaiKTP apiPegawaiKTP = RetroServer.konekRetrofit().create(APIPegawaiKTP.class);
+        Call<ResponseModelKTP> getpengajuan = apiPegawaiKTP.apiUpdate(pengajuanKTP.getId(),pengajuanKTP.getStatus_pengajuan(),pengajuanKTP.getKeterangan(),pengajuanKTP.getPerkiraan_selesai(),pengajuanKTP.getTanggal_selesai());
 
         getpengajuan.enqueue(new Callback<ResponseModelKTP>() {
             @Override
