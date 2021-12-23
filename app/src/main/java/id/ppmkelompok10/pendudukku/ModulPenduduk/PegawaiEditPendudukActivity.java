@@ -8,25 +8,43 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.Calendar;
 
+import id.ppmkelompok10.pendudukku.Helper.SessionManagement;
 import id.ppmkelompok10.pendudukku.R;
 
 public class PegawaiEditPendudukActivity extends AppCompatActivity {
     private ImageButton imbTanggal, btnBack;
     private TextView tvTanggalLahir;
     private Spinner spAgama, spStatusPerkawinan, spStatusAkses;
+    private LinearLayout lnStatusAkses;
+    SessionManagement session;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        session = new SessionManagement(this);
+
+        if(session.getStatusAkses().equals("Admin")){
+            lnStatusAkses.setVisibility(View.VISIBLE);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pegawai_edit_penduduk);
 
+        session = new SessionManagement(this);
+
         //Merubah Status Bar Menjadi Putih / Mode Light
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+
+        lnStatusAkses = findViewById(R.id.ln_status_akses);
 
         //Deklarasi Spinner
         spStatusAkses = findViewById(R.id.sp_status_akses);

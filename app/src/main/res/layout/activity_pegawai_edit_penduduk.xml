@@ -72,11 +72,14 @@
                 android:layout_marginRight="10dp"/>
 
             <LinearLayout
+                android:id="@+id/ln_status_akses"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:clipToPadding="false"
-                android:layout_marginTop="30dp">
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="-30dp"
+                android:visibility="gone">
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -107,7 +110,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:clipToPadding="false">
+                android:clipToPadding="false"
+                android:layout_marginTop="30dp">
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -137,6 +141,39 @@
                     android:textColorHint="@color/transparent50PrimaryText"
                     android:textColor="@color/PrimaryTextColorBlack"
                     android:inputType="text"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:clipToPadding="false">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Reset Password"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textSize="15dp"
+                    android:textColor="@color/PrimaryTextColorBlack"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"/>
+                <Button
+                    android:id="@+id/btn_reset_password"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="7dp"
+                    android:layout_marginBottom="20dp"
+                    style="@style/buttonPrimary"
+                    android:text="Reset Password"
+                    android:drawableLeft="@drawable/ic_ubah_password"
+                    android:paddingTop="17dp"
+                    android:paddingBottom="15dp"
+                    android:paddingLeft="35dp"
+                    android:paddingRight="40dp"
+                    android:elevation="10dp"
+                    android:outlineSpotShadowColor="@color/transparent50PrimaryText"
+                    android:outlineAmbientShadowColor="@color/transparent50PrimaryText"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -327,7 +364,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Jenis Kelamin"
+                    android:text="Golongan Darah"
                     android:fontFamily="@font/poppins_medium"
                     android:textSize="15dp"
                     android:textColor="@color/PrimaryTextColorBlack"
