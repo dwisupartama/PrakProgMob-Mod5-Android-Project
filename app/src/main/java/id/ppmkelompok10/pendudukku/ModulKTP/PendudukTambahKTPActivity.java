@@ -131,11 +131,11 @@ public class PendudukTambahKTPActivity extends AppCompatActivity {
 
                 if(code == 0){
                     loading.dismissLoading();
-                    alertDialog(PendudukTambahKTPActivity.this, "Berhasil", message);
+                    alertDialog(PendudukTambahKTPActivity.this, "Gagal", message);
                 }
                 else{
                     loading.dismissLoading();
-                    alertDialog(PendudukTambahKTPActivity.this, "Gagal", message);
+                    alertDialog(PendudukTambahKTPActivity.this, "Berhasil", message);
                 }
             }
 
@@ -173,6 +173,8 @@ public class PendudukTambahKTPActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 alertDialog.dismiss();
+                MainPendudukActivity.pendudukContext.ambilDataAPI();
+                finish();
             }
         });
     }

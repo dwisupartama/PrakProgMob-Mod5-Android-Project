@@ -86,6 +86,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"/>
                 <TextView
+                    android:id="@+id/tv_jenis_pembuatan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Jenis Pembuatan KTP"
@@ -112,6 +113,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"/>
                 <TextView
+                    android:id="@+id/tv_tanggal_pengajuan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Tanggal Pengajuan"
@@ -138,6 +140,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"/>
                 <TextView
+                    android:id="@+id/tv_tanggal_perkiraan_selesai"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Tanggal Perkiraan Selesai"
@@ -204,6 +207,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"/>
                 <TextView
+                    android:id="@+id/tv_keterangan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Keterangan"
@@ -230,6 +234,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"/>
                 <TextView
+                    android:id="@+id/tv_nik"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Nomor Induk Kependudukan"
@@ -256,6 +261,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"/>
                 <TextView
+                    android:id="@+id/tv_nama"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Nama Lengkap"
@@ -282,6 +288,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"/>
                 <TextView
+                    android:id="@+id/tv_tempat_lahir"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Tempat Lahir"
@@ -308,6 +315,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"/>
                 <TextView
+                    android:id="@+id/tv_tgl_lahir"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Tanggal Lahir"
@@ -334,6 +342,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"/>
                 <TextView
+                    android:id="@+id/tv_jenis_kelamin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Jenis Kelamin"
@@ -360,6 +369,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"/>
                 <TextView
+                    android:id="@+id/tv_golongan_darah"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Golongan Darah"
@@ -386,6 +396,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"/>
                 <TextView
+                    android:id="@+id/tv_alamat"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Alamat"
@@ -412,6 +423,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"/>
                 <TextView
+                    android:id="@+id/tv_agama"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Agama"
@@ -438,6 +450,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"/>
                 <TextView
+                    android:id="@+id/tv_perkawinan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Status Perkawinan"
@@ -464,6 +477,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"/>
                 <TextView
+                    android:id="@+id/tv_pekerjaan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Pekerjaan"

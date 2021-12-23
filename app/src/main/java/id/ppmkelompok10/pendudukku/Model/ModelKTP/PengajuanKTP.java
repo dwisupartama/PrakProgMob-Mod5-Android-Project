@@ -1,8 +1,11 @@
 package id.ppmkelompok10.pendudukku.Model.ModelKTP;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Date;
 
-public class PengajuanKTP {
+public class PengajuanKTP implements Parcelable {
     private long id;
     private String jenis_pengajuan;
     private Date tanggal_pengajuan;
@@ -63,6 +66,54 @@ public class PengajuanKTP {
         this.created_at = created_at;
         this.updated_at = updated_at;
     }
+
+    protected PengajuanKTP(Parcel in) {
+        id = in.readLong();
+        jenis_pengajuan = in.readString();
+        tanggal_pengajuan = new Date(in.readLong());
+        status_pengajuan = in.readString();
+        keterangan = in.readString();
+        nik = in.readLong();
+        nama_lengkap = in.readString();
+        tempat_lahir = in.readString();
+        tanggal_lahir = new Date(in.readLong());
+        jenis_kelamin = in.readString();
+        golongan_darah = in.readString();
+        alamat = in.readString();
+        agama = in.readString();
+        status_perkawinan = in.readString();
+        pekerjaan = in.readString();
+    }
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeLong(id);
+        parcel.writeString(jenis_pengajuan);
+        parcel.writeLong(tanggal_pengajuan.getTime());
+        parcel.writeString(status_pengajuan);
+        parcel.writeString(keterangan);
+        parcel.writeLong(nik);
+        parcel.writeString(nama_lengkap);
+        parcel.writeString(tempat_lahir);
+        parcel.writeLong(tanggal_lahir.getTime());
+        parcel.writeString(jenis_kelamin);
+        parcel.writeString(golongan_darah);
+        parcel.writeString(alamat);
+        parcel.writeString(agama);
+        parcel.writeString(status_perkawinan);
+        parcel.writeString(pekerjaan);
+    }
+
+    public static final Creator<PengajuanKTP> CREATOR = new Creator<PengajuanKTP>() {
+        @Override
+        public PengajuanKTP createFromParcel(Parcel in) {
+            return new PengajuanKTP(in);
+        }
+
+        @Override
+        public PengajuanKTP[] newArray(int size) {
+            return new PengajuanKTP[size];
+        }
+    };
 
     public long getId() {
         return id;
@@ -138,5 +189,10 @@ public class PengajuanKTP {
 
     public Date getUpdated_at() {
         return updated_at;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 }

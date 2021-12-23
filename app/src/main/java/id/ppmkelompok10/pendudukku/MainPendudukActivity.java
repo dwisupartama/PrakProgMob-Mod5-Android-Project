@@ -7,6 +7,7 @@ import androidx.cardview.widget.CardView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -41,11 +42,13 @@ public class MainPendudukActivity extends AppCompatActivity {
     private TextView tvNamaPengguna;
     private CardView cvMenuKTPku, cvMenuVaksinku, cvMenuSuratku;
     SessionManagement session;
+    public static MainPendudukActivity pendudukContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_penduduk);
+        pendudukContext = this;
         session = new SessionManagement(this);
 
         //Merubah Status Bar Menjadi Putih / Mode Light
@@ -109,6 +112,7 @@ public class MainPendudukActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         showDataAkun(MainPendudukActivity.this);
+        ambilDataAPI();
     }
 
     public void alertDialogConfirm(Context context){
@@ -153,6 +157,7 @@ public class MainPendudukActivity extends AppCompatActivity {
         });
     }
 
+
     public void showDataAkun(Context context){
         LoadingDialog loading = new LoadingDialog(this);
         loading.startLoadingDialog();
@@ -180,7 +185,7 @@ public class MainPendudukActivity extends AppCompatActivity {
         });
     }
 
-    protected void ambilDataAPI(){
+    public void ambilDataAPI(){
         LoadingDialog loading2 = new LoadingDialog(this);
         loading2.startLoadingDialog();
         //Ambil API
@@ -193,13 +198,12 @@ public class MainPendudukActivity extends AppCompatActivity {
         getpengajuan.enqueue(new Callback<ResponseModelKTP>() {
             @Override
             public void onResponse(Call<ResponseModelKTP> call, Response<ResponseModelKTP> response) {
-                int code = response.body().getCode();
-                String message = response.body().getMessage();
                 ArrayList<PengajuanKTP> dataPengajuan = response.body().getData();
                 for (PengajuanKTP item:dataPengajuan) {
                     pengajuanKTPS.add(item);
                 }
-                MainPendudukActivity.this.setPengajuanView(pengajuanKTPS);
+                PengajuanKTP_Data.getInstance().setPengajuanData(pengajuanKTPS);
+                Log.d("setpen", "setPengajuanView: "+PengajuanKTP_Data.getInstance().getdata().size());
                 loading2.dismissLoading();
             }
 
@@ -209,10 +213,6 @@ public class MainPendudukActivity extends AppCompatActivity {
                 loading2.dismissLoading();
             }
         });
-    }
-
-    private void setPengajuanView(ArrayList<PengajuanKTP> pengajuanKTPS) {
-        PengajuanKTP_Data.getInstance().setPengajuanData(pengajuanKTPS);
     }
 
 }
