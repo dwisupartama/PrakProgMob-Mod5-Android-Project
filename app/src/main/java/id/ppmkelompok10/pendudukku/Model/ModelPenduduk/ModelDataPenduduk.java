@@ -1,8 +1,8 @@
-package id.ppmkelompok10.pendudukku.Model.ModelAuth;
+package id.ppmkelompok10.pendudukku.Model.ModelPenduduk;
 
-public class AccountModelAuth {
+public class ModelDataPenduduk {
     private String nik;
-    private String password, status_akses, nama_lengkap, tempat_lahir, tanggal_lahir, jenis_kelamin, golongan_darah, alamat, agama, status_perkawinan, pekerjaan, created_at, updated_at;
+    private String password,status_akses,nama_lengkap,tempat_lahir,tanggal_lahir,jenis_kelamin,golongan_darah,alamat,agama,status_perkawinan,pekerjaan,created_at,updated_at;
 
     public String getNik() {
         return nik;
