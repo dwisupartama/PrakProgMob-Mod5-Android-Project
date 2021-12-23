@@ -1,12 +1,14 @@
 package id.ppmkelompok10.pendudukku.ModulKTP;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -22,7 +24,6 @@ import id.ppmkelompok10.pendudukku.API.RetroServer;
 import id.ppmkelompok10.pendudukku.Adapter.AdapterPendudukDaftarKTP;
 import id.ppmkelompok10.pendudukku.Helper.LoadingDialog;
 import id.ppmkelompok10.pendudukku.Helper.SessionManagement;
-import id.ppmkelompok10.pendudukku.MainPendudukActivity;
 import id.ppmkelompok10.pendudukku.Model.ModelKTP.PengajuanKTP;
 import id.ppmkelompok10.pendudukku.Model.ModelKTP.PengajuanKTP_Data;
 import id.ppmkelompok10.pendudukku.Model.ModelKTP.ResponseModelKTP;
@@ -56,10 +57,7 @@ public class PendudukDaftarKTPActivity extends AppCompatActivity implements Adap
         rvDaftarKTP = findViewById(R.id.rv_daftar_ktp);
 
         //Pemanggilan Data Daftar
-        pengajuanlist = PengajuanKTP_Data.getInstance().getdata();
-        if(pengajuanlist != null && pengajuanlist.size() !=0){
-            tampilDaftar();
-        }
+        ambilDataAPI();
 
         //Tombol Kembali
         btnBack.setOnClickListener(new View.OnClickListener() {
@@ -74,14 +72,13 @@ public class PendudukDaftarKTPActivity extends AppCompatActivity implements Adap
             @Override
             public void onClick(View v) {
                 Intent pendudukTambahKTPActivity = new Intent(PendudukDaftarKTPActivity.this, PendudukTambahKTPActivity.class);
-                startActivity(pendudukTambahKTPActivity);
+                tambahPengajuan.launch(pendudukTambahKTPActivity);
             }
         });
     }
 
-    public void tampilDaftar(){
-        pengajuanlist = PengajuanKTP_Data.getInstance().getdata();
-        Log.d("setpen", "pengajuan: "+pengajuanlist.size());
+    public void tampilDaftar(ArrayList<PengajuanKTP> pengajuanKTP){
+        pengajuanlist = pengajuanKTP;
         AdapterPendudukDaftarKTP adapterPendudukDaftarKTP = new AdapterPendudukDaftarKTP(PendudukDaftarKTPActivity.this,pengajuanlist,this::lihat,this::hapus);
         rvDaftarKTP.setAdapter(adapterPendudukDaftarKTP);
         rvDaftarKTP.invalidate();
@@ -89,13 +86,11 @@ public class PendudukDaftarKTPActivity extends AppCompatActivity implements Adap
 
     @Override
     protected void onResume() {
-        tampilDaftar();
         super.onResume();
     }
 
     @Override
     protected void onPause() {
-        tampilDaftar();
         super.onPause();
     }
 
@@ -104,6 +99,44 @@ public class PendudukDaftarKTPActivity extends AppCompatActivity implements Adap
         Intent detailKTPActivity = new Intent(PendudukDaftarKTPActivity.this, DetailKTPActivity.class);
         detailKTPActivity.putExtra("pengajuan",pengajuanlist.get(position));
         startActivity(detailKTPActivity);
+    }
+
+    ActivityResultLauncher<Intent> tambahPengajuan = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == Activity.RESULT_OK) {
+                    ambilDataAPI();
+                }
+            });
+
+    public void ambilDataAPI(){
+        LoadingDialog loading2 = new LoadingDialog(this);
+        loading2.startLoadingDialog();
+        //Ambil API
+        ArrayList<PengajuanKTP> pengajuanKTPS = new ArrayList<>();
+        session = new SessionManagement(this);
+        String nik = session.getNIK();
+        APIGetAllPengajuan apiGetAllPengajuan = RetroServer.konekRetrofit().create(APIGetAllPengajuan.class);
+        Call<ResponseModelKTP> getpengajuan = apiGetAllPengajuan.apiAmbilPengajuan(nik);
+
+        getpengajuan.enqueue(new Callback<ResponseModelKTP>() {
+            @Override
+            public void onResponse(Call<ResponseModelKTP> call, Response<ResponseModelKTP> response) {
+                ArrayList<PengajuanKTP> dataPengajuan = response.body().getData();
+                for (PengajuanKTP item:dataPengajuan) {
+                    pengajuanKTPS.add(item);
+                }
+                PengajuanKTP_Data.getInstance().setPengajuanData(pengajuanKTPS);
+                tampilDaftar(pengajuanKTPS);
+                loading2.dismissLoading();
+            }
+
+            @Override
+            public void onFailure(Call<ResponseModelKTP> call, Throwable t) {
+                Toast.makeText(PendudukDaftarKTPActivity.this, "Error Server : "+t.getMessage(), Toast.LENGTH_SHORT).show();
+                loading2.dismissLoading();
+            }
+        });
     }
 
     @Override
@@ -159,6 +192,7 @@ public class PendudukDaftarKTPActivity extends AppCompatActivity implements Adap
                 int code = response.body().getCode();
                 String message = response.body().getMessage();
                 loading2.dismissLoading();
+                ambilDataAPI();
             }
 
             @Override
@@ -167,6 +201,6 @@ public class PendudukDaftarKTPActivity extends AppCompatActivity implements Adap
                 loading2.dismissLoading();
             }
         });
-        MainPendudukActivity.pendudukContext.ambilDataAPI();
+
     }
 }

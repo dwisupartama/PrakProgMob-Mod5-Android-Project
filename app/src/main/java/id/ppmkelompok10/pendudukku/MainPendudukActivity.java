@@ -42,13 +42,11 @@ public class MainPendudukActivity extends AppCompatActivity {
     private TextView tvNamaPengguna;
     private CardView cvMenuKTPku, cvMenuVaksinku, cvMenuSuratku;
     SessionManagement session;
-    public static MainPendudukActivity pendudukContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_penduduk);
-        pendudukContext = this;
         session = new SessionManagement(this);
 
         //Merubah Status Bar Menjadi Putih / Mode Light
@@ -63,8 +61,6 @@ public class MainPendudukActivity extends AppCompatActivity {
         tvNamaPengguna = findViewById(R.id.tv_nama_pengguna);
 
         showDataAkun(MainPendudukActivity.this);
-        //ambil data api
-        ambilDataAPI();
         //Button Pengaturan Profil
         imbPengaturanProfil = findViewById(R.id.img_pengaturan_profil);
         imbPengaturanProfil.setOnClickListener(new View.OnClickListener() {
@@ -112,7 +108,6 @@ public class MainPendudukActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         showDataAkun(MainPendudukActivity.this);
-        ambilDataAPI();
     }
 
     public void alertDialogConfirm(Context context){
@@ -188,35 +183,4 @@ public class MainPendudukActivity extends AppCompatActivity {
             }
         });
     }
-
-    public void ambilDataAPI(){
-        LoadingDialog loading2 = new LoadingDialog(this);
-        loading2.startLoadingDialog();
-        //Ambil API
-        ArrayList<PengajuanKTP> pengajuanKTPS = new ArrayList<>();
-        session = new SessionManagement(this);
-        String nik = session.getNIK();
-        APIGetAllPengajuan apiGetAllPengajuan = RetroServer.konekRetrofit().create(APIGetAllPengajuan.class);
-        Call<ResponseModelKTP> getpengajuan = apiGetAllPengajuan.apiAmbilPengajuan(nik);
-
-        getpengajuan.enqueue(new Callback<ResponseModelKTP>() {
-            @Override
-            public void onResponse(Call<ResponseModelKTP> call, Response<ResponseModelKTP> response) {
-                ArrayList<PengajuanKTP> dataPengajuan = response.body().getData();
-                for (PengajuanKTP item:dataPengajuan) {
-                    pengajuanKTPS.add(item);
-                }
-                PengajuanKTP_Data.getInstance().setPengajuanData(pengajuanKTPS);
-                Log.d("setpen", "setPengajuanView: "+PengajuanKTP_Data.getInstance().getdata().size());
-                loading2.dismissLoading();
-            }
-
-            @Override
-            public void onFailure(Call<ResponseModelKTP> call, Throwable t) {
-                Toast.makeText(MainPendudukActivity.this, "Error Server : "+t.getMessage(), Toast.LENGTH_SHORT).show();
-                loading2.dismissLoading();
-            }
-        });
-    }
-
 }

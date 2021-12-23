@@ -147,7 +147,6 @@ public class PegawaiEditKTPActivity extends AppCompatActivity {
                 loading2.dismissLoading();
             }
         });
-        MainPendudukActivity.pendudukContext.ambilDataAPI();
     }
 
     public void alertDialog(Context context, String textTitle, String textMessage){
