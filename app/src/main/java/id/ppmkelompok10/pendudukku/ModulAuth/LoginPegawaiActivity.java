@@ -138,7 +138,7 @@ public class LoginPegawaiActivity extends AppCompatActivity {
                 }else{
                     loading.dismissLoading();
                     AccountModelAuth dataLogin = response.body().getData();
-                    session.saveSession(String.valueOf(dataLogin.getNik()), dataLogin.getStatus_akses(), "Pegawai");
+                    session.saveSession(dataLogin.getNik(), dataLogin.getStatus_akses(), "Pegawai");
                     alertDialogSuccess(LoginPegawaiActivity.this, "Berhasil Masuk", message);
                 }
             }

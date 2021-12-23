@@ -173,6 +173,10 @@ public class MainPendudukActivity extends AppCompatActivity {
                 String message = response.body().getMessage();
                 AccountModelAuth dataAkun = response.body().getData();
 
+                String namaLengkap = dataAkun.getNama_lengkap();
+                if(namaLengkap.length() > 11){
+                    namaLengkap = namaLengkap.substring(0,11)+"...";
+                }
                 tvNamaPengguna.setText(dataAkun.getNama_lengkap());
                 loading.dismissLoading();
             }

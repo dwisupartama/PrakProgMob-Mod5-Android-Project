@@ -268,7 +268,7 @@ public class PengaturanProfilActivity extends AppCompatActivity {
 
 //                Toast.makeText(PengaturanProfiltActivity.this, "NIK : "+dataAkun.getNik(), Toast.LENGTH_SHORT).show();
 //                int dataNIK = dataAkun.getNik();
-                tvNIK.setText(""+dataAkun.getNik());
+                tvNIK.setText(dataAkun.getNik());
                 etNamaLengkap.setText(dataAkun.getNama_lengkap());
                 etTempatLahir.setText(dataAkun.getTempat_lahir());
                 tvTanggalLahir.setText(dataAkun.getTanggal_lahir());

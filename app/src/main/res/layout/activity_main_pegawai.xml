@@ -81,6 +81,43 @@
         android:paddingBottom="10dp"
         android:clipToPadding="false">
         <androidx.cardview.widget.CardView
+            android:id="@+id/cv_menu_pendudukku"
+            android:layout_width="0dp"
+            android:layout_height="160dp"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            app:cardCornerRadius="15dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardElevation="10dp"
+            android:outlineAmbientShadowColor="@color/transparent50PrimaryText"
+            android:outlineSpotShadowColor="@color/transparent50PrimaryText"
+            android:clickable="true"
+            android:foreground="@drawable/ripple_menu_utama"
+            android:layout_marginBottom="20dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:paddingTop="10dp">
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_pendudukku"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Pendudukku"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:textColor="@color/PrimaryTextColorBlack"
+                    android:textSize="15dp"
+                    android:textAlignment="center"
+                    android:layout_marginTop="10dp"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
             android:id="@+id/cv_menu_ktpku"
             app:cardBackgroundColor="@color/white"
             android:layout_width="0dp"
@@ -190,42 +227,5 @@
                     android:layout_marginTop="10dp"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
-        android:id="@+id/cv_menu_pendudukku"
-        android:layout_width="0dp"
-        android:layout_height="160dp"
-        android:layout_columnWeight="1"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        app:cardCornerRadius="15dp"
-        app:cardBackgroundColor="@color/white"
-        app:cardElevation="10dp"
-        android:outlineAmbientShadowColor="@color/transparent50PrimaryText"
-        android:outlineSpotShadowColor="@color/transparent50PrimaryText"
-        android:clickable="true"
-        android:foreground="@drawable/ripple_menu_utama"
-        android:layout_marginBottom="20dp">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:paddingTop="10dp">
-            <ImageView
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_pendudukku"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Pendudukku"
-                android:fontFamily="@font/poppins_semibold"
-                android:textColor="@color/PrimaryTextColorBlack"
-                android:textSize="15dp"
-                android:textAlignment="center"
-                android:layout_marginTop="10dp"/>
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
     </GridLayout>
 </LinearLayout>

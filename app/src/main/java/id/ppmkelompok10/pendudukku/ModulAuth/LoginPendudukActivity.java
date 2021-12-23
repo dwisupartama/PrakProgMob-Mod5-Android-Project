@@ -139,7 +139,7 @@ public class LoginPendudukActivity extends AppCompatActivity {
                 }else{
                     loading.dismissLoading();
                     AccountModelAuth dataLogin = response.body().getData();
-                    session.saveSession(String.valueOf(dataLogin.getNik()), dataLogin.getStatus_akses(), "Penduduk");
+                    session.saveSession(dataLogin.getNik(), dataLogin.getStatus_akses(), "Penduduk");
                     alertDialogSuccess(LoginPendudukActivity.this, "Berhasil Masuk", message);
                 }
             }

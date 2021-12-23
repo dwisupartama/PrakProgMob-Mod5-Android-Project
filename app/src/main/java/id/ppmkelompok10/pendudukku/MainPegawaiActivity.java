@@ -41,10 +41,6 @@ public class MainPegawaiActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
-        if(session.getStatusAkses().equals("Pegawai")){
-            cvMenuPendudukku.setVisibility(View.GONE);
-        }
     }
 
     @Override
@@ -184,7 +180,12 @@ public class MainPegawaiActivity extends AppCompatActivity {
 
                 loading.dismissLoading();
 
-                tvNamaPengguna.setText(dataAkun.getNama_lengkap());
+
+                String namaLengkap = dataAkun.getNama_lengkap();
+                if(namaLengkap.length() > 11){
+                    namaLengkap = namaLengkap.substring(0,11)+"...";
+                }
+                tvNamaPengguna.setText(namaLengkap);
             }
 
             @Override
