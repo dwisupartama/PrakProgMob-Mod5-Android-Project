@@ -16,6 +16,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.math.BigInteger;
+
 import id.ppmkelompok10.pendudukku.API.APIAuth.APIPengaturanProfil;
 import id.ppmkelompok10.pendudukku.API.APIKTP.APIPengajuanKTP;
 import id.ppmkelompok10.pendudukku.API.RetroServer;
@@ -103,7 +105,7 @@ public class PendudukTambahKTPActivity extends AppCompatActivity {
         loading.startLoadingDialog();
         //ambil Data
         String __jenis_Pengajuan = spJenisPengajuanKTP.getSelectedItem().toString();
-        String __nik = tv_nik.getText().toString();
+        BigInteger __nik = BigInteger.valueOf(Long.parseLong(tv_nik.getText().toString()));
         String __nama = tv_nama.getText().toString();
         String __tmptLahir = tv_tmptLahir.getText().toString();
         String __tglLahir = tv_tgl_lahir.getText().toString();

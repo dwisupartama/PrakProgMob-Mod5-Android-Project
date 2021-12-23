@@ -84,6 +84,11 @@ public class PengajuanKTP implements Parcelable {
         status_perkawinan = in.readString();
         pekerjaan = in.readString();
     }
+
+    public PengajuanKTP() {
+
+    }
+
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeLong(id);
@@ -189,6 +194,82 @@ public class PengajuanKTP implements Parcelable {
 
     public Date getUpdated_at() {
         return updated_at;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setJenis_pengajuan(String jenis_pengajuan) {
+        this.jenis_pengajuan = jenis_pengajuan;
+    }
+
+    public void setTanggal_pengajuan(Date tanggal_pengajuan) {
+        this.tanggal_pengajuan = tanggal_pengajuan;
+    }
+
+    public void setStatus_pengajuan(String status_pengajuan) {
+        this.status_pengajuan = status_pengajuan;
+    }
+
+    public void setKeterangan(String keterangan) {
+        this.keterangan = keterangan;
+    }
+
+    public void setPerkiraan_selesai(Date perkiraan_selesai) {
+        this.perkiraan_selesai = perkiraan_selesai;
+    }
+
+    public void setTanggal_selesai(Date tanggal_selesai) {
+        this.tanggal_selesai = tanggal_selesai;
+    }
+
+    public void setNik(long nik) {
+        this.nik = nik;
+    }
+
+    public void setNama_lengkap(String nama_lengkap) {
+        this.nama_lengkap = nama_lengkap;
+    }
+
+    public void setTempat_lahir(String tempat_lahir) {
+        this.tempat_lahir = tempat_lahir;
+    }
+
+    public void setTanggal_lahir(Date tanggal_lahir) {
+        this.tanggal_lahir = tanggal_lahir;
+    }
+
+    public void setJenis_kelamin(String jenis_kelamin) {
+        this.jenis_kelamin = jenis_kelamin;
+    }
+
+    public void setGolongan_darah(String golongan_darah) {
+        this.golongan_darah = golongan_darah;
+    }
+
+    public void setAlamat(String alamat) {
+        this.alamat = alamat;
+    }
+
+    public void setAgama(String agama) {
+        this.agama = agama;
+    }
+
+    public void setStatus_perkawinan(String status_perkawinan) {
+        this.status_perkawinan = status_perkawinan;
+    }
+
+    public void setPekerjaan(String pekerjaan) {
+        this.pekerjaan = pekerjaan;
+    }
+
+    public void setCreated_at(Date created_at) {
+        this.created_at = created_at;
+    }
+
+    public void setUpdated_at(Date updated_at) {
+        this.updated_at = updated_at;
     }
 
     @Override

@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -20,6 +21,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 import id.ppmkelompok10.pendudukku.API.APIKTP.APIPegawaiKTP;
 import id.ppmkelompok10.pendudukku.API.APIKTP.APIPengajuanKTP;
@@ -37,9 +39,11 @@ import retrofit2.Response;
 
 public class PegawaiEditKTPActivity extends AppCompatActivity {
     private ImageButton imbTanggal, btnBack;
+    private Button btn_perbaharui;
     private TextView tvTanggal;
     private Spinner spStatusPengajuan;
     private LinearLayout lnTanggalPerkiraanSelesai;
+    EditText et_keterangan;
     SessionManagement session;
 
     @Override
@@ -56,8 +60,14 @@ public class PegawaiEditKTPActivity extends AppCompatActivity {
         //Deklarasi Text View Tanggal Lahir
         tvTanggal = findViewById(R.id.tv_tanggal);
 
+        //Deklarasi EditText Keterangan
+        et_keterangan = findViewById(R.id.et_keterangan);
+
         //Deklarasi Tombol Kembali
         btnBack = findViewById(R.id.btn_back);
+
+        //Deklarasi tombol perbarui
+        btn_perbaharui = findViewById(R.id.btn_perbaharui);
 
         //Deklarasi Layout Tanggal Pengajuan;
         lnTanggalPerkiraanSelesai = findViewById(R.id.ln_tanggal_perkiraan_selesai);
@@ -115,6 +125,22 @@ public class PegawaiEditKTPActivity extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
+            }
+        });
+
+        btn_perbaharui.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PengajuanKTP pengajuanKTP = new PengajuanKTP();
+                pengajuanKTP.setStatus_pengajuan(spStatusPengajuan.getSelectedItem().toString());
+                pengajuanKTP.setKeterangan(et_keterangan.toString());
+//                pengajuanKTP.setPerkiraan_selesai();
+                if(pengajuanKTP.getStatus_pengajuan().equals("Selesai di Proses")){
+                    pengajuanKTP.setTanggal_selesai(Calendar.getInstance().getTime());
+                }else{
+                    pengajuanKTP.setTanggal_selesai(null);
+                }
+//                CallUpdateAPI(pengajuanKTP);
             }
         });
     }

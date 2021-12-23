@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -109,6 +110,7 @@ public class PegawaiDaftarKTPActivity extends AppCompatActivity implements Adapt
 
             @Override
             public void onFailure(Call<ResponseModelKTP> call, Throwable t) {
+                Log.d("Daftar", "onFailure: "+t.getMessage());
                 Toast.makeText(PegawaiDaftarKTPActivity.this, "Error Server : "+t.getMessage(), Toast.LENGTH_SHORT).show();
                 loading2.dismissLoading();
             }

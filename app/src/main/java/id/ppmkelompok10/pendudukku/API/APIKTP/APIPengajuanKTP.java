@@ -1,5 +1,7 @@
 package id.ppmkelompok10.pendudukku.API.APIKTP;
 
+import java.math.BigInteger;
+
 import id.ppmkelompok10.pendudukku.Model.ModelAuth.ResponseModelAuth;
 import id.ppmkelompok10.pendudukku.Model.ModelKTP.ResponseModelKTP;
 import retrofit2.Call;
@@ -14,7 +16,7 @@ public interface APIPengajuanKTP {
     @POST("pengajuanKTP")
     Call<ResponseModelAuth> AjukanKTP(
             @Field("jenis_pengajuan") String jenis_pengajuan,
-            @Field("nik") String nik,
+            @Field("nik") BigInteger id,
             @Field("nama") String nama,
             @Field("tempat_lahir") String tempat_lahir,
             @Field("tanggal_lahir") String tanggal_lahir,

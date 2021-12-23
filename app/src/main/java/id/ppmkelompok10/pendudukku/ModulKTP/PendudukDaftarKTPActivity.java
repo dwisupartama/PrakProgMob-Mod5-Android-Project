@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -173,6 +174,7 @@ public class PendudukDaftarKTPActivity extends AppCompatActivity implements Adap
 
             @Override
             public void onFailure(Call<ResponseModelKTP> call, Throwable t) {
+                Log.d("Daftar", "onFailure: "+t.getMessage());
                 Toast.makeText(PendudukDaftarKTPActivity.this, "Error Server : "+t.getMessage(), Toast.LENGTH_SHORT).show();
                 loading2.dismissLoading();
             }
