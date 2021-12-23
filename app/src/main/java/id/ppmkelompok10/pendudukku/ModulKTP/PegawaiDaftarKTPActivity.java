@@ -75,4 +75,6 @@ public class PegawaiDaftarKTPActivity extends AppCompatActivity {
         super.onResume();
         tampilDaftar();
     }
+
+
 }
