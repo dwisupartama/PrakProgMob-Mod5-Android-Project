@@ -1,9 +1,11 @@
 package id.ppmkelompok10.pendudukku.Model.ModelVaksin;
 
-public class ResponseModelDetailVaksin {
+import java.util.ArrayList;
+
+public class ResponseMultiDataModelVaksin {
     private int code;
     private String message;
-    private ModelVaksin data;
+    private ArrayList<ModelVaksin> data;
 
     public int getCode() {
         return code;
@@ -21,11 +23,11 @@ public class ResponseModelDetailVaksin {
         this.message = message;
     }
 
-    public ModelVaksin getData() {
+    public ArrayList<ModelVaksin> getData() {
         return data;
     }
 
-    public void setData(ModelVaksin data) {
+    public void setData(ArrayList<ModelVaksin> data) {
         this.data = data;
     }
 }

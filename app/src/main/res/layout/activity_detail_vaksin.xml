@@ -131,7 +131,7 @@
                 android:clipToPadding="false"
                 android:layout_marginTop="15dp">
                 <TextView
-                    android:id="@+id/tv_tgl_selesai"
+                    android:id="@+id/tv_label_perkiraan_selesai"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Perkiraan Selesai"

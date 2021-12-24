@@ -1,5 +1,6 @@
 package id.ppmkelompok10.pendudukku.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -14,6 +15,9 @@ import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
+import id.ppmkelompok10.pendudukku.Model.ModelSurat.ModelSurat;
 import id.ppmkelompok10.pendudukku.ModulSurat.DetailSuratActivity;
 import id.ppmkelompok10.pendudukku.ModulSurat.PegawaiEditSuratActivity;
 import id.ppmkelompok10.pendudukku.ModulVaksin.DetailVaksinActivity;
@@ -22,9 +26,11 @@ import id.ppmkelompok10.pendudukku.R;
 
 public class AdapterPegawaiDaftarSurat extends RecyclerView.Adapter<AdapterPegawaiDaftarSurat.Holder>{
     private Context context;
+    private ArrayList<ModelSurat> data;
 
-    public AdapterPegawaiDaftarSurat(Context context) {
+    public AdapterPegawaiDaftarSurat(Context context, ArrayList<ModelSurat> data) {
         this.context = context;
+        this.data = data;
     }
 
     @NonNull
@@ -35,14 +41,11 @@ public class AdapterPegawaiDaftarSurat extends RecyclerView.Adapter<AdapterPegaw
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterPegawaiDaftarSurat.Holder holder, int position) {
-        String jenisPengajuan = "Surat Tidak Mampu";
-        String namaLengkap = "I Kadek Dwi Supartama";
-        String nik = "5103061410010003";
-        String status = "Menunggu Konfirmasi";
-//        String status = "Sedang di Proses";
-//        String status = "Selesai di Proses";
-//        String status = "Pengajuan Gagal";
+    public void onBindViewHolder(@NonNull AdapterPegawaiDaftarSurat.Holder holder, @SuppressLint("RecyclerView") int position) {
+        String jenisPengajuan = data.get(position).getJenis_surat();
+        String namaLengkap = data.get(position).getNama_lengkap();
+        String nik = data.get(position).getNik();
+        String status = data.get(position).getStatus_pengajuan();
 
         if(namaLengkap.length() > 18){
             namaLengkap = namaLengkap.substring(0,18)+"...";
@@ -77,6 +80,7 @@ public class AdapterPegawaiDaftarSurat extends RecyclerView.Adapter<AdapterPegaw
             @Override
             public void onClick(View v) {
                 Intent detailSuratActivity = new Intent(v.getContext(), DetailSuratActivity.class);
+                detailSuratActivity.putExtra("id_surat", data.get(position).getId());
                 context.startActivity(detailSuratActivity);
             }
         });
@@ -85,6 +89,7 @@ public class AdapterPegawaiDaftarSurat extends RecyclerView.Adapter<AdapterPegaw
             @Override
             public void onClick(View v) {
                 Intent pegawaiEditSuratActivity = new Intent(v.getContext(), PegawaiEditSuratActivity.class);
+                pegawaiEditSuratActivity.putExtra("id_surat", data.get(position).getId());
                 context.startActivity(pegawaiEditSuratActivity);
             }
         });
@@ -92,8 +97,8 @@ public class AdapterPegawaiDaftarSurat extends RecyclerView.Adapter<AdapterPegaw
 
     @Override
     public int getItemCount() {
-        return 6;
-        //return arrayList.size();
+//        return 6;
+        return data.size();
     }
 
     public class Holder extends RecyclerView.ViewHolder {

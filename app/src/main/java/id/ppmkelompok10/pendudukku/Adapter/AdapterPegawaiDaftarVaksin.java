@@ -1,5 +1,6 @@
 package id.ppmkelompok10.pendudukku.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -41,9 +42,9 @@ public class AdapterPegawaiDaftarVaksin extends RecyclerView.Adapter<AdapterPega
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterPegawaiDaftarVaksin.Holder holder, int position) {
+    public void onBindViewHolder(@NonNull AdapterPegawaiDaftarVaksin.Holder holder, @SuppressLint("RecyclerView") int position) {
         String jenisPengajuan = data.get(position).getTahap_vaksin();
-        String namaLengkap = data.get(position).getKeterangan();
+        String namaLengkap = data.get(position).getNama_lengkap();
         String nik = ""+data.get(position).getNik();
         String status = data.get(position).getStatus_pengajuan();
 //        String status = "Sedang di Proses";
@@ -83,6 +84,7 @@ public class AdapterPegawaiDaftarVaksin extends RecyclerView.Adapter<AdapterPega
             @Override
             public void onClick(View v) {
                 Intent detailVaksinActivity = new Intent(v.getContext(), DetailVaksinActivity.class);
+                detailVaksinActivity.putExtra("id_vaksin",data.get(position).getId());
                 context.startActivity(detailVaksinActivity);
             }
         });
@@ -91,6 +93,7 @@ public class AdapterPegawaiDaftarVaksin extends RecyclerView.Adapter<AdapterPega
             @Override
             public void onClick(View v) {
                 Intent pegawaiEditVaksinActivity = new Intent(v.getContext(), PegawaiEditVaksinActivity.class);
+                pegawaiEditVaksinActivity.putExtra("id_vaksin",data.get(position).getId());
                 context.startActivity(pegawaiEditVaksinActivity);
             }
         });

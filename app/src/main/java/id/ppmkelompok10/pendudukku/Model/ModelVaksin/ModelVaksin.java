@@ -1,8 +1,8 @@
 package id.ppmkelompok10.pendudukku.Model.ModelVaksin;
 
 public class ModelVaksin {
-    private int id, nik;
-    private String tahap_vaksin, tanggal_pengajuan, status_pengajuan, keterangan, perkiraan_selesai, tanggal_selesai, tanggal_vaksin, waktu_vaksin, tempat_vaksin, jenis_vaksin, daerah_vaksin_diajukan, riwayat_penyakit, created_at, update_at;
+    private int id;
+    private String nik, nama_lengkap, tahap_vaksin, tanggal_pengajuan, status_pengajuan, keterangan, perkiraan_selesai, tanggal_selesai, tanggal_vaksin, waktu_vaksin, tempat_vaksin, jenis_vaksin, daerah_vaksin_diajukan, riwayat_penyakit, created_at, update_at;
 
     public int getId() {
         return id;
@@ -12,12 +12,20 @@ public class ModelVaksin {
         this.id = id;
     }
 
-    public int getNik() {
+    public String getNik() {
         return nik;
     }
 
-    public void setNik(int nik) {
+    public void setNik(String nik) {
         this.nik = nik;
+    }
+
+    public String getNama_lengkap() {
+        return nama_lengkap;
+    }
+
+    public void setNama_lengkap(String nama_lengkap) {
+        this.nama_lengkap = nama_lengkap;
     }
 
     public String getTahap_vaksin() {

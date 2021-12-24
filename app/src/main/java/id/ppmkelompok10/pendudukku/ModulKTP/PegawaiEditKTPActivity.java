@@ -252,35 +252,6 @@ public class PegawaiEditKTPActivity extends AppCompatActivity {
         });
     }
 
-//    protected void CallUpdateAPI(PengajuanKTP pengajuanKTP){
-//        LoadingDialog loading2 = new LoadingDialog(this);
-//        loading2.startLoadingDialog();
-//        APIPegawaiKTP apiPegawaiKTP = RetroServer.konekRetrofit().create(APIPegawaiKTP.class);
-//        Call<ResponseSingleDataModelKTP> getpengajuan = apiPegawaiKTP.apiUpdate(pengajuanKTP.getId(),pengajuanKTP.getStatus_pengajuan(),pengajuanKTP.getKeterangan(),pengajuanKTP.getPerkiraan_selesai(),pengajuanKTP.getTanggal_selesai());
-//
-//        getpengajuan.enqueue(new Callback<ResponseSingleDataModelKTP>() {
-//            @Override
-//            public void onResponse(Call<ResponseSingleDataModelKTP> call, Response<ResponseSingleDataModelKTP> response) {
-//                int code = response.body().getCode();
-//                String message = response.body().getMessage();
-//
-//                if(code == 0){
-//                    loading2.dismissLoading();
-//                    alertDialog(PegawaiEditKTPActivity.this, "Gagal Update", message);
-//                }else{
-//                    loading2.dismissLoading();
-//                    alertDialog(PegawaiEditKTPActivity.this, "Berhasil Update", message);
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<ResponseSingleDataModelKTP> call, Throwable t) {
-//                Toast.makeText(PegawaiEditKTPActivity.this, "Error Server : "+t.getMessage(), Toast.LENGTH_SHORT).show();
-//                loading2.dismissLoading();
-//            }
-//        });
-//    }
-
     public void alertDialogDanger(Context context, String textTitle, String textMessage){
     AlertDialog.Builder builderDialog;
     AlertDialog alertDialog;

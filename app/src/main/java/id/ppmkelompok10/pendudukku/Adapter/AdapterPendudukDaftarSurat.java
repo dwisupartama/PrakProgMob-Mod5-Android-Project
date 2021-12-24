@@ -1,5 +1,7 @@
 package id.ppmkelompok10.pendudukku.Adapter;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -9,6 +11,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -16,14 +19,28 @@ import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
+import id.ppmkelompok10.pendudukku.API.APISurat.APIPendudukSurat;
+import id.ppmkelompok10.pendudukku.API.APIVaksin.APIPendudukVaksin;
+import id.ppmkelompok10.pendudukku.API.RetroServer;
+import id.ppmkelompok10.pendudukku.Helper.LoadingDialog;
+import id.ppmkelompok10.pendudukku.Model.ModelSurat.ModelSurat;
+import id.ppmkelompok10.pendudukku.Model.ModelSurat.ResponseSingleDataModelSurat;
+import id.ppmkelompok10.pendudukku.Model.ModelVaksin.ResponseSingleModelDataVaksin;
 import id.ppmkelompok10.pendudukku.ModulSurat.DetailSuratActivity;
 import id.ppmkelompok10.pendudukku.R;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AdapterPendudukDaftarSurat extends RecyclerView.Adapter<AdapterPendudukDaftarSurat.Holder> {
     private Context context;
+    private ArrayList<ModelSurat> data;
 
-    public AdapterPendudukDaftarSurat(Context context) {
+    public AdapterPendudukDaftarSurat(Context context, ArrayList<ModelSurat> data) {
         this.context = context;
+        this.data = data;
     }
 
     @NonNull
@@ -34,13 +51,10 @@ public class AdapterPendudukDaftarSurat extends RecyclerView.Adapter<AdapterPend
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterPendudukDaftarSurat.Holder holder, int position) {
-        String jenisPengajuan = "Surat Tidak Mampu";
-        String tanggalPengajuan = "12 Desember 2021";
-//        String status = "Menunggu Konfirmasi";
-//        String status = "Sedang di Proses";
-//        String status = "Selesai di Proses";
-        String status = "Pengajuan Gagal";
+    public void onBindViewHolder(@NonNull AdapterPendudukDaftarSurat.Holder holder, @SuppressLint("RecyclerView") int position) {
+        String jenisPengajuan = data.get(position).getJenis_surat();
+        String tanggalPengajuan = data.get(position).getTanggal_pengajuan();
+        String status = data.get(position).getStatus_pengajuan();
 
         holder.tvJenisPengajuan.setText(jenisPengajuan);
         holder.tvTanggal.setText(tanggalPengajuan);
@@ -60,6 +74,12 @@ public class AdapterPendudukDaftarSurat extends RecyclerView.Adapter<AdapterPend
             holder.tvStatus.setTextColor(ContextCompat.getColor(context, R.color.RedColorPrimary));
         }
 
+        if(status.equals("Menunggu Konfirmasi")){
+            holder.imbDelete.setVisibility(View.VISIBLE);
+        }else{
+            holder.imbDelete.setVisibility(View.GONE);
+        }
+
         //Set Margin List Terakhir
         if (position == (getItemCount()-1)){
             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) holder.cvList.getLayoutParams();
@@ -70,6 +90,7 @@ public class AdapterPendudukDaftarSurat extends RecyclerView.Adapter<AdapterPend
             @Override
             public void onClick(View v) {
                 Intent detailSuratActivity = new Intent(v.getContext(), DetailSuratActivity.class);
+                detailSuratActivity.putExtra("id_surat",data.get(position).getId());
                 context.startActivity(detailSuratActivity);
             }
         });
@@ -102,9 +123,29 @@ public class AdapterPendudukDaftarSurat extends RecyclerView.Adapter<AdapterPend
                 buttonHapus.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-//                        databaseHelper.deletePenduduk(idDetail);
                         alertDialog.dismiss();
-//                        finish();
+
+                        LoadingDialog loading2 = new LoadingDialog((Activity) v.getContext());
+                        loading2.startLoadingDialog();
+
+                        APIPendudukSurat apiPendudukSurat = RetroServer.konekRetrofit().create(APIPendudukSurat.class);
+                        Call<ResponseSingleDataModelSurat> apiDeleteSurat = apiPendudukSurat.apiDeleteSurat(""+data.get(position).getId());
+
+                        apiDeleteSurat.enqueue(new Callback<ResponseSingleDataModelSurat>() {
+                            @Override
+                            public void onResponse(Call<ResponseSingleDataModelSurat> call, Response<ResponseSingleDataModelSurat> response) {
+                                data.remove(position);
+                                notifyItemRemoved(position);
+                                notifyItemRangeRemoved(position, data.size());
+                                loading2.dismissLoading();
+                            }
+
+                            @Override
+                            public void onFailure(Call<ResponseSingleDataModelSurat> call, Throwable t) {
+                                Toast.makeText(v.getContext(), "Error Server : "+t.getMessage(), Toast.LENGTH_SHORT).show();
+                                loading2.dismissLoading();
+                            }
+                        });
                     }
                 });
 
@@ -120,8 +161,8 @@ public class AdapterPendudukDaftarSurat extends RecyclerView.Adapter<AdapterPend
 
     @Override
     public int getItemCount() {
-        return 6;
-        //return arrayList.size();
+//        return 6;
+        return data.size();
     }
 
     public class Holder extends RecyclerView.ViewHolder {

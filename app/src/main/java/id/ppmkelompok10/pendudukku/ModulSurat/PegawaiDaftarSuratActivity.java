@@ -8,10 +8,26 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.util.ArrayList;
+
+import id.ppmkelompok10.pendudukku.API.APISurat.APIPegawaiSurat;
+import id.ppmkelompok10.pendudukku.API.APIVaksin.APIPegawaiVaksin;
+import id.ppmkelompok10.pendudukku.API.RetroServer;
 import id.ppmkelompok10.pendudukku.Adapter.AdapterPegawaiDaftarSurat;
+import id.ppmkelompok10.pendudukku.Adapter.AdapterPegawaiDaftarVaksin;
 import id.ppmkelompok10.pendudukku.Helper.KeyboardUtils;
+import id.ppmkelompok10.pendudukku.Helper.LoadingDialog;
+import id.ppmkelompok10.pendudukku.Model.ModelSurat.ModelSurat;
+import id.ppmkelompok10.pendudukku.Model.ModelSurat.ResponseMultiDataModelSurat;
+import id.ppmkelompok10.pendudukku.Model.ModelVaksin.ModelVaksin;
+import id.ppmkelompok10.pendudukku.Model.ModelVaksin.ResponseMultiDataModelVaksin;
+import id.ppmkelompok10.pendudukku.ModulVaksin.PegawaiDaftarVaksinActivity;
 import id.ppmkelompok10.pendudukku.R;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class PegawaiDaftarSuratActivity extends AppCompatActivity {
     private ImageButton btnBack;
@@ -66,8 +82,33 @@ public class PegawaiDaftarSuratActivity extends AppCompatActivity {
     }
 
     public void tampilDaftar(){
-        AdapterPegawaiDaftarSurat adapterPegawaiDaftarSurat = new AdapterPegawaiDaftarSurat(PegawaiDaftarSuratActivity.this);
-        rvDaftarSurat.setAdapter(adapterPegawaiDaftarSurat);
+        LoadingDialog loading2 = new LoadingDialog(this);
+        loading2.startLoadingDialog();
+
+        APIPegawaiSurat apiPegawaiSurat = RetroServer.konekRetrofit().create(APIPegawaiSurat.class);
+        Call<ResponseMultiDataModelSurat> apiDaftarSuratPegawai = apiPegawaiSurat.apiDaftarSuratPegawai();
+
+        apiDaftarSuratPegawai.enqueue(new Callback<ResponseMultiDataModelSurat>() {
+            @Override
+            public void onResponse(Call<ResponseMultiDataModelSurat> call, Response<ResponseMultiDataModelSurat> response) {
+                int code = response.body().getCode();
+                String message = response.body().getMessage();
+                ArrayList<ModelSurat> data = response.body().getData();
+
+                if (code == 1){
+                    AdapterPegawaiDaftarSurat adapterPegawaiDaftarVaksin = new AdapterPegawaiDaftarSurat(PegawaiDaftarSuratActivity.this, data);
+                    rvDaftarSurat.setAdapter(adapterPegawaiDaftarVaksin);
+                }
+                loading2.dismissLoading();
+            }
+
+            @Override
+            public void onFailure(Call<ResponseMultiDataModelSurat> call, Throwable t) {
+                Toast.makeText(PegawaiDaftarSuratActivity.this, "Error Server : "+t.getMessage(), Toast.LENGTH_SHORT).show();
+                loading2.dismissLoading();
+            }
+        });
+
     }
 
     @Override

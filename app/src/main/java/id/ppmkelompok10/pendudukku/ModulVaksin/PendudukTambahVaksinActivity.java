@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,13 +17,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import id.ppmkelompok10.pendudukku.API.APIAuth.APIPengaturanProfil;
-import id.ppmkelompok10.pendudukku.API.APIVaksin.APIVaksin;
+import id.ppmkelompok10.pendudukku.API.APIVaksin.APIPegawaiVaksin;
+import id.ppmkelompok10.pendudukku.API.APIVaksin.APIPendudukVaksin;
 import id.ppmkelompok10.pendudukku.API.RetroServer;
 import id.ppmkelompok10.pendudukku.Helper.SessionManagement;
-import id.ppmkelompok10.pendudukku.Model.ModelAuth.ResponseModelAuth;
-import id.ppmkelompok10.pendudukku.Model.ModelVaksin.ResponseModelVaksin;
-import id.ppmkelompok10.pendudukku.ModulAuth.PengaturanProfilActivity;
+import id.ppmkelompok10.pendudukku.Model.ModelVaksin.ResponseSingleModelDataVaksin;
 import id.ppmkelompok10.pendudukku.R;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -120,17 +117,17 @@ public class PendudukTambahVaksinActivity extends AppCompatActivity {
         String uDaerahVaksin = spDaerahVaksin.getSelectedItem().toString();
         String uRiwayatPenyakit = etRiwayatPenyakit.getText().toString().trim();
 
-        APIVaksin apiVaksin = RetroServer.konekRetrofit().create(APIVaksin.class);
-        Call<ResponseModelVaksin> apiTambahVaksin = apiVaksin.apiTambahVaksin(
+        APIPendudukVaksin apiPendudukVaksin = RetroServer.konekRetrofit().create(APIPendudukVaksin.class);
+        Call<ResponseSingleModelDataVaksin> apiTambahVaksin = apiPendudukVaksin.apiTambahVaksin(
                 dataNik,
                 uTahapVaksin,
                 uDaerahVaksin,
                 uRiwayatPenyakit
         );
 
-        apiTambahVaksin.enqueue(new Callback<ResponseModelVaksin>() {
+        apiTambahVaksin.enqueue(new Callback<ResponseSingleModelDataVaksin>() {
             @Override
-            public void onResponse(Call<ResponseModelVaksin> call, Response<ResponseModelVaksin> response) {
+            public void onResponse(Call<ResponseSingleModelDataVaksin> call, Response<ResponseSingleModelDataVaksin> response) {
                 int code = response.body().getCode();
                 String message = response.body().getMessage();
 
@@ -142,7 +139,7 @@ public class PendudukTambahVaksinActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<ResponseModelVaksin> call, Throwable t) {
+            public void onFailure(Call<ResponseSingleModelDataVaksin> call, Throwable t) {
                 Toast.makeText(PendudukTambahVaksinActivity.this, "Error Server : "+t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });

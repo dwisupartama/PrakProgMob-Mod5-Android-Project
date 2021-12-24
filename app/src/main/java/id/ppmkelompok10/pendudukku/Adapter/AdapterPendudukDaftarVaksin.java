@@ -1,5 +1,7 @@
 package id.ppmkelompok10.pendudukku.Adapter;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -9,6 +11,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -19,14 +22,22 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+import id.ppmkelompok10.pendudukku.API.APIKTP.APIPengajuanKTP;
+import id.ppmkelompok10.pendudukku.API.APIVaksin.APIPendudukVaksin;
+import id.ppmkelompok10.pendudukku.API.RetroServer;
+import id.ppmkelompok10.pendudukku.Helper.LoadingDialog;
+import id.ppmkelompok10.pendudukku.Model.ModelKTP.ResponseSingleDataModelKTP;
 import id.ppmkelompok10.pendudukku.Model.ModelVaksin.ModelVaksin;
+import id.ppmkelompok10.pendudukku.Model.ModelVaksin.ResponseSingleModelDataVaksin;
 import id.ppmkelompok10.pendudukku.ModulKTP.DetailKTPActivity;
 import id.ppmkelompok10.pendudukku.ModulVaksin.DetailVaksinActivity;
 import id.ppmkelompok10.pendudukku.R;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AdapterPendudukDaftarVaksin extends RecyclerView.Adapter<AdapterPendudukDaftarVaksin.Holder> {
     private Context context;
-
     private ArrayList<ModelVaksin> data;
 
     public AdapterPendudukDaftarVaksin(Context context, ArrayList<ModelVaksin> data) {
@@ -42,7 +53,7 @@ public class AdapterPendudukDaftarVaksin extends RecyclerView.Adapter<AdapterPen
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterPendudukDaftarVaksin.Holder holder, int position) {
+    public void onBindViewHolder(@NonNull AdapterPendudukDaftarVaksin.Holder holder, @SuppressLint("RecyclerView") int position) {
         String jenisPengajuan = data.get(position).getTahap_vaksin();
         String tanggalPengajuan = data.get(position).getTanggal_pengajuan();
 //        String status = "Menunggu Konfirmasi";
@@ -66,6 +77,12 @@ public class AdapterPendudukDaftarVaksin extends RecyclerView.Adapter<AdapterPen
         }else if(status.equals("Pengajuan Gagal")){
             holder.lnBgStatus.setBackground(ContextCompat.getDrawable(context,R.drawable.bg_status_red));
             holder.tvStatus.setTextColor(ContextCompat.getColor(context, R.color.RedColorPrimary));
+        }
+
+        if(status.equals("Menunggu Konfirmasi")){
+            holder.imbDelete.setVisibility(View.VISIBLE);
+        }else{
+            holder.imbDelete.setVisibility(View.GONE);
         }
 
         //Set Margin List Terakhir
@@ -111,9 +128,30 @@ public class AdapterPendudukDaftarVaksin extends RecyclerView.Adapter<AdapterPen
                 buttonHapus.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-//                        databaseHelper.deletePenduduk(idDetail);
                         alertDialog.dismiss();
-//                        finish();
+
+                        LoadingDialog loading2 = new LoadingDialog((Activity) v.getContext());
+                        loading2.startLoadingDialog();
+
+                        APIPendudukVaksin apiPendudukVaksin = RetroServer.konekRetrofit().create(APIPendudukVaksin.class);
+                        Call<ResponseSingleModelDataVaksin> apiDeleteVaksin = apiPendudukVaksin.apiDeleteVaksin(""+data.get(position).getId());
+
+                        apiDeleteVaksin.enqueue(new Callback<ResponseSingleModelDataVaksin>() {
+                            @Override
+                            public void onResponse(Call<ResponseSingleModelDataVaksin> call, Response<ResponseSingleModelDataVaksin> response) {
+                                data.remove(position);
+                                notifyItemRemoved(position);
+                                notifyItemRangeRemoved(position, data.size());
+                                loading2.dismissLoading();
+                            }
+
+                            @Override
+                            public void onFailure(Call<ResponseSingleModelDataVaksin> call, Throwable t) {
+                                Toast.makeText(v.getContext(), "Error Server : "+t.getMessage(), Toast.LENGTH_SHORT).show();
+                                loading2.dismissLoading();
+                            }
+                        });
+
                     }
                 });
 

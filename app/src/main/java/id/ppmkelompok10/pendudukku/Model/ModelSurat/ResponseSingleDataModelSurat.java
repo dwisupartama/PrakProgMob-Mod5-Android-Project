@@ -1,14 +1,11 @@
-package id.ppmkelompok10.pendudukku.Model.ModelVaksin;
+package id.ppmkelompok10.pendudukku.Model.ModelSurat;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import id.ppmkelompok10.pendudukku.Model.ModelVaksin.ResponseModelVaksin;
-
-public class ResponseModelVaksin {
+public class ResponseSingleDataModelSurat {
     private int code;
     private String message;
-    private ArrayList<ModelVaksin> data = new ArrayList<>();
+    private ModelSurat data;
 
     public int getCode() {
         return code;
@@ -26,11 +23,11 @@ public class ResponseModelVaksin {
         this.message = message;
     }
 
-    public ArrayList<ModelVaksin> getData() {
+    public ModelSurat getData() {
         return data;
     }
 
-    public void setData(ArrayList<ModelVaksin> data) {
+    public void setData(ModelSurat data) {
         this.data = data;
     }
 }

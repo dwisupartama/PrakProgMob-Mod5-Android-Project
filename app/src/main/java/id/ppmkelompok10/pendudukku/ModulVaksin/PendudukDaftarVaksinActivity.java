@@ -8,19 +8,20 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import id.ppmkelompok10.pendudukku.API.APIVaksin.APIVaksin;
+import id.ppmkelompok10.pendudukku.API.APIVaksin.APIPegawaiVaksin;
+import id.ppmkelompok10.pendudukku.API.APIVaksin.APIPendudukVaksin;
 import id.ppmkelompok10.pendudukku.API.RetroServer;
-import id.ppmkelompok10.pendudukku.Adapter.AdapterPendudukDaftarKTP;
 import id.ppmkelompok10.pendudukku.Adapter.AdapterPendudukDaftarVaksin;
+import id.ppmkelompok10.pendudukku.Helper.LoadingDialog;
 import id.ppmkelompok10.pendudukku.Helper.SessionManagement;
 import id.ppmkelompok10.pendudukku.Model.ModelVaksin.ModelVaksin;
-import id.ppmkelompok10.pendudukku.Model.ModelVaksin.ResponseModelVaksin;
-import id.ppmkelompok10.pendudukku.ModulKTP.PendudukDaftarKTPActivity;
-import id.ppmkelompok10.pendudukku.ModulKTP.PendudukTambahKTPActivity;
+import id.ppmkelompok10.pendudukku.Model.ModelVaksin.ResponseMultiDataModelVaksin;
+import id.ppmkelompok10.pendudukku.Model.ModelVaksin.ResponseSingleModelDataVaksin;
+import id.ppmkelompok10.pendudukku.ModulPenduduk.PegawaiDaftarPendudukActivity;
 import id.ppmkelompok10.pendudukku.R;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -74,30 +75,32 @@ public class PendudukDaftarVaksinActivity extends AppCompatActivity {
     }
 
     public void tampilDaftar(){
-        APIVaksin daftarVaksin = RetroServer.konekRetrofit().create(APIVaksin.class);
-        Call<ResponseModelVaksin> apiDaftarVaksin = daftarVaksin.apiDaftarVaksin(session.getNIK()); 
-        
-        apiDaftarVaksin.enqueue(new Callback<ResponseModelVaksin>() {
+        LoadingDialog loading2 = new LoadingDialog(this);
+        loading2.startLoadingDialog();
+
+        APIPendudukVaksin apiPendudukVaksin = RetroServer.konekRetrofit().create(APIPendudukVaksin.class);
+        Call<ResponseMultiDataModelVaksin> apiDaftarVaksin = apiPendudukVaksin.apiDaftarVaksin(session.getNIK());
+
+        apiDaftarVaksin.enqueue(new Callback<ResponseMultiDataModelVaksin>() {
             @Override
-            public void onResponse(Call<ResponseModelVaksin> call, Response<ResponseModelVaksin> response) {
+            public void onResponse(Call<ResponseMultiDataModelVaksin> call, Response<ResponseMultiDataModelVaksin> response) {
                 int code = response.body().getCode();
                 String message = response.body().getMessage();
                 ArrayList<ModelVaksin> data = response.body().getData();
 
                 if (code == 1){
-                    AdapterPendudukDaftarVaksin adapterPendudukDaftarVaksin = new AdapterPendudukDaftarVaksin(PendudukDaftarVaksinActivity.this,data);
+                    AdapterPendudukDaftarVaksin adapterPendudukDaftarVaksin = new AdapterPendudukDaftarVaksin(PendudukDaftarVaksinActivity.this, data);
                     rvDaftarVaksin.setAdapter(adapterPendudukDaftarVaksin);
                 }
+                loading2.dismissLoading();
             }
 
             @Override
-            public void onFailure(Call<ResponseModelVaksin> call, Throwable t) {
-
+            public void onFailure(Call<ResponseMultiDataModelVaksin> call, Throwable t) {
+                Toast.makeText(PendudukDaftarVaksinActivity.this, "Error Server : "+t.getMessage(), Toast.LENGTH_SHORT).show();
+                loading2.dismissLoading();
             }
         });
-
-
-
     }
 
     @Override

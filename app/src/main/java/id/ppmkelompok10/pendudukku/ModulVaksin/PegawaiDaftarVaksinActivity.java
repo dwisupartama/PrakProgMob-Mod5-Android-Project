@@ -8,16 +8,21 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import id.ppmkelompok10.pendudukku.API.APIVaksin.APIVaksin;
+import id.ppmkelompok10.pendudukku.API.APIVaksin.APIPegawaiVaksin;
+import id.ppmkelompok10.pendudukku.API.APIVaksin.APIPendudukVaksin;
 import id.ppmkelompok10.pendudukku.API.RetroServer;
 import id.ppmkelompok10.pendudukku.Adapter.AdapterPegawaiDaftarVaksin;
+import id.ppmkelompok10.pendudukku.Adapter.AdapterPendudukDaftarVaksin;
 import id.ppmkelompok10.pendudukku.Helper.KeyboardUtils;
+import id.ppmkelompok10.pendudukku.Helper.LoadingDialog;
 import id.ppmkelompok10.pendudukku.Helper.SessionManagement;
 import id.ppmkelompok10.pendudukku.Model.ModelVaksin.ModelVaksin;
-import id.ppmkelompok10.pendudukku.Model.ModelVaksin.ResponseModelVaksin;
+import id.ppmkelompok10.pendudukku.Model.ModelVaksin.ResponseMultiDataModelVaksin;
+import id.ppmkelompok10.pendudukku.Model.ModelVaksin.ResponseSingleModelDataVaksin;
 import id.ppmkelompok10.pendudukku.R;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -79,28 +84,32 @@ public class PegawaiDaftarVaksinActivity extends AppCompatActivity {
     }
 
     public void tampilDaftar(){
-        APIVaksin daftarVaksinPegawai = RetroServer.konekRetrofit().create(APIVaksin.class);
-        Call<ResponseModelVaksin> apiDaftarVaksinPegawai = daftarVaksinPegawai.apiDaftarVaksinPegawai();
+        LoadingDialog loading2 = new LoadingDialog(this);
+        loading2.startLoadingDialog();
 
-        apiDaftarVaksinPegawai.enqueue(new Callback<ResponseModelVaksin>() {
+        APIPegawaiVaksin apiPegawaiVaksin = RetroServer.konekRetrofit().create(APIPegawaiVaksin.class);
+        Call<ResponseMultiDataModelVaksin> apiDaftarVaksinPegawai = apiPegawaiVaksin.apiDaftarVaksinPegawai();
+
+        apiDaftarVaksinPegawai.enqueue(new Callback<ResponseMultiDataModelVaksin>() {
             @Override
-            public void onResponse(Call<ResponseModelVaksin> call, Response<ResponseModelVaksin> response) {
+            public void onResponse(Call<ResponseMultiDataModelVaksin> call, Response<ResponseMultiDataModelVaksin> response) {
                 int code = response.body().getCode();
                 String message = response.body().getMessage();
                 ArrayList<ModelVaksin> data = response.body().getData();
 
                 if (code == 1){
-                    AdapterPegawaiDaftarVaksin adapterPegawaiDaftarVaksin = new AdapterPegawaiDaftarVaksin(PegawaiDaftarVaksinActivity.this,data);
+                    AdapterPegawaiDaftarVaksin adapterPegawaiDaftarVaksin = new AdapterPegawaiDaftarVaksin(PegawaiDaftarVaksinActivity.this, data);
                     rvDaftarVaksin.setAdapter(adapterPegawaiDaftarVaksin);
                 }
+                loading2.dismissLoading();
             }
 
             @Override
-            public void onFailure(Call<ResponseModelVaksin> call, Throwable t) {
-
+            public void onFailure(Call<ResponseMultiDataModelVaksin> call, Throwable t) {
+                Toast.makeText(PegawaiDaftarVaksinActivity.this, "Error Server : "+t.getMessage(), Toast.LENGTH_SHORT).show();
+                loading2.dismissLoading();
             }
         });
-
 
     }
 
