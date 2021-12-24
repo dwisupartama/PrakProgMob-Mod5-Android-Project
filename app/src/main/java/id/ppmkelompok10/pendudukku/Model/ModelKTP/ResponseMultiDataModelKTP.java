@@ -2,7 +2,7 @@ package id.ppmkelompok10.pendudukku.Model.ModelKTP;
 
 import java.util.ArrayList;
 
-public class ResponseModelKTP {
+public class ResponseMultiDataModelKTP {
     private int code;
     private String message;
     private ArrayList<PengajuanKTP> data;

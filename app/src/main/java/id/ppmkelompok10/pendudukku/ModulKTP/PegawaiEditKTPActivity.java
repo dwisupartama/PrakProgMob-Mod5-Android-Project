@@ -17,25 +17,11 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
-import id.ppmkelompok10.pendudukku.API.APIKTP.APIPegawaiKTP;
-import id.ppmkelompok10.pendudukku.API.APIKTP.APIPengajuanKTP;
-import id.ppmkelompok10.pendudukku.API.RetroServer;
-import id.ppmkelompok10.pendudukku.Adapter.AdapterPendudukDaftarKTP;
-import id.ppmkelompok10.pendudukku.Helper.LoadingDialog;
 import id.ppmkelompok10.pendudukku.Helper.SessionManagement;
-import id.ppmkelompok10.pendudukku.Model.ModelKTP.PengajuanKTP;
-import id.ppmkelompok10.pendudukku.Model.ModelKTP.PengajuanKTP_Data;
-import id.ppmkelompok10.pendudukku.Model.ModelKTP.ResponseModelKTP;
 import id.ppmkelompok10.pendudukku.R;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class PegawaiEditKTPActivity extends AppCompatActivity {
     private ImageButton imbTanggal, btnBack;
@@ -131,48 +117,48 @@ public class PegawaiEditKTPActivity extends AppCompatActivity {
         btn_perbaharui.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PengajuanKTP pengajuanKTP = new PengajuanKTP();
-                pengajuanKTP.setStatus_pengajuan(spStatusPengajuan.getSelectedItem().toString());
-                pengajuanKTP.setKeterangan(et_keterangan.toString());
+//                PengajuanKTP pengajuanKTP = new PengajuanKTP();
+//                pengajuanKTP.setStatus_pengajuan(spStatusPengajuan.getSelectedItem().toString());
+//                pengajuanKTP.setKeterangan(et_keterangan.toString());
 //                pengajuanKTP.setPerkiraan_selesai();
-                if(pengajuanKTP.getStatus_pengajuan().equals("Selesai di Proses")){
-                    pengajuanKTP.setTanggal_selesai(Calendar.getInstance().getTime());
-                }else{
-                    pengajuanKTP.setTanggal_selesai(null);
-                }
+//                if(pengajuanKTP.getStatus_pengajuan().equals("Selesai di Proses")){
+//                    pengajuanKTP.setTanggal_selesai(Calendar.getInstance().getTime());
+//                }else{
+//                    pengajuanKTP.setTanggal_selesai(null);
+//                }
 //                CallUpdateAPI(pengajuanKTP);
             }
         });
     }
 
-    protected void CallUpdateAPI(PengajuanKTP pengajuanKTP){
-        LoadingDialog loading2 = new LoadingDialog(this);
-        loading2.startLoadingDialog();
-        APIPegawaiKTP apiPegawaiKTP = RetroServer.konekRetrofit().create(APIPegawaiKTP.class);
-        Call<ResponseModelKTP> getpengajuan = apiPegawaiKTP.apiUpdate(pengajuanKTP.getId(),pengajuanKTP.getStatus_pengajuan(),pengajuanKTP.getKeterangan(),pengajuanKTP.getPerkiraan_selesai(),pengajuanKTP.getTanggal_selesai());
-
-        getpengajuan.enqueue(new Callback<ResponseModelKTP>() {
-            @Override
-            public void onResponse(Call<ResponseModelKTP> call, Response<ResponseModelKTP> response) {
-                int code = response.body().getCode();
-                String message = response.body().getMessage();
-
-                if(code == 0){
-                    loading2.dismissLoading();
-                    alertDialog(PegawaiEditKTPActivity.this, "Gagal Update", message);
-                }else{
-                    loading2.dismissLoading();
-                    alertDialog(PegawaiEditKTPActivity.this, "Berhasil Update", message);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResponseModelKTP> call, Throwable t) {
-                Toast.makeText(PegawaiEditKTPActivity.this, "Error Server : "+t.getMessage(), Toast.LENGTH_SHORT).show();
-                loading2.dismissLoading();
-            }
-        });
-    }
+//    protected void CallUpdateAPI(PengajuanKTP pengajuanKTP){
+//        LoadingDialog loading2 = new LoadingDialog(this);
+//        loading2.startLoadingDialog();
+//        APIPegawaiKTP apiPegawaiKTP = RetroServer.konekRetrofit().create(APIPegawaiKTP.class);
+//        Call<ResponseSingleDataModelKTP> getpengajuan = apiPegawaiKTP.apiUpdate(pengajuanKTP.getId(),pengajuanKTP.getStatus_pengajuan(),pengajuanKTP.getKeterangan(),pengajuanKTP.getPerkiraan_selesai(),pengajuanKTP.getTanggal_selesai());
+//
+//        getpengajuan.enqueue(new Callback<ResponseSingleDataModelKTP>() {
+//            @Override
+//            public void onResponse(Call<ResponseSingleDataModelKTP> call, Response<ResponseSingleDataModelKTP> response) {
+//                int code = response.body().getCode();
+//                String message = response.body().getMessage();
+//
+//                if(code == 0){
+//                    loading2.dismissLoading();
+//                    alertDialog(PegawaiEditKTPActivity.this, "Gagal Update", message);
+//                }else{
+//                    loading2.dismissLoading();
+//                    alertDialog(PegawaiEditKTPActivity.this, "Berhasil Update", message);
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ResponseSingleDataModelKTP> call, Throwable t) {
+//                Toast.makeText(PegawaiEditKTPActivity.this, "Error Server : "+t.getMessage(), Toast.LENGTH_SHORT).show();
+//                loading2.dismissLoading();
+//            }
+//        });
+//    }
 
     public void alertDialog(Context context, String textTitle, String textMessage){
         //Btn Delete

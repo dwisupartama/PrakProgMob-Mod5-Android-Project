@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -16,8 +15,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.math.BigInteger;
-
 import id.ppmkelompok10.pendudukku.API.APIAuth.APIPengaturanProfil;
 import id.ppmkelompok10.pendudukku.API.APIKTP.APIPengajuanKTP;
 import id.ppmkelompok10.pendudukku.API.RetroServer;
@@ -25,10 +22,12 @@ import id.ppmkelompok10.pendudukku.Helper.LoadingDialog;
 import id.ppmkelompok10.pendudukku.Helper.SessionManagement;
 import id.ppmkelompok10.pendudukku.Model.ModelAuth.AccountModelAuth;
 import id.ppmkelompok10.pendudukku.Model.ModelAuth.ResponseModelAuth;
+import id.ppmkelompok10.pendudukku.Model.ModelKTP.ResponseSingleDataModelKTP;
 import id.ppmkelompok10.pendudukku.R;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
 public class PendudukTambahKTPActivity extends AppCompatActivity {
     private Spinner spJenisPengajuanKTP;
     private ImageButton btnBack;
@@ -44,6 +43,8 @@ public class PendudukTambahKTPActivity extends AppCompatActivity {
 
         //Merubah Status Bar Menjadi Putih / Mode Light
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+
+        session = new SessionManagement(this);
 
         //deklarasi textview data
         tv_nik = findViewById(R.id.tv_nik);
@@ -74,7 +75,9 @@ public class PendudukTambahKTPActivity extends AppCompatActivity {
         spJenisPengajuanKTP.setAdapter(adapterJenisPengajuanKTP);
 
         // Ambil data penduduk
-        ambilDataAPI();
+//        ambilDataAPI();
+
+        setDataForm();
 
         //Tombol Kembali
         btnBack.setOnClickListener(new View.OnClickListener() {
@@ -89,61 +92,119 @@ public class PendudukTambahKTPActivity extends AppCompatActivity {
         btnAjukan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(checkData.isChecked()){
-                    BuatPengajuan();
+                validasiData();
+//                if(checkData.isChecked()){
+//                    BuatPengajuan();
 //                    Toast.makeText(PendudukTambahKTPActivity.this, ""+spJenisPengajuanKTP.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    Toast.makeText(PendudukTambahKTPActivity.this, "Silahkan Centang Terlebih Dahulu", Toast.LENGTH_SHORT).show();
-                }
+//                }
+//                else{
+//                    Toast.makeText(PendudukTambahKTPActivity.this, "Silahkan Centang Terlebih Dahulu", Toast.LENGTH_SHORT).show();
+//                }
             }
         });
+
     }
 
-    private void BuatPengajuan() {
+    public void validasiData() {
+        if(spJenisPengajuanKTP.getSelectedItem().toString().equals("Pilih Jenis Pengajuan KTP")){
+            TextView textStatusAkses = (TextView) spJenisPengajuanKTP.getSelectedView();
+            textStatusAkses.setError("Jenis Pengajuan KTP harus dipilih !");
+            spJenisPengajuanKTP.requestFocus();
+        }else if(!checkData.isChecked()){
+            checkData.setError("Ini harus dicentang !");
+            checkData.requestFocus();
+        }else{
+            prosesSimpanPengajuanKTP();
+        }
+    }
+
+    public void prosesSimpanPengajuanKTP() {
         LoadingDialog loading = new LoadingDialog(this);
         loading.startLoadingDialog();
-        //ambil Data
-        String __jenis_Pengajuan = spJenisPengajuanKTP.getSelectedItem().toString();
-        BigInteger __nik = BigInteger.valueOf(Long.parseLong(tv_nik.getText().toString()));
-        String __nama = tv_nama.getText().toString();
-        String __tmptLahir = tv_tmptLahir.getText().toString();
-        String __tglLahir = tv_tgl_lahir.getText().toString();
-        String __jK = tv_JenisKelamin.getText().toString();
-        String __golDar = tv_GolDar.getText().toString();
-        String __alamat = tv_Alamat.getText().toString();
-        String __agama = tv_Agama.getText().toString();
-        String __perkawinan = tv_perkawinan.getText().toString();
-        String __pekerjaan = tv_pekerjaan.getText().toString();
 
-        APIPengajuanKTP apiPengajuanKTP = RetroServer.konekRetrofit().create(APIPengajuanKTP.class);
-        Call<ResponseModelAuth> ajukan = apiPengajuanKTP.AjukanKTP(__jenis_Pengajuan, __nik,__nama,__tmptLahir,__tglLahir,__jK,__golDar,__alamat,__agama,__perkawinan,__pekerjaan);
-        ajukan.enqueue(new Callback<ResponseModelAuth>() {
+        String txtJenisPengajuan = spJenisPengajuanKTP.getSelectedItem().toString();
+        String txtNIK = tv_nik.getText().toString();
+        String txtNamaLengkap = tv_nama.getText().toString();
+        String txtTempatLahir = tv_tmptLahir.getText().toString();
+        String txtTanggalLahir = tv_tgl_lahir.getText().toString();
+        String txtJenisKelamin = tv_JenisKelamin.getText().toString();
+        String txtGolonganDarah = tv_GolDar.getText().toString();
+        String txtAlamat = tv_Alamat.getText().toString();
+        String txtAgama = tv_Agama.getText().toString();
+        String txtStatusPerkawinan = tv_perkawinan.getText().toString();
+        String txtPekerjaan = tv_pekerjaan.getText().toString();
+
+        APIPengajuanKTP apiPengajuan = RetroServer.konekRetrofit().create(APIPengajuanKTP.class);
+        Call<ResponseSingleDataModelKTP> apiPengajuanKTP = apiPengajuan.apiPengajuanKTP(
+                txtJenisPengajuan,
+                txtNIK,
+                txtNamaLengkap,
+                txtTempatLahir,
+                txtTanggalLahir,
+                txtJenisKelamin,
+                txtGolonganDarah,
+                txtAlamat,
+                txtAgama,
+                txtStatusPerkawinan,
+                txtPekerjaan
+        );
+
+        apiPengajuanKTP.enqueue(new Callback<ResponseSingleDataModelKTP>() {
             @Override
-            public void onResponse(Call<ResponseModelAuth> call, Response<ResponseModelAuth> response) {
-                Log.d("Penduduk", "onResponse: "+response);
+            public void onResponse(Call<ResponseSingleDataModelKTP> call, Response<ResponseSingleDataModelKTP> response) {
                 int code = response.body().getCode();
                 String message = response.body().getMessage();
 
-                if(code == 0){
-                    loading.dismissLoading();
-                    alertDialog(PendudukTambahKTPActivity.this, "Gagal", message);
-                }
-                else{
-                    loading.dismissLoading();
-                    alertDialog(PendudukTambahKTPActivity.this, "Berhasil", message);
+                if(code == 1){
+                    alertDialogSuccess(PendudukTambahKTPActivity.this, "Berhasil", message);
+                }else{
+                    alertDialogDanger(PendudukTambahKTPActivity.this, "Gagal", message);
                 }
             }
 
             @Override
-            public void onFailure(Call<ResponseModelAuth> call, Throwable t) {
-                Toast.makeText(PendudukTambahKTPActivity.this, "Error Server : "+t.getMessage(), Toast.LENGTH_SHORT).show();
-                loading.dismissLoading();
+            public void onFailure(Call<ResponseSingleDataModelKTP> call, Throwable t) {
+
             }
         });
     }
 
-    public void alertDialog(Context context, String textTitle, String textMessage){
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setDataForm();
+    }
+
+    public void alertDialogDanger(Context context, String textTitle, String textMessage){
+        AlertDialog.Builder builderDialog;
+        AlertDialog alertDialog;
+
+        builderDialog = new AlertDialog.Builder(context);
+        View layoutView = LayoutInflater.from(context).inflate(R.layout.dialog_danger, null);
+
+        Button buttonPrimary = layoutView.findViewById(R.id.btn_primary);
+
+        TextView title = layoutView.findViewById(R.id.title);
+        TextView subtitle = layoutView.findViewById(R.id.subtitle);
+
+        title.setText(textTitle);
+        subtitle.setText(textMessage);
+        buttonPrimary.setText("Oke");
+
+        builderDialog.setView(layoutView);
+        alertDialog = builderDialog.create();
+        alertDialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationZoom;
+        alertDialog.show();
+
+        buttonPrimary.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        });
+    }
+
+    public void alertDialogSuccess(Context context, String textTitle, String textMessage){
         //Btn Delete
         AlertDialog.Builder builderDialog;
         AlertDialog alertDialog;
@@ -169,18 +230,17 @@ public class PendudukTambahKTPActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 alertDialog.dismiss();
-                setResult(RESULT_OK);
                 finish();
             }
         });
     }
 
-    public void ambilDataAPI(){
+    public void setDataForm(){
         LoadingDialog loading2 = new LoadingDialog(this);
         loading2.startLoadingDialog();
-        //Ambil API
-        session = new SessionManagement(this);
+
         String nik = session.getNIK();
+
         APIPengaturanProfil apiPengaturanProfil = RetroServer.konekRetrofit().create(APIPengaturanProfil.class);
         Call<ResponseModelAuth> apiAmbilDataProfil = apiPengaturanProfil.apiAmbilDataProfil(nik);
 
@@ -189,20 +249,18 @@ public class PendudukTambahKTPActivity extends AppCompatActivity {
             public void onResponse(Call<ResponseModelAuth> call, Response<ResponseModelAuth> response) {
                 int code = response.body().getCode();
                 String message = response.body().getMessage();
-                AccountModelAuth dataAkun = response.body().getData();
+                AccountModelAuth data = response.body().getData();
 
-//                Toast.makeText(PengaturanProfiltActivity.this, "NIK : "+dataAkun.getNik(), Toast.LENGTH_SHORT).show();
-//                int dataNIK = dataAkun.getNik();
-                tv_nik.setText(""+dataAkun.getNik());
-                tv_nama.setText(dataAkun.getNama_lengkap());
-                tv_tmptLahir.setText(dataAkun.getTempat_lahir());
-                tv_tgl_lahir.setText(dataAkun.getTanggal_lahir());
-                tv_JenisKelamin.setText(dataAkun.getJenis_kelamin());
-                tv_GolDar.setText(dataAkun.getGolongan_darah());
-                tv_Alamat.setText(dataAkun.getAlamat());
-                tv_Agama.setText(dataAkun.getAgama());
-                tv_perkawinan.setText(dataAkun.getStatus_perkawinan());
-                tv_pekerjaan.setText(dataAkun.getPekerjaan());
+                tv_nik.setText(data.getNik());
+                tv_nama.setText(data.getNama_lengkap());
+                tv_tmptLahir.setText(data.getTempat_lahir());
+                tv_tgl_lahir.setText(data.getTanggal_lahir());
+                tv_JenisKelamin.setText(data.getJenis_kelamin());
+                tv_GolDar.setText(data.getGolongan_darah());
+                tv_Alamat.setText(data.getAlamat());
+                tv_Agama.setText(data.getAgama());
+                tv_perkawinan.setText(data.getStatus_perkawinan());
+                tv_pekerjaan.setText(data.getPekerjaan());
                 loading2.dismissLoading();
             }
 

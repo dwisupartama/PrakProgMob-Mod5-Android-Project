@@ -3,7 +3,8 @@ package id.ppmkelompok10.pendudukku.API.APIKTP;
 import java.math.BigInteger;
 
 import id.ppmkelompok10.pendudukku.Model.ModelAuth.ResponseModelAuth;
-import id.ppmkelompok10.pendudukku.Model.ModelKTP.ResponseModelKTP;
+import id.ppmkelompok10.pendudukku.Model.ModelKTP.ResponseMultiDataModelKTP;
+import id.ppmkelompok10.pendudukku.Model.ModelKTP.ResponseSingleDataModelKTP;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -12,12 +13,17 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public interface APIPengajuanKTP {
+    @GET("penduduk/getPengajuanFor/{nik}")
+    Call<ResponseMultiDataModelKTP> apiGetPengajuanFor(
+            @Path(value = "nik", encoded = true) String nik
+    );
+
     @FormUrlEncoded
-    @POST("pengajuanKTP")
-    Call<ResponseModelAuth> AjukanKTP(
+    @POST("penduduk/pengajuanKTP")
+    Call<ResponseSingleDataModelKTP> apiPengajuanKTP(
             @Field("jenis_pengajuan") String jenis_pengajuan,
-            @Field("nik") BigInteger id,
-            @Field("nama") String nama,
+            @Field("nik") String nik,
+            @Field("nama_lengkap") String nama_lengkap,
             @Field("tempat_lahir") String tempat_lahir,
             @Field("tanggal_lahir") String tanggal_lahir,
             @Field("jenis_kelamin") String jenis_kelamin,
@@ -28,13 +34,13 @@ public interface APIPengajuanKTP {
             @Field("pekerjaan") String pekerjaan
     );
 
-    @GET("/api/deletePengajuan/{id}")
-    Call<ResponseModelKTP> apiDelete(
-            @Path(value = "id", encoded = true) Long id
+    @GET("penduduk/deletePengajuan/{id}")
+    Call<ResponseSingleDataModelKTP> apiDeletePengajuan(
+            @Path(value = "id", encoded = true) String id
     );
 
-    @GET("/api/getPengajuanFor/{nik}")
-    Call<ResponseModelKTP> apiAmbilPengajuan(
-            @Path(value = "nik", encoded = true) String nik
+    @GET("detailPengajuan/{id}")
+    Call<ResponseSingleDataModelKTP> apiDetailPengajuan(
+            @Path(value = "id", encoded = true) String id
     );
 }

@@ -20,20 +20,15 @@ import java.util.ArrayList;
 
 import id.ppmkelompok10.pendudukku.Model.ModelKTP.PengajuanKTP;
 import id.ppmkelompok10.pendudukku.ModulKTP.DetailKTPActivity;
-import id.ppmkelompok10.pendudukku.ModulKTP.PegawaiEditKTPActivity;
 import id.ppmkelompok10.pendudukku.R;
 
 public class AdapterPendudukDaftarKTP extends RecyclerView.Adapter<AdapterPendudukDaftarKTP.Holder> {
     private Context context;
     private ArrayList<PengajuanKTP> pengajuanAll;
-    private lihatDataPengajuan lihatDataPengajuan;
-    private hapusPengajuan hapusPengajuan;
 
-    public AdapterPendudukDaftarKTP(Context context,ArrayList<PengajuanKTP> pengajuanAll,lihatDataPengajuan lihatDataPengajuan,hapusPengajuan hapusPengajuan) {
+    public AdapterPendudukDaftarKTP(Context context, ArrayList<PengajuanKTP> pengajuanAll) {
         this.context = context;
         this.pengajuanAll = pengajuanAll;
-        this.lihatDataPengajuan = lihatDataPengajuan;
-        this.hapusPengajuan = hapusPengajuan;
     }
 
     @NonNull
@@ -72,6 +67,57 @@ public class AdapterPendudukDaftarKTP extends RecyclerView.Adapter<AdapterPendud
             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) holder.cvList.getLayoutParams();
             params.bottomMargin = 60;
         }
+
+        holder.imbDetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent detailPengajuanKTP = new Intent(v.getContext(), DetailKTPActivity.class);
+                context.startActivity(detailPengajuanKTP);
+            }
+        });
+
+        holder.imbDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builderDialog;
+                AlertDialog alertDialog;
+
+                builderDialog = new AlertDialog.Builder(v.getContext());
+                View layoutView = LayoutInflater.from(context).inflate(R.layout.dialog_confirm_danger, null);
+
+                Button buttonHapus = layoutView.findViewById(R.id.btn_primary);
+                Button buttonKembali = layoutView.findViewById(R.id.btn_secondary);
+
+                TextView title = layoutView.findViewById(R.id.title);
+                TextView subtitle = layoutView.findViewById(R.id.subtitle);
+
+                title.setText("Hapus Data");
+                subtitle.setText("Apakah anda yakin ?");
+                buttonHapus.setText("Ya, Hapus");
+                buttonKembali.setText("Kembali");
+
+                builderDialog.setView(layoutView);
+                alertDialog = builderDialog.create();
+                alertDialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationZoom;
+                alertDialog.show();
+
+                buttonHapus.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+//                        databaseHelper.deletePenduduk(idDetail);
+                        alertDialog.dismiss();
+//                        finish();
+                    }
+                });
+
+                buttonKembali.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertDialog.dismiss();
+                    }
+                });
+            }
+        });
     }
 
     @Override
@@ -99,25 +145,25 @@ public class AdapterPendudukDaftarKTP extends RecyclerView.Adapter<AdapterPendud
 
             cvList = itemView.findViewById(R.id.cv_list);
 
-            imbDetail.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    lihatDataPengajuan.lihat(getAbsoluteAdapterPosition());
-                }
-            });
-
-            imbDelete.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    hapusPengajuan.hapus(getAbsoluteAdapterPosition());
-                }
-            });
+//            imbDetail.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    lihatDataPengajuan.lihat(getAbsoluteAdapterPosition());
+//                }
+//            });
+//
+//            imbDelete.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    hapusPengajuan.hapus(getAbsoluteAdapterPosition());
+//                }
+//            });
         }
     }
-    public interface lihatDataPengajuan{
-        void lihat(int position);
-    }
-    public interface hapusPengajuan{
-        void hapus(int position);
-    }
+//    public interface lihatDataPengajuan{
+//        void lihat(int position);
+//    }
+//    public interface hapusPengajuan{
+//        void hapus(int position);
+//    }
 }

@@ -46,10 +46,10 @@ public class DetailKTPActivity extends AppCompatActivity {
         tv_pekerjaan = findViewById(R.id.tv_pekerjaan);
 
         // get data yang dikirim
-        Intent getPengajuan = getIntent();
-        PengajuanKTP pengajuan = getPengajuan.getParcelableExtra("pengajuan");
-        Log.d("Penlah", "lihattgl: "+pengajuan.getTanggal_lahir());
-        setItem(pengajuan);
+//        Intent getPengajuan = getIntent();
+//        PengajuanKTP pengajuan = getPengajuan.getParcelableExtra("pengajuan");
+//        Log.d("Penlah", "lihattgl: "+pengajuan.getTanggal_lahir());
+//        setItem(pengajuan);
 
         //Deklarasi Tombol Kembali
         btnBack = findViewById(R.id.btn_back);
@@ -63,52 +63,52 @@ public class DetailKTPActivity extends AppCompatActivity {
         });
     }
 
-    private void setItem(PengajuanKTP pengajuanKTP){
-        tv_nik.setText(String.valueOf(pengajuanKTP.getNik()));
-        if(pengajuanKTP.getJenis_pengajuan() != null){
-            tv_jenis_pembuatan.setText(pengajuanKTP.getJenis_pengajuan());
-        }
-        if(pengajuanKTP.getTanggal_pengajuan() != null){
-            tv_tgl_pengajuan.setText(pengajuanKTP.getTanggal_pengajuan().toString());
-        }
-        if(pengajuanKTP.getPerkiraan_selesai() != null){
-            tv_tgl_perkiraan.setText(pengajuanKTP.getPerkiraan_selesai().toString());
-        }else{
-            tv_tgl_perkiraan.setText("-");
-        }
-        if(pengajuanKTP.getStatus_pengajuan() != null){
-            tv_status.setText(pengajuanKTP.getStatus_pengajuan());
-            setStatus(pengajuanKTP.getStatus_pengajuan());
-        }
-        if(pengajuanKTP.getKeterangan() != null){
-            tv_keterangan.setText(pengajuanKTP.getKeterangan());
-        }
-        if(pengajuanKTP.getTanggal_lahir() != null){
-            tv_tgl_lahir.setText(pengajuanKTP.getTanggal_lahir().toString());
-        }
-        tv_nama.setText(pengajuanKTP.getNama_lengkap());
-        tv_tmptLahir.setText(pengajuanKTP.getTempat_lahir());
-        tv_JenisKelamin.setText(pengajuanKTP.getJenis_kelamin());
-        tv_GolDar.setText(pengajuanKTP.getGolongan_darah());
-        tv_Alamat.setText(pengajuanKTP.getAlamat());
-        tv_Agama.setText(pengajuanKTP.getAgama());
-        tv_perkawinan.setText(pengajuanKTP.getStatus_perkawinan());
-        tv_pekerjaan.setText(pengajuanKTP.getPekerjaan());
-    }
+//    private void setItem(PengajuanKTP pengajuanKTP){
+//        tv_nik.setText(String.valueOf(pengajuanKTP.getNik()));
+//        if(pengajuanKTP.getJenis_pengajuan() != null){
+//            tv_jenis_pembuatan.setText(pengajuanKTP.getJenis_pengajuan());
+//        }
+//        if(pengajuanKTP.getTanggal_pengajuan() != null){
+//            tv_tgl_pengajuan.setText(pengajuanKTP.getTanggal_pengajuan().toString());
+//        }
+//        if(pengajuanKTP.getPerkiraan_selesai() != null){
+//            tv_tgl_perkiraan.setText(pengajuanKTP.getPerkiraan_selesai().toString());
+//        }else{
+//            tv_tgl_perkiraan.setText("-");
+//        }
+//        if(pengajuanKTP.getStatus_pengajuan() != null){
+//            tv_status.setText(pengajuanKTP.getStatus_pengajuan());
+//            setStatus(pengajuanKTP.getStatus_pengajuan());
+//        }
+//        if(pengajuanKTP.getKeterangan() != null){
+//            tv_keterangan.setText(pengajuanKTP.getKeterangan());
+//        }
+//        if(pengajuanKTP.getTanggal_lahir() != null){
+//            tv_tgl_lahir.setText(pengajuanKTP.getTanggal_lahir().toString());
+//        }
+//        tv_nama.setText(pengajuanKTP.getNama_lengkap());
+//        tv_tmptLahir.setText(pengajuanKTP.getTempat_lahir());
+//        tv_JenisKelamin.setText(pengajuanKTP.getJenis_kelamin());
+//        tv_GolDar.setText(pengajuanKTP.getGolongan_darah());
+//        tv_Alamat.setText(pengajuanKTP.getAlamat());
+//        tv_Agama.setText(pengajuanKTP.getAgama());
+//        tv_perkawinan.setText(pengajuanKTP.getStatus_perkawinan());
+//        tv_pekerjaan.setText(pengajuanKTP.getPekerjaan());
+//    }
 
-    private void setStatus(String status){
-        if(status.equals("Menunggu Konfirmasi")){
-            tv_background.setBackground(ContextCompat.getDrawable(this,R.drawable.bg_status_blue));
-            tv_status.setTextColor(ContextCompat.getColor(this, R.color.BlueColorPrimary));
-        }else if(status.equals("Sedang di Proses")){
-            tv_background.setBackground(ContextCompat.getDrawable(this,R.drawable.bg_status_purple));
-            tv_status.setTextColor(ContextCompat.getColor(this, R.color.PrimaryColorVariant));
-        }else if(status.equals("Selesai di Proses")){
-            tv_background.setBackground(ContextCompat.getDrawable(this,R.drawable.bg_status_green));
-            tv_status.setTextColor(ContextCompat.getColor(this, R.color.GreenColorPrimary));
-        }else if(status.equals("Pengajuan Gagal")){
-            tv_background.setBackground(ContextCompat.getDrawable(this,R.drawable.bg_status_red));
-            tv_status.setTextColor(ContextCompat.getColor(this, R.color.RedColorPrimary));
-        }
-    }
+//    private void setStatus(String status){
+//        if(status.equals("Menunggu Konfirmasi")){
+//            tv_background.setBackground(ContextCompat.getDrawable(this,R.drawable.bg_status_blue));
+//            tv_status.setTextColor(ContextCompat.getColor(this, R.color.BlueColorPrimary));
+//        }else if(status.equals("Sedang di Proses")){
+//            tv_background.setBackground(ContextCompat.getDrawable(this,R.drawable.bg_status_purple));
+//            tv_status.setTextColor(ContextCompat.getColor(this, R.color.PrimaryColorVariant));
+//        }else if(status.equals("Selesai di Proses")){
+//            tv_background.setBackground(ContextCompat.getDrawable(this,R.drawable.bg_status_green));
+//            tv_status.setTextColor(ContextCompat.getColor(this, R.color.GreenColorPrimary));
+//        }else if(status.equals("Pengajuan Gagal")){
+//            tv_background.setBackground(ContextCompat.getDrawable(this,R.drawable.bg_status_red));
+//            tv_status.setTextColor(ContextCompat.getColor(this, R.color.RedColorPrimary));
+//        }
+//    }
 }

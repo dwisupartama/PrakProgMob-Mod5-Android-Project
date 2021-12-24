@@ -2,9 +2,6 @@ package id.ppmkelompok10.pendudukku.Adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,21 +17,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import id.ppmkelompok10.pendudukku.Model.ModelKTP.PengajuanKTP;
-import id.ppmkelompok10.pendudukku.ModulKTP.DetailKTPActivity;
-import id.ppmkelompok10.pendudukku.ModulKTP.PegawaiEditKTPActivity;
 import id.ppmkelompok10.pendudukku.R;
 
 public class AdapterPegawaiDaftarKTP extends RecyclerView.Adapter<AdapterPegawaiDaftarKTP.Holder> {
     private Context context;
     private ArrayList<PengajuanKTP> pengajuanAll;
-    private AdapterPendudukDaftarKTP.lihatDataPengajuan lihatDataPengajuan;
-    private EditPengajuan editPengajuan;
 
-    public AdapterPegawaiDaftarKTP(Context context,ArrayList<PengajuanKTP> pengajuanAll, AdapterPendudukDaftarKTP.lihatDataPengajuan lihatDataPengajuan, EditPengajuan editPengajuan) {
+    public AdapterPegawaiDaftarKTP(Context context, ArrayList<PengajuanKTP> pengajuanAll) {
         this.context = context;
         this.pengajuanAll = pengajuanAll;
-        this.lihatDataPengajuan = lihatDataPengajuan;
-        this.editPengajuan = editPengajuan;
     }
 
     @NonNull
@@ -106,25 +97,25 @@ public class AdapterPegawaiDaftarKTP extends RecyclerView.Adapter<AdapterPegawai
             imbDetail = itemView.findViewById(R.id.imb_detail);
             imbEdit = itemView.findViewById(R.id.imb_edit);
 
-            imbDetail.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    lihatDataPengajuan.lihat(getAbsoluteAdapterPosition());
-                }
-            });
-
-            imbEdit.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    editPengajuan.edit(getAbsoluteAdapterPosition());
-                }
-            });
+//            imbDetail.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    lihatDataPengajuan.lihat(getAbsoluteAdapterPosition());
+//                }
+//            });
+//
+//            imbEdit.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    editPengajuan.edit(getAbsoluteAdapterPosition());
+//                }
+//            });
 
             cvList = itemView.findViewById(R.id.cv_list);
         }
     }
 
-    public interface EditPengajuan{
-        void edit(int position);
-    }
+//    public interface EditPengajuan{
+//        void edit(int position);
+//    }
 }

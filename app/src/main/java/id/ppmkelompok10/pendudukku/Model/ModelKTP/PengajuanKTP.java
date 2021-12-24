@@ -5,275 +5,159 @@ import android.os.Parcelable;
 
 import java.util.Date;
 
-public class PengajuanKTP implements Parcelable {
-    private long id;
-    private String jenis_pengajuan;
-    private Date tanggal_pengajuan;
-    private String status_pengajuan;
-    private String keterangan;
-    private Date perkiraan_selesai;
-    private Date tanggal_selesai;
-    private long nik;
-    private String nama_lengkap;
-    private String tempat_lahir;
-    private Date tanggal_lahir;
-    private String jenis_kelamin;
-    private String golongan_darah;
-    private String alamat;
-    private String agama;
-    private String status_perkawinan;
-    private String pekerjaan;
-    private Date created_at;
-    private Date updated_at;
+public class PengajuanKTP {
+    private int id;
+    private String jenis_pengajuan, tanggal_pengajuan, status_pengajuan, keterangan, perkiraan_selesai, tanggal_selesai, nik, nama_lengkap, tempat_lahir, tanggal_lahir, jenis_kelamin, golongan_darah, alamat, agama, status_perkawinan, pekerjaan, created_at, updated_at;
 
-    public PengajuanKTP(long id, String jenis_pengajuan, Date tanggal_pengajuan, String status_pengajuan, long nik, String nama_lengkap, String tempat_lahir, Date tanggal_lahir, String jenis_kelamin, String golongan_darah, String alamat, String agama, String status_perkawinan, String pekerjaan, Date created_at, Date updated_at) {
-        this.id = id;
-        this.jenis_pengajuan = jenis_pengajuan;
-        this.tanggal_pengajuan = tanggal_pengajuan;
-        this.status_pengajuan = status_pengajuan;
-        this.nik = nik;
-        this.nama_lengkap = nama_lengkap;
-        this.tempat_lahir = tempat_lahir;
-        this.tanggal_lahir = tanggal_lahir;
-        this.jenis_kelamin = jenis_kelamin;
-        this.golongan_darah = golongan_darah;
-        this.alamat = alamat;
-        this.agama = agama;
-        this.status_perkawinan = status_perkawinan;
-        this.pekerjaan = pekerjaan;
-        this.created_at = created_at;
-        this.updated_at = updated_at;
-    }
-
-    public PengajuanKTP(long id, String jenis_pengajuan, Date tanggal_pengajuan, String status_pengajuan, String keterangan, Date perkiraan_selesai, Date tanggal_selesai, long nik, String nama_lengkap, String tempat_lahir, Date tanggal_lahir, String jenis_kelamin, String golongan_darah, String alamat, String agama, String status_perkawinan, String pekerjaan, Date created_at, Date updated_at) {
-        this.id = id;
-        this.jenis_pengajuan = jenis_pengajuan;
-        this.tanggal_pengajuan = tanggal_pengajuan;
-        this.status_pengajuan = status_pengajuan;
-        this.keterangan = keterangan;
-        this.perkiraan_selesai = perkiraan_selesai;
-        this.tanggal_selesai = tanggal_selesai;
-        this.nik = nik;
-        this.nama_lengkap = nama_lengkap;
-        this.tempat_lahir = tempat_lahir;
-        this.tanggal_lahir = tanggal_lahir;
-        this.jenis_kelamin = jenis_kelamin;
-        this.golongan_darah = golongan_darah;
-        this.alamat = alamat;
-        this.agama = agama;
-        this.status_perkawinan = status_perkawinan;
-        this.pekerjaan = pekerjaan;
-        this.created_at = created_at;
-        this.updated_at = updated_at;
-    }
-
-    protected PengajuanKTP(Parcel in) {
-        id = in.readLong();
-        jenis_pengajuan = in.readString();
-        tanggal_pengajuan = new Date(in.readLong());
-        status_pengajuan = in.readString();
-        keterangan = in.readString();
-        nik = in.readLong();
-        nama_lengkap = in.readString();
-        tempat_lahir = in.readString();
-        tanggal_lahir = new Date(in.readLong());
-        jenis_kelamin = in.readString();
-        golongan_darah = in.readString();
-        alamat = in.readString();
-        agama = in.readString();
-        status_perkawinan = in.readString();
-        pekerjaan = in.readString();
-    }
-
-    public PengajuanKTP() {
-
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeLong(id);
-        parcel.writeString(jenis_pengajuan);
-        parcel.writeLong(tanggal_pengajuan.getTime());
-        parcel.writeString(status_pengajuan);
-        parcel.writeString(keterangan);
-        parcel.writeLong(nik);
-        parcel.writeString(nama_lengkap);
-        parcel.writeString(tempat_lahir);
-        parcel.writeLong(tanggal_lahir.getTime());
-        parcel.writeString(jenis_kelamin);
-        parcel.writeString(golongan_darah);
-        parcel.writeString(alamat);
-        parcel.writeString(agama);
-        parcel.writeString(status_perkawinan);
-        parcel.writeString(pekerjaan);
-    }
-
-    public static final Creator<PengajuanKTP> CREATOR = new Creator<PengajuanKTP>() {
-        @Override
-        public PengajuanKTP createFromParcel(Parcel in) {
-            return new PengajuanKTP(in);
-        }
-
-        @Override
-        public PengajuanKTP[] newArray(int size) {
-            return new PengajuanKTP[size];
-        }
-    };
-
-    public long getId() {
+    public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getJenis_pengajuan() {
         return jenis_pengajuan;
     }
 
-    public Date getTanggal_pengajuan() {
+    public void setJenis_pengajuan(String jenis_pengajuan) {
+        this.jenis_pengajuan = jenis_pengajuan;
+    }
+
+    public String getTanggal_pengajuan() {
         return tanggal_pengajuan;
+    }
+
+    public void setTanggal_pengajuan(String tanggal_pengajuan) {
+        this.tanggal_pengajuan = tanggal_pengajuan;
     }
 
     public String getStatus_pengajuan() {
         return status_pengajuan;
     }
 
-    public String getKeterangan() {
-        return keterangan;
-    }
-
-    public Date getPerkiraan_selesai() {
-        return perkiraan_selesai;
-    }
-
-    public Date getTanggal_selesai() {
-        return tanggal_selesai;
-    }
-
-    public long getNik() {
-        return nik;
-    }
-
-    public String getNama_lengkap() {
-        return nama_lengkap;
-    }
-
-    public String getTempat_lahir() {
-        return tempat_lahir;
-    }
-
-    public Date getTanggal_lahir() {
-        return tanggal_lahir;
-    }
-
-    public String getJenis_kelamin() {
-        return jenis_kelamin;
-    }
-
-    public String getGolongan_darah() {
-        return golongan_darah;
-    }
-
-    public String getAlamat() {
-        return alamat;
-    }
-
-    public String getAgama() {
-        return agama;
-    }
-
-    public String getStatus_perkawinan() {
-        return status_perkawinan;
-    }
-
-    public String getPekerjaan() {
-        return pekerjaan;
-    }
-
-    public Date getCreated_at() {
-        return created_at;
-    }
-
-    public Date getUpdated_at() {
-        return updated_at;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public void setJenis_pengajuan(String jenis_pengajuan) {
-        this.jenis_pengajuan = jenis_pengajuan;
-    }
-
-    public void setTanggal_pengajuan(Date tanggal_pengajuan) {
-        this.tanggal_pengajuan = tanggal_pengajuan;
-    }
-
     public void setStatus_pengajuan(String status_pengajuan) {
         this.status_pengajuan = status_pengajuan;
+    }
+
+    public String getKeterangan() {
+        return keterangan;
     }
 
     public void setKeterangan(String keterangan) {
         this.keterangan = keterangan;
     }
 
-    public void setPerkiraan_selesai(Date perkiraan_selesai) {
+    public String getPerkiraan_selesai() {
+        return perkiraan_selesai;
+    }
+
+    public void setPerkiraan_selesai(String perkiraan_selesai) {
         this.perkiraan_selesai = perkiraan_selesai;
     }
 
-    public void setTanggal_selesai(Date tanggal_selesai) {
+    public String getTanggal_selesai() {
+        return tanggal_selesai;
+    }
+
+    public void setTanggal_selesai(String tanggal_selesai) {
         this.tanggal_selesai = tanggal_selesai;
     }
 
-    public void setNik(long nik) {
+    public String getNik() {
+        return nik;
+    }
+
+    public void setNik(String nik) {
         this.nik = nik;
+    }
+
+    public String getNama_lengkap() {
+        return nama_lengkap;
     }
 
     public void setNama_lengkap(String nama_lengkap) {
         this.nama_lengkap = nama_lengkap;
     }
 
+    public String getTempat_lahir() {
+        return tempat_lahir;
+    }
+
     public void setTempat_lahir(String tempat_lahir) {
         this.tempat_lahir = tempat_lahir;
     }
 
-    public void setTanggal_lahir(Date tanggal_lahir) {
+    public String getTanggal_lahir() {
+        return tanggal_lahir;
+    }
+
+    public void setTanggal_lahir(String tanggal_lahir) {
         this.tanggal_lahir = tanggal_lahir;
+    }
+
+    public String getJenis_kelamin() {
+        return jenis_kelamin;
     }
 
     public void setJenis_kelamin(String jenis_kelamin) {
         this.jenis_kelamin = jenis_kelamin;
     }
 
+    public String getGolongan_darah() {
+        return golongan_darah;
+    }
+
     public void setGolongan_darah(String golongan_darah) {
         this.golongan_darah = golongan_darah;
+    }
+
+    public String getAlamat() {
+        return alamat;
     }
 
     public void setAlamat(String alamat) {
         this.alamat = alamat;
     }
 
+    public String getAgama() {
+        return agama;
+    }
+
     public void setAgama(String agama) {
         this.agama = agama;
+    }
+
+    public String getStatus_perkawinan() {
+        return status_perkawinan;
     }
 
     public void setStatus_perkawinan(String status_perkawinan) {
         this.status_perkawinan = status_perkawinan;
     }
 
+    public String getPekerjaan() {
+        return pekerjaan;
+    }
+
     public void setPekerjaan(String pekerjaan) {
         this.pekerjaan = pekerjaan;
     }
 
-    public void setCreated_at(Date created_at) {
+    public String getCreated_at() {
+        return created_at;
+    }
+
+    public void setCreated_at(String created_at) {
         this.created_at = created_at;
     }
 
-    public void setUpdated_at(Date updated_at) {
-        this.updated_at = updated_at;
+    public String getUpdated_at() {
+        return updated_at;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public void setUpdated_at(String updated_at) {
+        this.updated_at = updated_at;
     }
 }

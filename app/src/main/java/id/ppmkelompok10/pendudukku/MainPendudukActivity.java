@@ -164,7 +164,7 @@ public class MainPendudukActivity extends AppCompatActivity {
                 if(namaLengkap.length() > 11){
                     namaLengkap = namaLengkap.substring(0,11)+"...";
                 }
-                tvNamaPengguna.setText(dataAkun.getNama_lengkap());
+                tvNamaPengguna.setText(namaLengkap);
                 loading.dismissLoading();
             }
 
