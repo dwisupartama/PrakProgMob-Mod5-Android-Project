@@ -79,7 +79,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Status Akses"
+                    android:text="Jenis Pengajuan"
                     android:fontFamily="@font/poppins_medium"
                     android:textSize="15dp"
                     android:textColor="@color/PrimaryColorVariant"
@@ -131,6 +131,7 @@
                 android:clipToPadding="false"
                 android:layout_marginTop="15dp">
                 <TextView
+                    android:id="@+id/tv_label_perkiraan_selesai"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Perkiraan Selesai"

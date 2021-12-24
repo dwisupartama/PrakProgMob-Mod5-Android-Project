@@ -1,5 +1,7 @@
 package id.ppmkelompok10.pendudukku.Adapter;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -9,6 +11,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -18,9 +21,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import id.ppmkelompok10.pendudukku.API.APIAuth.APIPengaturanProfil;
+import id.ppmkelompok10.pendudukku.API.APIKTP.APIPengajuanKTP;
+import id.ppmkelompok10.pendudukku.API.APIPenduduk.APIPenduduk;
+import id.ppmkelompok10.pendudukku.API.RetroServer;
+import id.ppmkelompok10.pendudukku.Helper.LoadingDialog;
+import id.ppmkelompok10.pendudukku.Model.ModelAuth.ResponseModelAuth;
 import id.ppmkelompok10.pendudukku.Model.ModelKTP.PengajuanKTP;
+import id.ppmkelompok10.pendudukku.Model.ModelKTP.ResponseSingleDataModelKTP;
+import id.ppmkelompok10.pendudukku.Model.ModelPenduduk.ResponseSingleDataModel;
 import id.ppmkelompok10.pendudukku.ModulKTP.DetailKTPActivity;
 import id.ppmkelompok10.pendudukku.R;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AdapterPendudukDaftarKTP extends RecyclerView.Adapter<AdapterPendudukDaftarKTP.Holder> {
     private Context context;
@@ -39,7 +53,7 @@ public class AdapterPendudukDaftarKTP extends RecyclerView.Adapter<AdapterPendud
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterPendudukDaftarKTP.Holder holder, int position) {
+    public void onBindViewHolder(@NonNull AdapterPendudukDaftarKTP.Holder holder, @SuppressLint("RecyclerView") int position) {
         String jenisPengajuan = pengajuanAll.get(position).getJenis_pengajuan();
         String tanggalPengajuan = pengajuanAll.get(position).getTanggal_pengajuan().toString();
         String status = pengajuanAll.get(position).getStatus_pengajuan();
@@ -62,6 +76,12 @@ public class AdapterPendudukDaftarKTP extends RecyclerView.Adapter<AdapterPendud
             holder.tvStatus.setTextColor(ContextCompat.getColor(context, R.color.RedColorPrimary));
         }
 
+        if(status.equals("Menunggu Konfirmasi")){
+            holder.imbDelete.setVisibility(View.VISIBLE);
+        }else{
+            holder.imbDelete.setVisibility(View.GONE);
+        }
+
         //Set Margin List Terakhir
         if (position == (getItemCount()-1)){
             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) holder.cvList.getLayoutParams();
@@ -72,6 +92,7 @@ public class AdapterPendudukDaftarKTP extends RecyclerView.Adapter<AdapterPendud
             @Override
             public void onClick(View v) {
                 Intent detailPengajuanKTP = new Intent(v.getContext(), DetailKTPActivity.class);
+                detailPengajuanKTP.putExtra("id_pengajuan", pengajuanAll.get(position).getId());
                 context.startActivity(detailPengajuanKTP);
             }
         });
@@ -104,9 +125,28 @@ public class AdapterPendudukDaftarKTP extends RecyclerView.Adapter<AdapterPendud
                 buttonHapus.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-//                        databaseHelper.deletePenduduk(idDetail);
                         alertDialog.dismiss();
-//                        finish();
+                        LoadingDialog loading2 = new LoadingDialog((Activity) v.getContext());
+                        loading2.startLoadingDialog();
+
+                        APIPengajuanKTP apiPengajuan = RetroServer.konekRetrofit().create(APIPengajuanKTP.class);
+                        Call<ResponseSingleDataModelKTP> apiDeletePengajuan = apiPengajuan.apiDeletePengajuan(""+pengajuanAll.get(position).getId());
+
+                        apiDeletePengajuan.enqueue(new Callback<ResponseSingleDataModelKTP>() {
+                            @Override
+                            public void onResponse(Call<ResponseSingleDataModelKTP> call, Response<ResponseSingleDataModelKTP> response) {
+                                pengajuanAll.remove(position);
+                                notifyItemRemoved(position);
+                                notifyItemRangeRemoved(position, pengajuanAll.size());
+                                loading2.dismissLoading();
+                            }
+
+                            @Override
+                            public void onFailure(Call<ResponseSingleDataModelKTP> call, Throwable t) {
+                                loading2.dismissLoading();
+                                Toast.makeText(v.getContext(), "Error Server : "+t.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     }
                 });
 
@@ -144,26 +184,6 @@ public class AdapterPendudukDaftarKTP extends RecyclerView.Adapter<AdapterPendud
             imbDelete = itemView.findViewById(R.id.imb_delete);
 
             cvList = itemView.findViewById(R.id.cv_list);
-
-//            imbDetail.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    lihatDataPengajuan.lihat(getAbsoluteAdapterPosition());
-//                }
-//            });
-//
-//            imbDelete.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    hapusPengajuan.hapus(getAbsoluteAdapterPosition());
-//                }
-//            });
         }
     }
-//    public interface lihatDataPengajuan{
-//        void lihat(int position);
-//    }
-//    public interface hapusPengajuan{
-//        void hapus(int position);
-//    }
 }

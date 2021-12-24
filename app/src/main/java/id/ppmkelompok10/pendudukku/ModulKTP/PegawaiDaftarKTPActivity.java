@@ -8,12 +8,23 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import id.ppmkelompok10.pendudukku.API.APIKTP.APIPegawaiKTP;
+import id.ppmkelompok10.pendudukku.API.APIKTP.APIPengajuanKTP;
+import id.ppmkelompok10.pendudukku.API.RetroServer;
+import id.ppmkelompok10.pendudukku.Adapter.AdapterPegawaiDaftarKTP;
+import id.ppmkelompok10.pendudukku.Adapter.AdapterPendudukDaftarKTP;
 import id.ppmkelompok10.pendudukku.Helper.KeyboardUtils;
+import id.ppmkelompok10.pendudukku.Helper.LoadingDialog;
 import id.ppmkelompok10.pendudukku.Model.ModelKTP.PengajuanKTP;
+import id.ppmkelompok10.pendudukku.Model.ModelKTP.ResponseMultiDataModelKTP;
 import id.ppmkelompok10.pendudukku.R;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class PegawaiDaftarKTPActivity extends AppCompatActivity{
     private ImageButton btnBack;
@@ -45,6 +56,7 @@ public class PegawaiDaftarKTPActivity extends AppCompatActivity{
 
         //Pemanggilan Data Daftar
 //        ambilDataAPI();
+        tampilDaftar();
 
         //Tombol Kembali
         btnBack.setOnClickListener(new View.OnClickListener() {
@@ -68,58 +80,38 @@ public class PegawaiDaftarKTPActivity extends AppCompatActivity{
         });
     }
 
-//    public void tampilDaftar(ArrayList<PengajuanKTP> pengajuanKTP){
-//        pengajuanlist = pengajuanKTP;
-//        AdapterPegawaiDaftarKTP adapterPendudukDaftarKTP = new AdapterPegawaiDaftarKTP(PegawaiDaftarKTPActivity.this,pengajuanlist,this::lihat,this::edit);
-//        rvDaftarKTP.setAdapter(adapterPendudukDaftarKTP);
-//        rvDaftarKTP.invalidate();
-//    }
+    public void tampilDaftar(){
+        LoadingDialog loading2 = new LoadingDialog(this);
+        loading2.startLoadingDialog();
 
-//    public void ambilDataAPI(){
-//        LoadingDialog loading2 = new LoadingDialog(this);
-//        loading2.startLoadingDialog();
-//        //Ambil API
-//        ArrayList<PengajuanKTP> pengajuanKTPS = new ArrayList<>();
-//        APIPegawaiKTP apiGetAllPengajuan = RetroServer.konekRetrofit().create(APIPegawaiKTP.class);
-//        Call<ResponseSingleDataModelKTP> getpengajuan = apiGetAllPengajuan.apiGetAll();
-//
-//        getpengajuan.enqueue(new Callback<ResponseSingleDataModelKTP>() {
-//            @Override
-//            public void onResponse(Call<ResponseSingleDataModelKTP> call, Response<ResponseSingleDataModelKTP> response) {
-//                ArrayList<PengajuanKTP> dataPengajuan = response.body().getData();
-//                for (PengajuanKTP item:dataPengajuan) {
-//                    pengajuanKTPS.add(item);
-//                }
-//                PengajuanKTP_Data.getInstance().setPengajuanData(pengajuanKTPS);
-//                tampilDaftar(pengajuanKTPS);
-//                loading2.dismissLoading();
-//            }
-//
-//            @Override
-//            public void onFailure(Call<ResponseSingleDataModelKTP> call, Throwable t) {
-//                Log.d("Daftar", "onFailure: "+t.getMessage());
-//                Toast.makeText(PegawaiDaftarKTPActivity.this, "Error Server : "+t.getMessage(), Toast.LENGTH_SHORT).show();
-//                loading2.dismissLoading();
-//            }
-//        });
-//    }
+        APIPegawaiKTP apiPegawaiKTP = RetroServer.konekRetrofit().create(APIPegawaiKTP.class);
+        Call<ResponseMultiDataModelKTP> apiAllPengajuan = apiPegawaiKTP.apiAllPengajuan();
+
+        apiAllPengajuan.enqueue(new Callback<ResponseMultiDataModelKTP>() {
+            @Override
+            public void onResponse(Call<ResponseMultiDataModelKTP> call, Response<ResponseMultiDataModelKTP> response) {
+                int code = response.body().getCode();
+                String message = response.body().getMessage();
+                ArrayList<PengajuanKTP> data = response.body().getData();
+
+                if(code == 1){
+                    loading2.dismissLoading();
+                    AdapterPegawaiDaftarKTP adapterPegawaiDaftarKTP = new AdapterPegawaiDaftarKTP(PegawaiDaftarKTPActivity.this, data);
+                    rvDaftarKTP.setAdapter(adapterPegawaiDaftarKTP);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseMultiDataModelKTP> call, Throwable t) {
+                Toast.makeText(PegawaiDaftarKTPActivity.this, "Error Server : "+t.getMessage(), Toast.LENGTH_SHORT).show();
+                loading2.dismissLoading();
+            }
+        });
+    }
 
     @Override
     protected void onResume() {
         super.onResume();
+        tampilDaftar();
     }
-
-//    @Override
-//    public void edit(int position) {
-//        Intent pegawaiEditKTPActivity = new Intent(PegawaiDaftarKTPActivity.this, PegawaiEditKTPActivity.class);
-//        pegawaiEditKTPActivity.putExtra("pengajuan",pengajuanlist.get(position));
-//        startActivity(pegawaiEditKTPActivity);
-//    }
-
-//    @Override
-//    public void lihat(int position) {
-//        Intent detailKTPActivity = new Intent(PegawaiDaftarKTPActivity.this, DetailKTPActivity.class);
-//        detailKTPActivity.putExtra("pengajuan",pengajuanlist.get(position));
-//        startActivity(detailKTPActivity);
-//    }
 }

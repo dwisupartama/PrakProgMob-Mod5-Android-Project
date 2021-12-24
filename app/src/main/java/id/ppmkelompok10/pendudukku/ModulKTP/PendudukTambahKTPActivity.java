@@ -93,13 +93,6 @@ public class PendudukTambahKTPActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 validasiData();
-//                if(checkData.isChecked()){
-//                    BuatPengajuan();
-//                    Toast.makeText(PendudukTambahKTPActivity.this, ""+spJenisPengajuanKTP.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
-//                }
-//                else{
-//                    Toast.makeText(PendudukTambahKTPActivity.this, "Silahkan Centang Terlebih Dahulu", Toast.LENGTH_SHORT).show();
-//                }
             }
         });
 

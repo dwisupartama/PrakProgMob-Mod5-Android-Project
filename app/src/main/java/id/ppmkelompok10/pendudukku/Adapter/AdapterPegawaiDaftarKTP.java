@@ -2,6 +2,7 @@ package id.ppmkelompok10.pendudukku.Adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import id.ppmkelompok10.pendudukku.Model.ModelKTP.PengajuanKTP;
+import id.ppmkelompok10.pendudukku.ModulKTP.DetailKTPActivity;
+import id.ppmkelompok10.pendudukku.ModulKTP.PegawaiEditKTPActivity;
 import id.ppmkelompok10.pendudukku.R;
 
 public class AdapterPegawaiDaftarKTP extends RecyclerView.Adapter<AdapterPegawaiDaftarKTP.Holder> {
@@ -37,7 +40,7 @@ public class AdapterPegawaiDaftarKTP extends RecyclerView.Adapter<AdapterPegawai
 
     @SuppressLint("ResourceAsColor")
     @Override
-    public void onBindViewHolder(@NonNull AdapterPegawaiDaftarKTP.Holder holder, int position) {
+    public void onBindViewHolder(@NonNull AdapterPegawaiDaftarKTP.Holder holder, @SuppressLint("RecyclerView") int position) {
         String jenisPengajuan = pengajuanAll.get(position).getJenis_pengajuan();
         String namaLengkap = pengajuanAll.get(position).getNama_lengkap();
         String nik = String.valueOf(pengajuanAll.get(position).getNik());
@@ -71,6 +74,24 @@ public class AdapterPegawaiDaftarKTP extends RecyclerView.Adapter<AdapterPegawai
             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) holder.cvList.getLayoutParams();
             params.bottomMargin = 60;
         }
+
+        holder.imbDetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent detailPengajuanKTP = new Intent(v.getContext(), DetailKTPActivity.class);
+                detailPengajuanKTP.putExtra("id_pengajuan", pengajuanAll.get(position).getId());
+                context.startActivity(detailPengajuanKTP);
+            }
+        });
+
+        holder.imbEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent editPengajuanKTP = new Intent(v.getContext(), PegawaiEditKTPActivity.class);
+                editPengajuanKTP.putExtra("id_pengajuan", pengajuanAll.get(position).getId());
+                context.startActivity(editPengajuanKTP);
+            }
+        });
     }
 
     @Override

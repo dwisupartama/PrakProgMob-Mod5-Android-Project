@@ -17,8 +17,8 @@ public interface APIPegawaiKTP {
         @Field("id") String id,
         @Field("status_pengajuan") String status,
         @Field("keterangan") String keterangan,
-        @Field("perkiraan_selesai") Date perkiraan_selesai,
-        @Field("tanggal_selesai") Date tanggal_selesai
+        @Field("perkiraan_selesai") String perkiraan_selesai,
+        @Field("tanggal_selesai") String tanggal_selesai
     );
 
     @GET("pegawai/allPengajuan")
